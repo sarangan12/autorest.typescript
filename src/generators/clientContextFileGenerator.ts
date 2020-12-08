@@ -106,7 +106,7 @@ function writePackageInfo(
   sourceFile.addStatements([
     `\n\n`,
     `const packageName = "${packageDetails.name || ""}";`,
-    `const packageVersion = "${packageDetails.version || ""}";`
+    `export const packageVersion = "${packageDetails.version || ""}";`
   ]);
 }
 
