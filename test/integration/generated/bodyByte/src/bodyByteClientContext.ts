@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { BodyByteClientOptionalParams } from "./models";
 
 const packageName = "body-byte";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class BodyByteClientContext extends coreHttp.ServiceClient {
   $host: string;

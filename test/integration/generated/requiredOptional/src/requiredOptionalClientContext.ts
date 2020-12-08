@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { RequiredOptionalClientOptionalParams } from "./models";
 
 const packageName = "required-optional";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class RequiredOptionalClientContext extends coreHttp.ServiceClient {
   $host: string;

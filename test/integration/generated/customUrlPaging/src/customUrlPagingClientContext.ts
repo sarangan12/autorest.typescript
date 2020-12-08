@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { CustomUrlPagingClientOptionalParams } from "./models";
 
 const packageName = "custom-url-paging";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class CustomUrlPagingClientContext extends coreHttp.ServiceClient {
   host: string;

@@ -11,7 +11,7 @@ import { ComputeManagementClientOptionalParams } from "./models";
 import { lroPolicy } from "./lro";
 
 const packageName = "compute-resource-manager";
-const packageVersion = "1.0.0";
+export const packageVersion = "1.0.0";
 
 export class ComputeManagementClientContext extends coreHttp.ServiceClient {
   $host: string;

@@ -11,7 +11,7 @@ import { PagingNoIteratorsClientOptionalParams } from "./models";
 import { lroPolicy } from "./lro";
 
 const packageName = "paging-no-iterators";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class PagingNoIteratorsClientContext extends coreHttp.ServiceClient {
   $host: string;

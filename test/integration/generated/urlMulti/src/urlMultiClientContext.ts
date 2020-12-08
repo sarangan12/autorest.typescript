@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { UrlMultiClientOptionalParams } from "./models";
 
 const packageName = "url-multi";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class UrlMultiClientContext extends coreHttp.ServiceClient {
   $host: string;

@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { NonStringEnumClientOptionalParams } from "./models";
 
 const packageName = "non-string-num";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class NonStringEnumClientContext extends coreHttp.ServiceClient {
   $host: string;

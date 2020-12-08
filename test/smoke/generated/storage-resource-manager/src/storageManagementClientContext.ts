@@ -11,7 +11,7 @@ import { StorageManagementClientOptionalParams } from "./models";
 import { lroPolicy } from "./lro";
 
 const packageName = "storage-resource-manager";
-const packageVersion = "1.0.0";
+export const packageVersion = "1.0.0";
 
 export class StorageManagementClientContext extends coreHttp.ServiceClient {
   $host: string;

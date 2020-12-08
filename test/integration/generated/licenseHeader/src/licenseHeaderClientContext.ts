@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { Enum0, LicenseHeaderClientOptionalParams } from "./models";
 
 const packageName = "license-header";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class LicenseHeaderClientContext extends coreHttp.ServiceClient {
   $host: string;

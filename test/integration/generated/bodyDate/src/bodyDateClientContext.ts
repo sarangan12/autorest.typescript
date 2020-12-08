@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { BodyDateClientOptionalParams } from "./models";
 
 const packageName = "body-date";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class BodyDateClientContext extends coreHttp.ServiceClient {
   $host: string;

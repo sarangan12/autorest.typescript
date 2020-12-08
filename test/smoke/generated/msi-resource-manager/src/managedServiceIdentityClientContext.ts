@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { ManagedServiceIdentityClientOptionalParams } from "./models";
 
 const packageName = "msi-resource-manager";
-const packageVersion = "1.0.0";
+export const packageVersion = "1.0.0";
 
 export class ManagedServiceIdentityClientContext extends coreHttp.ServiceClient {
   $host: string;

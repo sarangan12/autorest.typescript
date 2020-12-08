@@ -11,7 +11,7 @@ import { KeyVaultManagementClientOptionalParams } from "./models";
 import { lroPolicy } from "./lro";
 
 const packageName = "keyvault-resource-manager";
-const packageVersion = "1.0.0";
+export const packageVersion = "1.0.0";
 
 export class KeyVaultManagementClientContext extends coreHttp.ServiceClient {
   $host: string;

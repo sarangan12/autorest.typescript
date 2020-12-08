@@ -11,7 +11,7 @@ import { NetworkManagementClientOptionalParams } from "./models";
 import { lroPolicy } from "./lro";
 
 const packageName = "network-resource-manager";
-const packageVersion = "1.0.0";
+export const packageVersion = "1.0.0";
 
 export class NetworkManagementClientContext extends coreHttp.ServiceClient {
   $host: string;

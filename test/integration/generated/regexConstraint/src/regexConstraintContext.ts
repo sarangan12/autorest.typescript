@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { RegexConstraintOptionalParams } from "./models";
 
 const packageName = "regex-constraint";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class RegexConstraintContext extends coreHttp.ServiceClient {
   $host: string;

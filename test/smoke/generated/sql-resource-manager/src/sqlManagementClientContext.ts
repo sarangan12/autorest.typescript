@@ -11,7 +11,7 @@ import { SqlManagementClientOptionalParams } from "./models";
 import { lroPolicy } from "./lro";
 
 const packageName = "sql-resource-manager";
-const packageVersion = "1.0.0";
+export const packageVersion = "1.0.0";
 
 export class SqlManagementClientContext extends coreHttp.ServiceClient {
   $host: string;

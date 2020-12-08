@@ -11,7 +11,7 @@ import { MediaTypesV3LROClientOptionalParams } from "./models";
 import { lroPolicy } from "./lro";
 
 const packageName = "media-types-v3-lro-client";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class MediaTypesV3LROClientContext extends coreHttp.ServiceClient {
   $host: string;

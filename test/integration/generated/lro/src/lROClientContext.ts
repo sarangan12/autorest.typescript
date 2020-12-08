@@ -11,7 +11,7 @@ import { LROClientOptionalParams } from "./models";
 import { lroPolicy } from "./lro";
 
 const packageName = "lro";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class LROClientContext extends coreHttp.ServiceClient {
   $host: string;

@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { XmlServiceClientOptionalParams } from "./models";
 
 const packageName = "xml-service";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class XmlServiceClientContext extends coreHttp.ServiceClient {
   $host: string;

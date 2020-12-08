@@ -11,7 +11,7 @@ import { CosmosDBManagementClientOptionalParams } from "./models";
 import { lroPolicy } from "./lro";
 
 const packageName = "cosmos-db-resource-manager";
-const packageVersion = "1.0.0";
+export const packageVersion = "1.0.0";
 
 export class CosmosDBManagementClientContext extends coreHttp.ServiceClient {
   $host: string;

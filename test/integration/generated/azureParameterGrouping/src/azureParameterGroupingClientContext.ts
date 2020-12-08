@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { AzureParameterGroupingClientOptionalParams } from "./models";
 
 const packageName = "azure-parameter-grouping";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class AzureParameterGroupingClientContext extends coreHttp.ServiceClient {
   $host: string;

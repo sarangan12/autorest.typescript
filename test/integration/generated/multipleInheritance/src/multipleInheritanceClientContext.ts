@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { MultipleInheritanceClientOptionalParams } from "./models";
 
 const packageName = "multiple-inheritance";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class MultipleInheritanceClientContext extends coreHttp.ServiceClient {
   $host: string;

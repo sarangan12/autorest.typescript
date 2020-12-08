@@ -11,7 +11,7 @@ import { DeploymentScriptsClientOptionalParams } from "./models";
 import { lroPolicy } from "./lro";
 
 const packageName = "arm-package-deploymentscripts-2019-10-preview";
-const packageVersion = "1.0.0";
+export const packageVersion = "1.0.0";
 
 export class DeploymentScriptsClientContext extends coreHttp.ServiceClient {
   $host: string;

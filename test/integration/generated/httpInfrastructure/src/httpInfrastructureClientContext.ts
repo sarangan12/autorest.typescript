@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { HttpInfrastructureClientOptionalParams } from "./models";
 
 const packageName = "httpInfrastructure";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class HttpInfrastructureClientContext extends coreHttp.ServiceClient {
   $host: string;

@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { Enum0, NoMappersClientOptionalParams } from "./models";
 
 const packageName = "no-mappers";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class NoMappersClientContext extends coreHttp.ServiceClient {
   $host: string;

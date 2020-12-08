@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { SubscriptionIdApiVersionClientOptionalParams } from "./models";
 
 const packageName = "subscriptionid-apiversion";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class SubscriptionIdApiVersionClientContext extends coreHttp.ServiceClient {
   $host: string;

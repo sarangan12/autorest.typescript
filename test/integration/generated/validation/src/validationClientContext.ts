@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { ValidationClientOptionalParams } from "./models";
 
 const packageName = "validation";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class ValidationClientContext extends coreHttp.ServiceClient {
   $host: string;

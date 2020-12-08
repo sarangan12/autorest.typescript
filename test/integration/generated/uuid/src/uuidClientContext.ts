@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { UuidClientOptionalParams } from "./models";
 
 const packageName = "uuid";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class UuidClientContext extends coreHttp.ServiceClient {
   $host: string;

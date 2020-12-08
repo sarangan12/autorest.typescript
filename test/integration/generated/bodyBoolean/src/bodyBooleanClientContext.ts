@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { BodyBooleanClientOptionalParams } from "./models";
 
 const packageName = "body-boolean";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class BodyBooleanClientContext extends coreHttp.ServiceClient {
   $host: string;

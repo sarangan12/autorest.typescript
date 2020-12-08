@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { HeaderClientOptionalParams } from "./models";
 
 const packageName = "header";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class HeaderClientContext extends coreHttp.ServiceClient {
   $host: string;

@@ -11,7 +11,7 @@ import { PagingClientOptionalParams } from "./models";
 import { lroPolicy } from "./lro";
 
 const packageName = "paging-service";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class PagingClientContext extends coreHttp.ServiceClient {
   $host: string;

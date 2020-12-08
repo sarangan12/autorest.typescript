@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { BodyStringClientOptionalParams } from "./models";
 
 const packageName = "body-string";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class BodyStringClientContext extends coreHttp.ServiceClient {
   $host: string;

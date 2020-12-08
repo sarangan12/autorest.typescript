@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { MediaTypesWithTracingClientOptionalParams } from "./models";
 
 const packageName = "media-types-service-tracing";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class MediaTypesWithTracingClientContext extends coreHttp.ServiceClient {
   $host: string;

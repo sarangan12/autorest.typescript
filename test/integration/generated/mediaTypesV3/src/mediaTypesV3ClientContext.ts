@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { MediaTypesV3ClientOptionalParams } from "./models";
 
 const packageName = "media-types-v3-client";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class MediaTypesV3ClientContext extends coreHttp.ServiceClient {
   $host: string;

@@ -11,7 +11,7 @@ import { ResourceManagementClientOptionalParams } from "./models";
 import { lroPolicy } from "./lro";
 
 const packageName = "arm-package-resources-2019-08";
-const packageVersion = "1.0.0";
+export const packageVersion = "1.0.0";
 
 export class ResourceManagementClientContext extends coreHttp.ServiceClient {
   $host: string;

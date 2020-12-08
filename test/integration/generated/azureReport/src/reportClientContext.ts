@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { ReportClientOptionalParams } from "./models";
 
 const packageName = "zzzAzureReport";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class ReportClientContext extends coreHttp.ServiceClient {
   $host: string;

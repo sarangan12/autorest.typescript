@@ -11,7 +11,7 @@ import { LroParametrizedEndpointsClientOptionalParams } from "./models";
 import { lroPolicy } from "./lro";
 
 const packageName = "lro-parameterized-endpoints";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class LroParametrizedEndpointsClientContext extends coreHttp.ServiceClient {
   host: string;

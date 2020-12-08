@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { BodyDurationClientOptionalParams } from "./models";
 
 const packageName = "body-duration";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class BodyDurationClientContext extends coreHttp.ServiceClient {
   $host: string;

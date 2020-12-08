@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { BodyComplexWithTracingOptionalParams } from "./models";
 
 const packageName = "body-complex-tracing";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class BodyComplexWithTracingContext extends coreHttp.ServiceClient {
   $host: string;

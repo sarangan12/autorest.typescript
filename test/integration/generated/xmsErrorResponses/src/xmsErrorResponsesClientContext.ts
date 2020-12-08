@@ -10,7 +10,7 @@ import * as coreHttp from "@azure/core-http";
 import { XmsErrorResponsesClientOptionalParams } from "./models";
 
 const packageName = "xms-error-responses";
-const packageVersion = "1.0.0-preview1";
+export const packageVersion = "1.0.0-preview1";
 
 export class XmsErrorResponsesClientContext extends coreHttp.ServiceClient {
   $host: string;
