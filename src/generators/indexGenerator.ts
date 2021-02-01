@@ -1,5 +1,6 @@
 import { Project } from "ts-morph";
 import { ClientDetails } from "../models/clientDetails";
+import { OperationGroupDetails } from "../models/operationDetails";
 
 export function generateIndexFile(
   clientDetails: ClientDetails,
@@ -20,7 +21,10 @@ export function generateIndexFile(
     indexFile.addStatements([`/// <reference lib="esnext.asynciterable" />`]);
   }
 
-  indexFile.addExportDeclarations([
+  const exportDeclarations = [
+    {
+      moduleSpecifier: "./operations"
+    },
     {
       moduleSpecifier: "./models"
     },
@@ -32,5 +36,21 @@ export function generateIndexFile(
       moduleSpecifier: `./${clientDetails.sourceFileName}Context`,
       namedExports: [`${clientDetails.className}Context`]
     }
-  ]);
+  ];
+
+  if (!includeOperations(clientDetails.operationGroups)) {
+    exportDeclarations.shift();
+  }
+
+  indexFile.addExportDeclarations(exportDeclarations);
+}
+
+function includeOperations(operationGroups: OperationGroupDetails[]) {
+  for (const operationGroup of operationGroups) {
+    if (operationGroup.key.trim().length > 0) {
+      return true;
+    }
+  }
+
+  return false;
 }
