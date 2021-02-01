@@ -12,7 +12,7 @@ import { AppConfigurationClientOptionalParams } from "./models";
 const packageName = "appconfiguration";
 const packageVersion = "1.0.0-preview1";
 
-/** @hidden */
+/** @internal */
 export class AppConfigurationClientContext extends coreHttp.ServiceClient {
   endpoint: string;
   syncToken?: string;

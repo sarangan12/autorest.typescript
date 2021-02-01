@@ -50,11 +50,13 @@ export function generateClientContext(
 
   const contextClass = buildClass(sourceFile, clientContextClassName);
 
-  if(hideClients) {
+  if (hideClients) {
     contextClass.addJsDoc({
-      tags: [{
-          tagName: "hidden"
-      }],
+      tags: [
+        {
+          tagName: "internal"
+        }
+      ]
     });
   }
 

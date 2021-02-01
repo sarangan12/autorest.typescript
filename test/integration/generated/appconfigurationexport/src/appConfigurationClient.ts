@@ -54,7 +54,7 @@ import {
   AppConfigurationClientGetRevisionsNextResponse
 } from "./models";
 
-/** @hidden */
+/** @internal */
 export class AppConfigurationClient extends AppConfigurationClientContext {
   /**
    * Initializes a new instance of the AppConfigurationClient class.
