@@ -69,7 +69,7 @@ const getByPetIdOperationSpec: coreHttp.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.Pet
+      bodyMapper: Mappers.Petdef
     }
   },
   urlParameters: [Parameters.$host, Parameters.petId],
@@ -81,7 +81,7 @@ const addPetOperationSpec: coreHttp.OperationSpec = {
   httpMethod: "POST",
   responses: {
     200: {
-      bodyMapper: Mappers.Pet
+      bodyMapper: Mappers.Petdef
     }
   },
   requestBody: Parameters.petParam,

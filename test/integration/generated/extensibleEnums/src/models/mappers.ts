@@ -8,10 +8,10 @@
 
 import * as coreHttp from "@azure/core-http";
 
-export const Pet: coreHttp.CompositeMapper = {
+export const Petdef: coreHttp.CompositeMapper = {
   type: {
     name: "Composite",
-    className: "Pet",
+    className: "Petdef",
     modelProperties: {
       name: {
         serializedName: "name",

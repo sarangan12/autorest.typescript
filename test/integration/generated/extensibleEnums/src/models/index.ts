@@ -8,7 +8,7 @@
 
 import * as coreHttp from "@azure/core-http";
 
-export interface Pet {
+export interface Petdef {
   /** name */
   name?: string;
   /** Type of Pet */
@@ -64,32 +64,32 @@ export const enum KnownIntEnum {
 export type IntEnum = string;
 
 /** Contains response data for the getByPetId operation. */
-export type PetGetByPetIdResponse = Pet & {
+export type PetGetByPetIdResponse = Petdef & {
   /** The underlying HTTP response. */
   _response: coreHttp.HttpResponse & {
     /** The response body as text (string format) */
     bodyAsText: string;
 
     /** The response body as parsed JSON or XML */
-    parsedBody: Pet;
+    parsedBody: Petdef;
   };
 };
 
 /** Optional parameters. */
 export interface PetAddPetOptionalParams extends coreHttp.OperationOptions {
   /** pet param */
-  petParam?: Pet;
+  petParam?: Petdef;
 }
 
 /** Contains response data for the addPet operation. */
-export type PetAddPetResponse = Pet & {
+export type PetAddPetResponse = Petdef & {
   /** The underlying HTTP response. */
   _response: coreHttp.HttpResponse & {
     /** The response body as text (string format) */
     bodyAsText: string;
 
     /** The response body as parsed JSON or XML */
-    parsedBody: Pet;
+    parsedBody: Petdef;
   };
 };
 

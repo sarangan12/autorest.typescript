@@ -53,10 +53,10 @@ export const PetAction: coreHttp.CompositeMapper = {
   }
 };
 
-export const Pet: coreHttp.CompositeMapper = {
+export const Petdef: coreHttp.CompositeMapper = {
   type: {
     name: "Composite",
-    className: "Pet",
+    className: "Petdef",
     modelProperties: {
       ...Animal.type.modelProperties,
       name: {

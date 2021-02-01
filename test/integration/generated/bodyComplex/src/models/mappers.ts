@@ -8,10 +8,10 @@
 
 import * as coreHttp from "@azure/core-http";
 
-export const Basic: coreHttp.CompositeMapper = {
+export const Basicdef: coreHttp.CompositeMapper = {
   type: {
     name: "Composite",
-    className: "Basic",
+    className: "Basicdef",
     modelProperties: {
       id: {
         serializedName: "id",

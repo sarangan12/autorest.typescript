@@ -14,7 +14,7 @@ import * as Parameters from "../models/parameters";
 import { BodyComplexWithTracing } from "../bodyComplexWithTracing";
 import {
   BasicGetValidResponse,
-  Basic as BasicModel,
+  Basicdef,
   BasicGetInvalidResponse,
   BasicGetEmptyResponse,
   BasicGetNullResponse,
@@ -70,7 +70,7 @@ export class Basic {
    * @param options The options parameters.
    */
   async putValid(
-    complexBody: BasicModel,
+    complexBody: Basicdef,
     options?: coreHttp.OperationOptions
   ): Promise<coreHttp.RestResponse> {
     const { span, updatedOptions } = createSpan(
@@ -230,7 +230,7 @@ const getValidOperationSpec: coreHttp.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.Basic
+      bodyMapper: Mappers.Basicdef
     },
     default: {
       bodyMapper: Mappers.ErrorModel
@@ -261,7 +261,7 @@ const getInvalidOperationSpec: coreHttp.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.Basic
+      bodyMapper: Mappers.Basicdef
     },
     default: {
       bodyMapper: Mappers.ErrorModel
@@ -276,7 +276,7 @@ const getEmptyOperationSpec: coreHttp.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.Basic
+      bodyMapper: Mappers.Basicdef
     },
     default: {
       bodyMapper: Mappers.ErrorModel
@@ -291,7 +291,7 @@ const getNullOperationSpec: coreHttp.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.Basic
+      bodyMapper: Mappers.Basicdef
     },
     default: {
       bodyMapper: Mappers.ErrorModel
@@ -306,7 +306,7 @@ const getNotProvidedOperationSpec: coreHttp.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.Basic
+      bodyMapper: Mappers.Basicdef
     },
     default: {
       bodyMapper: Mappers.ErrorModel

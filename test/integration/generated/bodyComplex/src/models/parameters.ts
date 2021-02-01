@@ -12,7 +12,7 @@ import {
   OperationQueryParameter
 } from "@azure/core-http";
 import {
-  Basic as BasicMapper,
+  Basicdef as BasicdefMapper,
   IntWrapper as IntWrapperMapper,
   LongWrapper as LongWrapperMapper,
   FloatWrapper as FloatWrapperMapper,
@@ -70,7 +70,7 @@ export const contentType: OperationParameter = {
 
 export const complexBody: OperationParameter = {
   parameterPath: "complexBody",
-  mapper: BasicMapper
+  mapper: BasicdefMapper
 };
 
 export const apiVersion: OperationQueryParameter = {

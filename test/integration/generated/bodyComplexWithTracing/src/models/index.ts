@@ -14,7 +14,7 @@ export type MyBaseTypeUnion = MyBaseType | MyDerivedType;
 export type SalmonUnion = Salmon | SmartSalmon;
 export type SharkUnion = Shark | Sawshark | Goblinshark | Cookiecuttershark;
 
-export interface Basic {
+export interface Basicdef {
   /** Basic Id */
   id?: number | null;
   /** Name property with a very long description that does not fit on a single line and a line break. */
@@ -261,62 +261,62 @@ export const enum KnownGoblinSharkColor {
 export type GoblinSharkColor = string;
 
 /** Contains response data for the getValid operation. */
-export type BasicGetValidResponse = Basic & {
+export type BasicGetValidResponse = Basicdef & {
   /** The underlying HTTP response. */
   _response: coreHttp.HttpResponse & {
     /** The response body as text (string format) */
     bodyAsText: string;
 
     /** The response body as parsed JSON or XML */
-    parsedBody: Basic;
+    parsedBody: Basicdef;
   };
 };
 
 /** Contains response data for the getInvalid operation. */
-export type BasicGetInvalidResponse = Basic & {
+export type BasicGetInvalidResponse = Basicdef & {
   /** The underlying HTTP response. */
   _response: coreHttp.HttpResponse & {
     /** The response body as text (string format) */
     bodyAsText: string;
 
     /** The response body as parsed JSON or XML */
-    parsedBody: Basic;
+    parsedBody: Basicdef;
   };
 };
 
 /** Contains response data for the getEmpty operation. */
-export type BasicGetEmptyResponse = Basic & {
+export type BasicGetEmptyResponse = Basicdef & {
   /** The underlying HTTP response. */
   _response: coreHttp.HttpResponse & {
     /** The response body as text (string format) */
     bodyAsText: string;
 
     /** The response body as parsed JSON or XML */
-    parsedBody: Basic;
+    parsedBody: Basicdef;
   };
 };
 
 /** Contains response data for the getNull operation. */
-export type BasicGetNullResponse = Basic & {
+export type BasicGetNullResponse = Basicdef & {
   /** The underlying HTTP response. */
   _response: coreHttp.HttpResponse & {
     /** The response body as text (string format) */
     bodyAsText: string;
 
     /** The response body as parsed JSON or XML */
-    parsedBody: Basic;
+    parsedBody: Basicdef;
   };
 };
 
 /** Contains response data for the getNotProvided operation. */
-export type BasicGetNotProvidedResponse = Basic & {
+export type BasicGetNotProvidedResponse = Basicdef & {
   /** The underlying HTTP response. */
   _response: coreHttp.HttpResponse & {
     /** The response body as text (string format) */
     bodyAsText: string;
 
     /** The response body as parsed JSON or XML */
-    parsedBody: Basic;
+    parsedBody: Basicdef;
   };
 };
 

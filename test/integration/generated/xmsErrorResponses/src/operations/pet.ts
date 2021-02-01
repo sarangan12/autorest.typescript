@@ -70,7 +70,7 @@ const getPetByIdOperationSpec: coreHttp.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.Pet
+      bodyMapper: Mappers.Petdef
     },
     202: {},
     400: {
