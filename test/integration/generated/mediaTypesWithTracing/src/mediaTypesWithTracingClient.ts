@@ -6,7 +6,7 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
 import { CanonicalCode } from "@opentelemetry/api";
 import { createSpan } from "./tracing";
 import * as Parameters from "./models/parameters";
@@ -64,8 +64,8 @@ export class MediaTypesWithTracingClient extends MediaTypesWithTracingClientCont
           MediaTypesWithTracingClientAnalyzeBody$jsonOptionalParams?
         ]
   ): Promise<MediaTypesWithTracingClientAnalyzeBodyResponse> {
-    let operationSpec: coreHttp.OperationSpec;
-    let operationArguments: coreHttp.OperationArguments;
+    let operationSpec: coreClient.OperationSpec;
+    let operationArguments: coreClient.OperationArguments;
     if (
       args[0] === "application/pdf" ||
       args[0] === "image/jpeg" ||
@@ -84,9 +84,7 @@ export class MediaTypesWithTracingClient extends MediaTypesWithTracingClientCont
     }
     const { span, updatedOptions } = createSpan(
       "MediaTypesWithTracingClient-analyzeBody",
-      coreHttp.operationOptionsToRequestOptionsBase(
-        operationArguments.options || {}
-      )
+      operationArguments.options || {}
     );
     operationArguments.options = updatedOptions;
     try {
@@ -115,14 +113,11 @@ export class MediaTypesWithTracingClient extends MediaTypesWithTracingClientCont
   ): Promise<MediaTypesWithTracingClientContentTypeWithEncodingResponse> {
     const { span, updatedOptions } = createSpan(
       "MediaTypesWithTracingClient-contentTypeWithEncoding",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      options: updatedOptions
-    };
     try {
       const result = await this.sendOperationRequest(
-        operationArguments,
+        { options },
         contentTypeWithEncodingOperationSpec
       );
       return result as MediaTypesWithTracingClientContentTypeWithEncodingResponse;
@@ -138,9 +133,9 @@ export class MediaTypesWithTracingClient extends MediaTypesWithTracingClientCont
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const analyzeBody$binaryOperationSpec: coreHttp.OperationSpec = {
+const analyzeBody$binaryOperationSpec: coreClient.OperationSpec = {
   path: "/mediatypes/analyze",
   httpMethod: "POST",
   responses: {
@@ -154,7 +149,7 @@ const analyzeBody$binaryOperationSpec: coreHttp.OperationSpec = {
   mediaType: "binary",
   serializer
 };
-const analyzeBody$jsonOperationSpec: coreHttp.OperationSpec = {
+const analyzeBody$jsonOperationSpec: coreClient.OperationSpec = {
   path: "/mediatypes/analyze",
   httpMethod: "POST",
   responses: {
@@ -168,7 +163,7 @@ const analyzeBody$jsonOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const contentTypeWithEncodingOperationSpec: coreHttp.OperationSpec = {
+const contentTypeWithEncodingOperationSpec: coreClient.OperationSpec = {
   path: "/mediatypes/contentTypeWithEncoding",
   httpMethod: "POST",
   responses: {

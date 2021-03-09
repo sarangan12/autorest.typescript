@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { BodyDateTimeRfc1123ClientContext } from "../bodyDateTimeRfc1123ClientContext";
@@ -37,15 +38,9 @@ export class Datetimerfc1123 {
    * @param options The options parameters.
    */
   getNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<Datetimerfc1123GetNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      getNullOperationSpec
-    ) as Promise<Datetimerfc1123GetNullResponse>;
+    return this.client.sendOperationRequest({ options }, getNullOperationSpec);
   }
 
   /**
@@ -53,15 +48,12 @@ export class Datetimerfc1123 {
    * @param options The options parameters.
    */
   getInvalid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<Datetimerfc1123GetInvalidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getInvalidOperationSpec
-    ) as Promise<Datetimerfc1123GetInvalidResponse>;
+    );
   }
 
   /**
@@ -69,15 +61,12 @@ export class Datetimerfc1123 {
    * @param options The options parameters.
    */
   getOverflow(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<Datetimerfc1123GetOverflowResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getOverflowOperationSpec
-    ) as Promise<Datetimerfc1123GetOverflowResponse>;
+    );
   }
 
   /**
@@ -85,15 +74,12 @@ export class Datetimerfc1123 {
    * @param options The options parameters.
    */
   getUnderflow(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<Datetimerfc1123GetUnderflowResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getUnderflowOperationSpec
-    ) as Promise<Datetimerfc1123GetUnderflowResponse>;
+    );
   }
 
   /**
@@ -103,16 +89,12 @@ export class Datetimerfc1123 {
    */
   putUtcMaxDateTime(
     datetimeBody: Date,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      datetimeBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { datetimeBody, options },
       putUtcMaxDateTimeOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -120,15 +102,12 @@ export class Datetimerfc1123 {
    * @param options The options parameters.
    */
   getUtcLowercaseMaxDateTime(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<Datetimerfc1123GetUtcLowercaseMaxDateTimeResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getUtcLowercaseMaxDateTimeOperationSpec
-    ) as Promise<Datetimerfc1123GetUtcLowercaseMaxDateTimeResponse>;
+    );
   }
 
   /**
@@ -136,15 +115,12 @@ export class Datetimerfc1123 {
    * @param options The options parameters.
    */
   getUtcUppercaseMaxDateTime(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<Datetimerfc1123GetUtcUppercaseMaxDateTimeResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getUtcUppercaseMaxDateTimeOperationSpec
-    ) as Promise<Datetimerfc1123GetUtcUppercaseMaxDateTimeResponse>;
+    );
   }
 
   /**
@@ -154,16 +130,12 @@ export class Datetimerfc1123 {
    */
   putUtcMinDateTime(
     datetimeBody: Date,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      datetimeBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { datetimeBody, options },
       putUtcMinDateTimeOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -171,21 +143,18 @@ export class Datetimerfc1123 {
    * @param options The options parameters.
    */
   getUtcMinDateTime(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<Datetimerfc1123GetUtcMinDateTimeResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getUtcMinDateTimeOperationSpec
-    ) as Promise<Datetimerfc1123GetUtcMinDateTimeResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getNullOperationSpec: coreHttp.OperationSpec = {
+const getNullOperationSpec: coreClient.OperationSpec = {
   path: "/datetimerfc1123/null",
   httpMethod: "GET",
   responses: {
@@ -200,7 +169,7 @@ const getNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getInvalidOperationSpec: coreHttp.OperationSpec = {
+const getInvalidOperationSpec: coreClient.OperationSpec = {
   path: "/datetimerfc1123/invalid",
   httpMethod: "GET",
   responses: {
@@ -215,7 +184,7 @@ const getInvalidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getOverflowOperationSpec: coreHttp.OperationSpec = {
+const getOverflowOperationSpec: coreClient.OperationSpec = {
   path: "/datetimerfc1123/overflow",
   httpMethod: "GET",
   responses: {
@@ -230,7 +199,7 @@ const getOverflowOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getUnderflowOperationSpec: coreHttp.OperationSpec = {
+const getUnderflowOperationSpec: coreClient.OperationSpec = {
   path: "/datetimerfc1123/underflow",
   httpMethod: "GET",
   responses: {
@@ -245,7 +214,7 @@ const getUnderflowOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putUtcMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
+const putUtcMaxDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetimerfc1123/max",
   httpMethod: "PUT",
   responses: {
@@ -260,7 +229,7 @@ const putUtcMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getUtcLowercaseMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
+const getUtcLowercaseMaxDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetimerfc1123/max/lowercase",
   httpMethod: "GET",
   responses: {
@@ -275,7 +244,7 @@ const getUtcLowercaseMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getUtcUppercaseMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
+const getUtcUppercaseMaxDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetimerfc1123/max/uppercase",
   httpMethod: "GET",
   responses: {
@@ -290,7 +259,7 @@ const getUtcUppercaseMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putUtcMinDateTimeOperationSpec: coreHttp.OperationSpec = {
+const putUtcMinDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetimerfc1123/min",
   httpMethod: "PUT",
   responses: {
@@ -305,7 +274,7 @@ const putUtcMinDateTimeOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getUtcMinDateTimeOperationSpec: coreHttp.OperationSpec = {
+const getUtcMinDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetimerfc1123/min",
   httpMethod: "GET",
   responses: {

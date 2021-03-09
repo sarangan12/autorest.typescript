@@ -109,7 +109,8 @@ export function getOperationParameterSignatures(
   operation: OperationDetails,
   parameters: ParameterDetails[],
   importedModels: Set<string>,
-  operationGroupClass: ClassDeclaration
+  operationGroupClass: ClassDeclaration,
+  useCoreV2: boolean
 ) {
   const operationParameters = filterOperationParameters(parameters, operation, {
     includeContentType: true
@@ -192,7 +193,8 @@ export function getOperationParameterSignatures(
       importedModels,
       {
         mediaType: hasMultipleOverloads ? requestMediaType : undefined
-      }
+      },
+      useCoreV2
     );
     orderedParameterDeclarations.push(optionalParameter);
 
@@ -351,9 +353,13 @@ function getOptionsParameter(
   {
     isOptional = true,
     mediaType
-  }: { isOptional?: boolean; mediaType?: string } = {}
+  }: { isOptional?: boolean; mediaType?: string } = {},
+  useCoreV2: boolean
 ): ParameterWithDescription {
-  let type: string = "coreHttp.OperationOptions";
+  let type: string = !useCoreV2
+    ? "coreHttp.OperationOptions"
+    : "coreClient.OperationOptions";
+
   const operationParameters = filterOperationParameters(parameters, operation, {
     includeOptional: true,
     includeGroupedParameters: true

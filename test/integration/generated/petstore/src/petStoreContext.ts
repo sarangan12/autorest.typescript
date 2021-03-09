@@ -1,10 +1,7 @@
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
 import { PetStoreOptionalParams } from "./models";
 
-const packageName = "petstore";
-const packageVersion = "1.0.0-preview1";
-
-export class PetStoreContext extends coreHttp.ServiceClient {
+export class PetStoreContext extends coreClient.ServiceClient {
   $host: string;
 
   /**
@@ -17,16 +14,17 @@ export class PetStoreContext extends coreHttp.ServiceClient {
       options = {};
     }
 
-    if (!options.userAgent) {
-      const defaultUserAgent = coreHttp.getDefaultUserAgentValue();
-      options.userAgent = `${packageName}/${packageVersion} ${defaultUserAgent}`;
-    }
+    const defaults: PetStoreOptionalParams = {
+      requestContentType: "application/json; charset=utf-8"
+    };
 
-    super(undefined, options);
+    const optionsWithDefaults = {
+      ...defaults,
+      ...options,
+      baseUri: options.endpoint || "http://petstore.swagger.io/v2"
+    };
 
-    this.requestContentType = "application/json; charset=utf-8";
-
-    this.baseUri = options.endpoint || "http://petstore.swagger.io/v2";
+    super(optionsWithDefaults);
 
     // Assigning values to Constant parameters
     this.$host = options.$host || "http://petstore.swagger.io/v2";

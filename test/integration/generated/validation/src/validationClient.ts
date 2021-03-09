@@ -6,7 +6,7 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
 import * as Parameters from "./models/parameters";
 import * as Mappers from "./models/mappers";
 import { ValidationClientContext } from "./validationClientContext";
@@ -41,17 +41,12 @@ export class ValidationClient extends ValidationClientContext {
   validationOfMethodParameters(
     resourceGroupName: string,
     id: number,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<ValidationClientValidationOfMethodParametersResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      resourceGroupName,
-      id,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.sendOperationRequest(
-      operationArguments,
+      { resourceGroupName, id, options },
       validationOfMethodParametersOperationSpec
-    ) as Promise<ValidationClientValidationOfMethodParametersResponse>;
+    );
   }
 
   /**
@@ -65,47 +60,34 @@ export class ValidationClient extends ValidationClientContext {
     id: number,
     options?: ValidationClientValidationOfBodyOptionalParams
   ): Promise<ValidationClientValidationOfBodyResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      resourceGroupName,
-      id,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.sendOperationRequest(
-      operationArguments,
+      { resourceGroupName, id, options },
       validationOfBodyOperationSpec
-    ) as Promise<ValidationClientValidationOfBodyResponse>;
+    );
   }
 
   /** @param options The options parameters. */
-  getWithConstantInPath(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  getWithConstantInPath(options?: coreClient.OperationOptions): Promise<void> {
     return this.sendOperationRequest(
-      operationArguments,
+      { options },
       getWithConstantInPathOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /** @param options The options parameters. */
   postWithConstantInBody(
     options?: ValidationClientPostWithConstantInBodyOptionalParams
   ): Promise<ValidationClientPostWithConstantInBodyResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.sendOperationRequest(
-      operationArguments,
+      { options },
       postWithConstantInBodyOperationSpec
-    ) as Promise<ValidationClientPostWithConstantInBodyResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const validationOfMethodParametersOperationSpec: coreHttp.OperationSpec = {
+const validationOfMethodParametersOperationSpec: coreClient.OperationSpec = {
   path: "/fakepath/{subscriptionId}/{resourceGroupName}/{id}",
   httpMethod: "GET",
   responses: {
@@ -126,7 +108,7 @@ const validationOfMethodParametersOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const validationOfBodyOperationSpec: coreHttp.OperationSpec = {
+const validationOfBodyOperationSpec: coreClient.OperationSpec = {
   path: "/fakepath/{subscriptionId}/{resourceGroupName}/{id}",
   httpMethod: "PUT",
   responses: {
@@ -149,14 +131,14 @@ const validationOfBodyOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getWithConstantInPathOperationSpec: coreHttp.OperationSpec = {
+const getWithConstantInPathOperationSpec: coreClient.OperationSpec = {
   path: "/validation/constantsInPath/{constantParam}/value",
   httpMethod: "GET",
   responses: { 200: {} },
   urlParameters: [Parameters.$host, Parameters.constantParam],
   serializer
 };
-const postWithConstantInBodyOperationSpec: coreHttp.OperationSpec = {
+const postWithConstantInBodyOperationSpec: coreClient.OperationSpec = {
   path: "/validation/constantsInPath/{constantParam}/value",
   httpMethod: "POST",
   responses: {

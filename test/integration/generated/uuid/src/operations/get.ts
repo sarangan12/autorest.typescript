@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Parameters from "../models/parameters";
 import { UuidClientContext } from "../uuidClientContext";
 import { GetUuidResponse } from "../models";
@@ -29,22 +30,18 @@ export class Get {
    */
   uuid(
     testUuid: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<GetUuidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      testUuid,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { testUuid, options },
       uuidOperationSpec
-    ) as Promise<GetUuidResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer({}, /* isXml */ false);
+const serializer = coreClient.createSerializer({}, /* isXml */ false);
 
-const uuidOperationSpec: coreHttp.OperationSpec = {
+const uuidOperationSpec: coreClient.OperationSpec = {
   path: "/Uuid",
   httpMethod: "GET",
   responses: {

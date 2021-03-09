@@ -8,7 +8,8 @@ import { NameType, normalizeName } from "../utils/nameUtils";
 
 export function generateTracingFile(
   clientDetails: ClientDetails,
-  project: Project
+  project: Project,
+  useCoreV2: boolean
 ) {
   if (clientDetails.tracing === undefined) {
     return;
@@ -22,12 +23,21 @@ export function generateTracingFile(
     }
   );
 
-  file.addImportDeclarations([
-    {
-      namedImports: ["createSpanFunction"],
-      moduleSpecifier: "@azure/core-http"
-    }
-  ]);
+  if (!useCoreV2) {
+    file.addImportDeclarations([
+      {
+        namedImports: ["createSpanFunction"],
+        moduleSpecifier: "@azure/core-http"
+      }
+    ]);
+  } else {
+    file.addImportDeclarations([
+      {
+        namedImports: ["createSpanFunction"],
+        moduleSpecifier: "@azure/core-client"
+      }
+    ]);
+  }
 
   writeCreateSpanFunction(file, clientDetails.tracing);
 }

@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 
 /** I am root, and I ref a model with no meta */
 export interface RootWithRefAndNoMeta {
@@ -261,6 +262,14 @@ export interface ObjectWithXMsTextProperty {
   content?: string;
 }
 
+export interface ModelWithByteProperty {
+  bytes?: Uint8Array;
+}
+
+export interface ModelWithUrlProperty {
+  url?: string;
+}
+
 /** Defines headers for Xml_getHeaders operation. */
 export interface XmlGetHeadersHeaders {
   /** A custom response header. */
@@ -347,209 +356,65 @@ export type BlobType = "BlockBlob" | "PageBlob" | "AppendBlob";
 export type CopyStatusType = "pending" | "success" | "aborted" | "failed";
 
 /** Contains response data for the getComplexTypeRefNoMeta operation. */
-export type XmlGetComplexTypeRefNoMetaResponse = RootWithRefAndNoMeta & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: RootWithRefAndNoMeta;
-  };
-};
+export type XmlGetComplexTypeRefNoMetaResponse = RootWithRefAndNoMeta;
 
 /** Contains response data for the getComplexTypeRefWithMeta operation. */
-export type XmlGetComplexTypeRefWithMetaResponse = RootWithRefAndMeta & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: RootWithRefAndMeta;
-  };
-};
+export type XmlGetComplexTypeRefWithMetaResponse = RootWithRefAndMeta;
 
 /** Contains response data for the getSimple operation. */
-export type XmlGetSimpleResponse = Slideshow & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Slideshow;
-  };
-};
+export type XmlGetSimpleResponse = Slideshow;
 
 /** Contains response data for the getWrappedLists operation. */
-export type XmlGetWrappedListsResponse = AppleBarrel & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: AppleBarrel;
-  };
-};
+export type XmlGetWrappedListsResponse = AppleBarrel;
 
 /** Contains response data for the getHeaders operation. */
-export type XmlGetHeadersResponse = XmlGetHeadersHeaders & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The parsed HTTP response headers. */
-    parsedHeaders: XmlGetHeadersHeaders;
-  };
-};
+export type XmlGetHeadersResponse = XmlGetHeadersHeaders;
 
 /** Contains response data for the getEmptyList operation. */
-export type XmlGetEmptyListResponse = Slideshow & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Slideshow;
-  };
-};
+export type XmlGetEmptyListResponse = Slideshow;
 
 /** Contains response data for the getEmptyWrappedLists operation. */
-export type XmlGetEmptyWrappedListsResponse = AppleBarrel & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: AppleBarrel;
-  };
-};
+export type XmlGetEmptyWrappedListsResponse = AppleBarrel;
 
 /** Contains response data for the getRootList operation. */
-export type XmlGetRootListResponse = Banana[] & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Banana[];
-  };
-};
+export type XmlGetRootListResponse = Banana[];
 
 /** Contains response data for the getRootListSingleItem operation. */
-export type XmlGetRootListSingleItemResponse = Banana[] & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Banana[];
-  };
-};
+export type XmlGetRootListSingleItemResponse = Banana[];
 
 /** Contains response data for the getEmptyRootList operation. */
-export type XmlGetEmptyRootListResponse = Banana[] & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Banana[];
-  };
-};
+export type XmlGetEmptyRootListResponse = Banana[];
 
 /** Contains response data for the getEmptyChildElement operation. */
-export type XmlGetEmptyChildElementResponse = Banana & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Banana;
-  };
-};
+export type XmlGetEmptyChildElementResponse = Banana;
 
 /** Contains response data for the listContainers operation. */
-export type XmlListContainersResponse = ListContainersResponse & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: ListContainersResponse;
-  };
-};
+export type XmlListContainersResponse = ListContainersResponse;
 
 /** Contains response data for the getServiceProperties operation. */
-export type XmlGetServicePropertiesResponse = StorageServiceProperties & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: StorageServiceProperties;
-  };
-};
+export type XmlGetServicePropertiesResponse = StorageServiceProperties;
 
 /** Contains response data for the getAcls operation. */
-export type XmlGetAclsResponse = SignedIdentifier[] & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: SignedIdentifier[];
-  };
-};
+export type XmlGetAclsResponse = SignedIdentifier[];
 
 /** Contains response data for the listBlobs operation. */
-export type XmlListBlobsResponse = ListBlobsResponse & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: ListBlobsResponse;
-  };
-};
+export type XmlListBlobsResponse = ListBlobsResponse;
 
 /** Contains response data for the jsonOutput operation. */
-export type XmlJsonOutputResponse = JsonOutput & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: JsonOutput;
-  };
-};
+export type XmlJsonOutputResponse = JsonOutput;
 
 /** Contains response data for the getXMsText operation. */
-export type XmlGetXMsTextResponse = ObjectWithXMsTextProperty & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
+export type XmlGetXMsTextResponse = ObjectWithXMsTextProperty;
 
-    /** The response body as parsed JSON or XML */
-    parsedBody: ObjectWithXMsTextProperty;
-  };
-};
+/** Contains response data for the getBytes operation. */
+export type XmlGetBytesResponse = ModelWithByteProperty;
+
+/** Contains response data for the getUri operation. */
+export type XmlGetUriResponse = ModelWithUrlProperty;
 
 /** Optional parameters. */
 export interface XmlServiceClientOptionalParams
-  extends coreHttp.ServiceClientOptions {
+  extends coreClient.ServiceClientOptions {
   /** server parameter */
   $host?: string;
   /** Overrides client endpoint. */

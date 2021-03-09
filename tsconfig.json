@@ -16,7 +16,7 @@
     "noEmitHelpers": false,
     "target": "es2018",
     "types": ["node", "mocha"],
-    "lib": ["es2018"],
+    "lib": ["es2018", "dom"],
     "experimentalDecorators": true,
     "newLine": "LF",
     "outDir": "dist",

@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { AzureParameterGroupingClientContext } from "../azureParameterGroupingClientContext";
@@ -36,16 +37,12 @@ export class ParameterGrouping {
    */
   postRequired(
     parameterGroupingPostRequiredParameters: ParameterGroupingPostRequiredParameters,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      parameterGroupingPostRequiredParameters,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { parameterGroupingPostRequiredParameters, options },
       postRequiredOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -54,14 +51,11 @@ export class ParameterGrouping {
    */
   postOptional(
     options?: ParameterGroupingPostOptionalOptionalParams
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       postOptionalOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -70,14 +64,11 @@ export class ParameterGrouping {
    */
   postMultiParamGroups(
     options?: ParameterGroupingPostMultiParamGroupsOptionalParams
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       postMultiParamGroupsOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -86,20 +77,17 @@ export class ParameterGrouping {
    */
   postSharedParameterGroupObject(
     options?: ParameterGroupingPostSharedParameterGroupObjectOptionalParams
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       postSharedParameterGroupObjectOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const postRequiredOperationSpec: coreHttp.OperationSpec = {
+const postRequiredOperationSpec: coreClient.OperationSpec = {
   path: "/parameterGrouping/postRequired/{path}",
   httpMethod: "POST",
   responses: {
@@ -119,7 +107,7 @@ const postRequiredOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const postOptionalOperationSpec: coreHttp.OperationSpec = {
+const postOptionalOperationSpec: coreClient.OperationSpec = {
   path: "/parameterGrouping/postOptional",
   httpMethod: "POST",
   responses: {
@@ -133,7 +121,7 @@ const postOptionalOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept, Parameters.customHeader1],
   serializer
 };
-const postMultiParamGroupsOperationSpec: coreHttp.OperationSpec = {
+const postMultiParamGroupsOperationSpec: coreClient.OperationSpec = {
   path: "/parameterGrouping/postMultipleParameterGroups",
   httpMethod: "POST",
   responses: {
@@ -151,7 +139,7 @@ const postMultiParamGroupsOperationSpec: coreHttp.OperationSpec = {
   ],
   serializer
 };
-const postSharedParameterGroupObjectOperationSpec: coreHttp.OperationSpec = {
+const postSharedParameterGroupObjectOperationSpec: coreClient.OperationSpec = {
   path: "/parameterGrouping/sharedParameterGroupObject",
   httpMethod: "POST",
   responses: {

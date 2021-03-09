@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { HttpInfrastructureClientContext } from "../httpInfrastructureClientContext";
@@ -31,14 +32,8 @@ export class HttpSuccess {
    * Return 200 status code if successful
    * @param options The options parameters.
    */
-  head200(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      head200OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  head200(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, head200OperationSpec);
   }
 
   /**
@@ -46,15 +41,9 @@ export class HttpSuccess {
    * @param options The options parameters.
    */
   get200(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<HttpSuccessGet200Response> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      get200OperationSpec
-    ) as Promise<HttpSuccessGet200Response>;
+    return this.client.sendOperationRequest({ options }, get200OperationSpec);
   }
 
   /**
@@ -62,257 +51,155 @@ export class HttpSuccess {
    * @param options The options parameters.
    */
   options200(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<HttpSuccessOptions200Response> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       options200OperationSpec
-    ) as Promise<HttpSuccessOptions200Response>;
+    );
   }
 
   /**
    * Put boolean value true returning 200 success
    * @param options The options parameters.
    */
-  put200(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      put200OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  put200(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, put200OperationSpec);
   }
 
   /**
    * Patch true Boolean value in request returning 200
    * @param options The options parameters.
    */
-  patch200(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      patch200OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  patch200(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, patch200OperationSpec);
   }
 
   /**
    * Post bollean value true in request that returns a 200
    * @param options The options parameters.
    */
-  post200(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      post200OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  post200(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, post200OperationSpec);
   }
 
   /**
    * Delete simple boolean value true returns 200
    * @param options The options parameters.
    */
-  delete200(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  delete200(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       delete200OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
    * Put true Boolean value in request returns 201
    * @param options The options parameters.
    */
-  put201(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      put201OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  put201(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, put201OperationSpec);
   }
 
   /**
    * Post true Boolean value in request returns 201 (Created)
    * @param options The options parameters.
    */
-  post201(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      post201OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  post201(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, post201OperationSpec);
   }
 
   /**
    * Put true Boolean value in request returns 202 (Accepted)
    * @param options The options parameters.
    */
-  put202(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      put202OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  put202(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, put202OperationSpec);
   }
 
   /**
    * Patch true Boolean value in request returns 202
    * @param options The options parameters.
    */
-  patch202(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      patch202OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  patch202(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, patch202OperationSpec);
   }
 
   /**
    * Post true Boolean value in request returns 202 (Accepted)
    * @param options The options parameters.
    */
-  post202(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      post202OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  post202(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, post202OperationSpec);
   }
 
   /**
    * Delete true Boolean value in request returns 202 (accepted)
    * @param options The options parameters.
    */
-  delete202(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  delete202(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       delete202OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
    * Return 204 status code if successful
    * @param options The options parameters.
    */
-  head204(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      head204OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  head204(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, head204OperationSpec);
   }
 
   /**
    * Put true Boolean value in request returns 204 (no content)
    * @param options The options parameters.
    */
-  put204(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      put204OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  put204(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, put204OperationSpec);
   }
 
   /**
    * Patch true Boolean value in request returns 204 (no content)
    * @param options The options parameters.
    */
-  patch204(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      patch204OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  patch204(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, patch204OperationSpec);
   }
 
   /**
    * Post true Boolean value in request returns 204 (no content)
    * @param options The options parameters.
    */
-  post204(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      post204OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  post204(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, post204OperationSpec);
   }
 
   /**
    * Delete true Boolean value in request returns 204 (no content)
    * @param options The options parameters.
    */
-  delete204(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  delete204(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       delete204OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
    * Return 404 status code
    * @param options The options parameters.
    */
-  head404(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      head404OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  head404(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, head404OperationSpec);
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const head200OperationSpec: coreHttp.OperationSpec = {
+const head200OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/200",
   httpMethod: "HEAD",
   responses: {
@@ -325,7 +212,7 @@ const head200OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200OperationSpec: coreHttp.OperationSpec = {
+const get200OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/200",
   httpMethod: "GET",
   responses: {
@@ -340,7 +227,7 @@ const get200OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const options200OperationSpec: coreHttp.OperationSpec = {
+const options200OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/200",
   httpMethod: "OPTIONS",
   responses: {
@@ -355,7 +242,7 @@ const options200OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const put200OperationSpec: coreHttp.OperationSpec = {
+const put200OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/200",
   httpMethod: "PUT",
   responses: {
@@ -370,7 +257,7 @@ const put200OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const patch200OperationSpec: coreHttp.OperationSpec = {
+const patch200OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/200",
   httpMethod: "PATCH",
   responses: {
@@ -385,7 +272,7 @@ const patch200OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const post200OperationSpec: coreHttp.OperationSpec = {
+const post200OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/200",
   httpMethod: "POST",
   responses: {
@@ -400,7 +287,7 @@ const post200OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const delete200OperationSpec: coreHttp.OperationSpec = {
+const delete200OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/200",
   httpMethod: "DELETE",
   responses: {
@@ -415,7 +302,7 @@ const delete200OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const put201OperationSpec: coreHttp.OperationSpec = {
+const put201OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/201",
   httpMethod: "PUT",
   responses: {
@@ -430,7 +317,7 @@ const put201OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const post201OperationSpec: coreHttp.OperationSpec = {
+const post201OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/201",
   httpMethod: "POST",
   responses: {
@@ -445,7 +332,7 @@ const post201OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const put202OperationSpec: coreHttp.OperationSpec = {
+const put202OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/202",
   httpMethod: "PUT",
   responses: {
@@ -460,7 +347,7 @@ const put202OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const patch202OperationSpec: coreHttp.OperationSpec = {
+const patch202OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/202",
   httpMethod: "PATCH",
   responses: {
@@ -475,7 +362,7 @@ const patch202OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const post202OperationSpec: coreHttp.OperationSpec = {
+const post202OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/202",
   httpMethod: "POST",
   responses: {
@@ -490,7 +377,7 @@ const post202OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const delete202OperationSpec: coreHttp.OperationSpec = {
+const delete202OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/202",
   httpMethod: "DELETE",
   responses: {
@@ -505,7 +392,7 @@ const delete202OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const head204OperationSpec: coreHttp.OperationSpec = {
+const head204OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/204",
   httpMethod: "HEAD",
   responses: {
@@ -518,7 +405,7 @@ const head204OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const put204OperationSpec: coreHttp.OperationSpec = {
+const put204OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/204",
   httpMethod: "PUT",
   responses: {
@@ -533,7 +420,7 @@ const put204OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const patch204OperationSpec: coreHttp.OperationSpec = {
+const patch204OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/204",
   httpMethod: "PATCH",
   responses: {
@@ -548,7 +435,7 @@ const patch204OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const post204OperationSpec: coreHttp.OperationSpec = {
+const post204OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/204",
   httpMethod: "POST",
   responses: {
@@ -563,7 +450,7 @@ const post204OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const delete204OperationSpec: coreHttp.OperationSpec = {
+const delete204OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/204",
   httpMethod: "DELETE",
   responses: {
@@ -578,7 +465,7 @@ const delete204OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const head404OperationSpec: coreHttp.OperationSpec = {
+const head404OperationSpec: coreClient.OperationSpec = {
   path: "/http/success/404",
   httpMethod: "HEAD",
   responses: {

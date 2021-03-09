@@ -10,7 +10,7 @@ import {
   OperationParameter,
   OperationURLParameter,
   OperationQueryParameter
-} from "@azure/core-http";
+} from "@azure/core-client";
 import {
   RootWithRefAndNoMeta as RootWithRefAndNoMetaMapper,
   RootWithRefAndMeta as RootWithRefAndMetaMapper,
@@ -18,7 +18,9 @@ import {
   AppleBarrel as AppleBarrelMapper,
   Banana as BananaMapper,
   StorageServiceProperties as StorageServicePropertiesMapper,
-  JsonInput as JsonInputMapper
+  JsonInput as JsonInputMapper,
+  ModelWithByteProperty as ModelWithBytePropertyMapper,
+  ModelWithUrlProperty as ModelWithUrlPropertyMapper
 } from "../models/mappers";
 
 export const accept: OperationParameter = {
@@ -232,4 +234,14 @@ export const accept2: OperationParameter = {
       name: "String"
     }
   }
+};
+
+export const slideshow1: OperationParameter = {
+  parameterPath: "slideshow",
+  mapper: ModelWithBytePropertyMapper
+};
+
+export const model2: OperationParameter = {
+  parameterPath: "model",
+  mapper: ModelWithUrlPropertyMapper
 };

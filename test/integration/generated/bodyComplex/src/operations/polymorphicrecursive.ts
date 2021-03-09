@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { BodyComplexClientContext } from "../bodyComplexClientContext";
@@ -29,15 +30,9 @@ export class Polymorphicrecursive {
    * @param options The options parameters.
    */
   getValid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PolymorphicrecursiveGetValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      getValidOperationSpec
-    ) as Promise<PolymorphicrecursiveGetValidResponse>;
+    return this.client.sendOperationRequest({ options }, getValidOperationSpec);
   }
 
   /**
@@ -99,22 +94,18 @@ export class Polymorphicrecursive {
    */
   putValid(
     complexBody: FishUnion,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      complexBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { complexBody, options },
       putValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getValidOperationSpec: coreHttp.OperationSpec = {
+const getValidOperationSpec: coreClient.OperationSpec = {
   path: "/complex/polymorphicrecursive/valid",
   httpMethod: "GET",
   responses: {
@@ -129,7 +120,7 @@ const getValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putValidOperationSpec: coreHttp.OperationSpec = {
+const putValidOperationSpec: coreClient.OperationSpec = {
   path: "/complex/polymorphicrecursive/valid",
   httpMethod: "PUT",
   responses: {

@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { BodyDictionaryClientContext } from "../bodyDictionaryClientContext";
@@ -81,15 +82,9 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      getNullOperationSpec
-    ) as Promise<DictionaryGetNullResponse>;
+    return this.client.sendOperationRequest({ options }, getNullOperationSpec);
   }
 
   /**
@@ -97,15 +92,9 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getEmpty(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetEmptyResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      getEmptyOperationSpec
-    ) as Promise<DictionaryGetEmptyResponse>;
+    return this.client.sendOperationRequest({ options }, getEmptyOperationSpec);
   }
 
   /**
@@ -115,16 +104,12 @@ export class Dictionary {
    */
   putEmpty(
     arrayBody: { [propertyName: string]: string },
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      arrayBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { arrayBody, options },
       putEmptyOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -132,15 +117,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getNullValue(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetNullValueResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getNullValueOperationSpec
-    ) as Promise<DictionaryGetNullValueResponse>;
+    );
   }
 
   /**
@@ -148,15 +130,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getNullKey(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetNullKeyResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getNullKeyOperationSpec
-    ) as Promise<DictionaryGetNullKeyResponse>;
+    );
   }
 
   /**
@@ -164,15 +143,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getEmptyStringKey(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetEmptyStringKeyResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getEmptyStringKeyOperationSpec
-    ) as Promise<DictionaryGetEmptyStringKeyResponse>;
+    );
   }
 
   /**
@@ -180,15 +156,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getInvalid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetInvalidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getInvalidOperationSpec
-    ) as Promise<DictionaryGetInvalidResponse>;
+    );
   }
 
   /**
@@ -196,15 +169,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getBooleanTfft(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetBooleanTfftResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getBooleanTfftOperationSpec
-    ) as Promise<DictionaryGetBooleanTfftResponse>;
+    );
   }
 
   /**
@@ -214,16 +184,12 @@ export class Dictionary {
    */
   putBooleanTfft(
     arrayBody: { [propertyName: string]: boolean },
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      arrayBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { arrayBody, options },
       putBooleanTfftOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -231,15 +197,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getBooleanInvalidNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetBooleanInvalidNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getBooleanInvalidNullOperationSpec
-    ) as Promise<DictionaryGetBooleanInvalidNullResponse>;
+    );
   }
 
   /**
@@ -247,15 +210,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getBooleanInvalidString(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetBooleanInvalidStringResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getBooleanInvalidStringOperationSpec
-    ) as Promise<DictionaryGetBooleanInvalidStringResponse>;
+    );
   }
 
   /**
@@ -263,15 +223,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getIntegerValid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetIntegerValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getIntegerValidOperationSpec
-    ) as Promise<DictionaryGetIntegerValidResponse>;
+    );
   }
 
   /**
@@ -281,16 +238,12 @@ export class Dictionary {
    */
   putIntegerValid(
     arrayBody: { [propertyName: string]: number },
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      arrayBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { arrayBody, options },
       putIntegerValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -298,15 +251,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getIntInvalidNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetIntInvalidNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getIntInvalidNullOperationSpec
-    ) as Promise<DictionaryGetIntInvalidNullResponse>;
+    );
   }
 
   /**
@@ -314,15 +264,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getIntInvalidString(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetIntInvalidStringResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getIntInvalidStringOperationSpec
-    ) as Promise<DictionaryGetIntInvalidStringResponse>;
+    );
   }
 
   /**
@@ -330,15 +277,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getLongValid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetLongValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getLongValidOperationSpec
-    ) as Promise<DictionaryGetLongValidResponse>;
+    );
   }
 
   /**
@@ -348,16 +292,12 @@ export class Dictionary {
    */
   putLongValid(
     arrayBody: { [propertyName: string]: number },
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      arrayBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { arrayBody, options },
       putLongValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -365,15 +305,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getLongInvalidNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetLongInvalidNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getLongInvalidNullOperationSpec
-    ) as Promise<DictionaryGetLongInvalidNullResponse>;
+    );
   }
 
   /**
@@ -381,15 +318,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getLongInvalidString(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetLongInvalidStringResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getLongInvalidStringOperationSpec
-    ) as Promise<DictionaryGetLongInvalidStringResponse>;
+    );
   }
 
   /**
@@ -397,15 +331,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getFloatValid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetFloatValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getFloatValidOperationSpec
-    ) as Promise<DictionaryGetFloatValidResponse>;
+    );
   }
 
   /**
@@ -415,16 +346,12 @@ export class Dictionary {
    */
   putFloatValid(
     arrayBody: { [propertyName: string]: number },
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      arrayBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { arrayBody, options },
       putFloatValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -432,15 +359,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getFloatInvalidNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetFloatInvalidNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getFloatInvalidNullOperationSpec
-    ) as Promise<DictionaryGetFloatInvalidNullResponse>;
+    );
   }
 
   /**
@@ -448,15 +372,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getFloatInvalidString(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetFloatInvalidStringResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getFloatInvalidStringOperationSpec
-    ) as Promise<DictionaryGetFloatInvalidStringResponse>;
+    );
   }
 
   /**
@@ -464,15 +385,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDoubleValid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDoubleValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDoubleValidOperationSpec
-    ) as Promise<DictionaryGetDoubleValidResponse>;
+    );
   }
 
   /**
@@ -482,16 +400,12 @@ export class Dictionary {
    */
   putDoubleValid(
     arrayBody: { [propertyName: string]: number },
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      arrayBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { arrayBody, options },
       putDoubleValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -499,15 +413,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDoubleInvalidNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDoubleInvalidNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDoubleInvalidNullOperationSpec
-    ) as Promise<DictionaryGetDoubleInvalidNullResponse>;
+    );
   }
 
   /**
@@ -515,15 +426,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDoubleInvalidString(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDoubleInvalidStringResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDoubleInvalidStringOperationSpec
-    ) as Promise<DictionaryGetDoubleInvalidStringResponse>;
+    );
   }
 
   /**
@@ -531,15 +439,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getStringValid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetStringValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getStringValidOperationSpec
-    ) as Promise<DictionaryGetStringValidResponse>;
+    );
   }
 
   /**
@@ -549,16 +454,12 @@ export class Dictionary {
    */
   putStringValid(
     arrayBody: { [propertyName: string]: string },
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      arrayBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { arrayBody, options },
       putStringValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -566,15 +467,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getStringWithNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetStringWithNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getStringWithNullOperationSpec
-    ) as Promise<DictionaryGetStringWithNullResponse>;
+    );
   }
 
   /**
@@ -582,15 +480,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getStringWithInvalid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetStringWithInvalidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getStringWithInvalidOperationSpec
-    ) as Promise<DictionaryGetStringWithInvalidResponse>;
+    );
   }
 
   /**
@@ -598,15 +493,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDateValid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDateValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDateValidOperationSpec
-    ) as Promise<DictionaryGetDateValidResponse>;
+    );
   }
 
   /**
@@ -616,16 +508,12 @@ export class Dictionary {
    */
   putDateValid(
     arrayBody: { [propertyName: string]: Date },
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      arrayBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { arrayBody, options },
       putDateValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -633,15 +521,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDateInvalidNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDateInvalidNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDateInvalidNullOperationSpec
-    ) as Promise<DictionaryGetDateInvalidNullResponse>;
+    );
   }
 
   /**
@@ -649,15 +534,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDateInvalidChars(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDateInvalidCharsResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDateInvalidCharsOperationSpec
-    ) as Promise<DictionaryGetDateInvalidCharsResponse>;
+    );
   }
 
   /**
@@ -666,15 +548,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDateTimeValid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDateTimeValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDateTimeValidOperationSpec
-    ) as Promise<DictionaryGetDateTimeValidResponse>;
+    );
   }
 
   /**
@@ -686,16 +565,12 @@ export class Dictionary {
    */
   putDateTimeValid(
     arrayBody: { [propertyName: string]: Date },
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      arrayBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { arrayBody, options },
       putDateTimeValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -703,15 +578,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDateTimeInvalidNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDateTimeInvalidNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDateTimeInvalidNullOperationSpec
-    ) as Promise<DictionaryGetDateTimeInvalidNullResponse>;
+    );
   }
 
   /**
@@ -719,15 +591,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDateTimeInvalidChars(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDateTimeInvalidCharsResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDateTimeInvalidCharsOperationSpec
-    ) as Promise<DictionaryGetDateTimeInvalidCharsResponse>;
+    );
   }
 
   /**
@@ -736,15 +605,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDateTimeRfc1123Valid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDateTimeRfc1123ValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDateTimeRfc1123ValidOperationSpec
-    ) as Promise<DictionaryGetDateTimeRfc1123ValidResponse>;
+    );
   }
 
   /**
@@ -756,16 +622,12 @@ export class Dictionary {
    */
   putDateTimeRfc1123Valid(
     arrayBody: { [propertyName: string]: Date },
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      arrayBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { arrayBody, options },
       putDateTimeRfc1123ValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -773,15 +635,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDurationValid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDurationValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDurationValidOperationSpec
-    ) as Promise<DictionaryGetDurationValidResponse>;
+    );
   }
 
   /**
@@ -791,16 +650,12 @@ export class Dictionary {
    */
   putDurationValid(
     arrayBody: { [propertyName: string]: string },
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      arrayBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { arrayBody, options },
       putDurationValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -809,15 +664,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getByteValid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetByteValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getByteValidOperationSpec
-    ) as Promise<DictionaryGetByteValidResponse>;
+    );
   }
 
   /**
@@ -829,16 +681,12 @@ export class Dictionary {
    */
   putByteValid(
     arrayBody: { [propertyName: string]: Uint8Array },
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      arrayBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { arrayBody, options },
       putByteValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -846,15 +694,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getByteInvalidNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetByteInvalidNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getByteInvalidNullOperationSpec
-    ) as Promise<DictionaryGetByteInvalidNullResponse>;
+    );
   }
 
   /**
@@ -863,15 +708,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getBase64Url(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetBase64UrlResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getBase64UrlOperationSpec
-    ) as Promise<DictionaryGetBase64UrlResponse>;
+    );
   }
 
   /**
@@ -879,15 +721,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getComplexNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetComplexNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getComplexNullOperationSpec
-    ) as Promise<DictionaryGetComplexNullResponse>;
+    );
   }
 
   /**
@@ -895,15 +734,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getComplexEmpty(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetComplexEmptyResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getComplexEmptyOperationSpec
-    ) as Promise<DictionaryGetComplexEmptyResponse>;
+    );
   }
 
   /**
@@ -912,15 +748,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getComplexItemNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetComplexItemNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getComplexItemNullOperationSpec
-    ) as Promise<DictionaryGetComplexItemNullResponse>;
+    );
   }
 
   /**
@@ -929,15 +762,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getComplexItemEmpty(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetComplexItemEmptyResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getComplexItemEmptyOperationSpec
-    ) as Promise<DictionaryGetComplexItemEmptyResponse>;
+    );
   }
 
   /**
@@ -946,15 +776,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getComplexValid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetComplexValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getComplexValidOperationSpec
-    ) as Promise<DictionaryGetComplexValidResponse>;
+    );
   }
 
   /**
@@ -966,16 +793,12 @@ export class Dictionary {
    */
   putComplexValid(
     arrayBody: { [propertyName: string]: Widget },
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      arrayBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { arrayBody, options },
       putComplexValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -983,15 +806,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getArrayNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetArrayNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getArrayNullOperationSpec
-    ) as Promise<DictionaryGetArrayNullResponse>;
+    );
   }
 
   /**
@@ -999,15 +819,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getArrayEmpty(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetArrayEmptyResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getArrayEmptyOperationSpec
-    ) as Promise<DictionaryGetArrayEmptyResponse>;
+    );
   }
 
   /**
@@ -1015,15 +832,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getArrayItemNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetArrayItemNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getArrayItemNullOperationSpec
-    ) as Promise<DictionaryGetArrayItemNullResponse>;
+    );
   }
 
   /**
@@ -1031,15 +845,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getArrayItemEmpty(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetArrayItemEmptyResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getArrayItemEmptyOperationSpec
-    ) as Promise<DictionaryGetArrayItemEmptyResponse>;
+    );
   }
 
   /**
@@ -1047,15 +858,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getArrayValid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetArrayValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getArrayValidOperationSpec
-    ) as Promise<DictionaryGetArrayValidResponse>;
+    );
   }
 
   /**
@@ -1066,16 +874,12 @@ export class Dictionary {
    */
   putArrayValid(
     arrayBody: { [propertyName: string]: string[] },
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      arrayBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { arrayBody, options },
       putArrayValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -1083,15 +887,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDictionaryNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDictionaryNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDictionaryNullOperationSpec
-    ) as Promise<DictionaryGetDictionaryNullResponse>;
+    );
   }
 
   /**
@@ -1099,15 +900,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDictionaryEmpty(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDictionaryEmptyResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDictionaryEmptyOperationSpec
-    ) as Promise<DictionaryGetDictionaryEmptyResponse>;
+    );
   }
 
   /**
@@ -1116,15 +914,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDictionaryItemNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDictionaryItemNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDictionaryItemNullOperationSpec
-    ) as Promise<DictionaryGetDictionaryItemNullResponse>;
+    );
   }
 
   /**
@@ -1133,15 +928,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDictionaryItemEmpty(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDictionaryItemEmptyResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDictionaryItemEmptyOperationSpec
-    ) as Promise<DictionaryGetDictionaryItemEmptyResponse>;
+    );
   }
 
   /**
@@ -1151,15 +943,12 @@ export class Dictionary {
    * @param options The options parameters.
    */
   getDictionaryValid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DictionaryGetDictionaryValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDictionaryValidOperationSpec
-    ) as Promise<DictionaryGetDictionaryValidResponse>;
+    );
   }
 
   /**
@@ -1173,22 +962,18 @@ export class Dictionary {
    */
   putDictionaryValid(
     arrayBody: { [propertyName: string]: { [propertyName: string]: string } },
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      arrayBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { arrayBody, options },
       putDictionaryValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getNullOperationSpec: coreHttp.OperationSpec = {
+const getNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/null",
   httpMethod: "GET",
   responses: {
@@ -1205,7 +990,7 @@ const getNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getEmptyOperationSpec: coreHttp.OperationSpec = {
+const getEmptyOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/empty",
   httpMethod: "GET",
   responses: {
@@ -1222,7 +1007,7 @@ const getEmptyOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putEmptyOperationSpec: coreHttp.OperationSpec = {
+const putEmptyOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/empty",
   httpMethod: "PUT",
   responses: {
@@ -1237,7 +1022,7 @@ const putEmptyOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getNullValueOperationSpec: coreHttp.OperationSpec = {
+const getNullValueOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/nullvalue",
   httpMethod: "GET",
   responses: {
@@ -1254,7 +1039,7 @@ const getNullValueOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getNullKeyOperationSpec: coreHttp.OperationSpec = {
+const getNullKeyOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/nullkey",
   httpMethod: "GET",
   responses: {
@@ -1271,7 +1056,7 @@ const getNullKeyOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getEmptyStringKeyOperationSpec: coreHttp.OperationSpec = {
+const getEmptyStringKeyOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/keyemptystring",
   httpMethod: "GET",
   responses: {
@@ -1288,7 +1073,7 @@ const getEmptyStringKeyOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getInvalidOperationSpec: coreHttp.OperationSpec = {
+const getInvalidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/invalid",
   httpMethod: "GET",
   responses: {
@@ -1305,7 +1090,7 @@ const getInvalidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getBooleanTfftOperationSpec: coreHttp.OperationSpec = {
+const getBooleanTfftOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/boolean/tfft",
   httpMethod: "GET",
   responses: {
@@ -1322,7 +1107,7 @@ const getBooleanTfftOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putBooleanTfftOperationSpec: coreHttp.OperationSpec = {
+const putBooleanTfftOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/boolean/tfft",
   httpMethod: "PUT",
   responses: {
@@ -1337,7 +1122,7 @@ const putBooleanTfftOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getBooleanInvalidNullOperationSpec: coreHttp.OperationSpec = {
+const getBooleanInvalidNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/boolean/true.null.false",
   httpMethod: "GET",
   responses: {
@@ -1354,7 +1139,7 @@ const getBooleanInvalidNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getBooleanInvalidStringOperationSpec: coreHttp.OperationSpec = {
+const getBooleanInvalidStringOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/boolean/true.boolean.false",
   httpMethod: "GET",
   responses: {
@@ -1371,7 +1156,7 @@ const getBooleanInvalidStringOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getIntegerValidOperationSpec: coreHttp.OperationSpec = {
+const getIntegerValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/integer/1.-1.3.300",
   httpMethod: "GET",
   responses: {
@@ -1388,7 +1173,7 @@ const getIntegerValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putIntegerValidOperationSpec: coreHttp.OperationSpec = {
+const putIntegerValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/integer/1.-1.3.300",
   httpMethod: "PUT",
   responses: {
@@ -1403,7 +1188,7 @@ const putIntegerValidOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getIntInvalidNullOperationSpec: coreHttp.OperationSpec = {
+const getIntInvalidNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/integer/1.null.zero",
   httpMethod: "GET",
   responses: {
@@ -1420,7 +1205,7 @@ const getIntInvalidNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getIntInvalidStringOperationSpec: coreHttp.OperationSpec = {
+const getIntInvalidStringOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/integer/1.integer.0",
   httpMethod: "GET",
   responses: {
@@ -1437,7 +1222,7 @@ const getIntInvalidStringOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getLongValidOperationSpec: coreHttp.OperationSpec = {
+const getLongValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/long/1.-1.3.300",
   httpMethod: "GET",
   responses: {
@@ -1454,7 +1239,7 @@ const getLongValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putLongValidOperationSpec: coreHttp.OperationSpec = {
+const putLongValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/long/1.-1.3.300",
   httpMethod: "PUT",
   responses: {
@@ -1469,7 +1254,7 @@ const putLongValidOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getLongInvalidNullOperationSpec: coreHttp.OperationSpec = {
+const getLongInvalidNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/long/1.null.zero",
   httpMethod: "GET",
   responses: {
@@ -1486,7 +1271,7 @@ const getLongInvalidNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getLongInvalidStringOperationSpec: coreHttp.OperationSpec = {
+const getLongInvalidStringOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/long/1.integer.0",
   httpMethod: "GET",
   responses: {
@@ -1503,7 +1288,7 @@ const getLongInvalidStringOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getFloatValidOperationSpec: coreHttp.OperationSpec = {
+const getFloatValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/float/0--0.01-1.2e20",
   httpMethod: "GET",
   responses: {
@@ -1520,7 +1305,7 @@ const getFloatValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putFloatValidOperationSpec: coreHttp.OperationSpec = {
+const putFloatValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/float/0--0.01-1.2e20",
   httpMethod: "PUT",
   responses: {
@@ -1535,7 +1320,7 @@ const putFloatValidOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getFloatInvalidNullOperationSpec: coreHttp.OperationSpec = {
+const getFloatInvalidNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/float/0.0-null-1.2e20",
   httpMethod: "GET",
   responses: {
@@ -1552,7 +1337,7 @@ const getFloatInvalidNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getFloatInvalidStringOperationSpec: coreHttp.OperationSpec = {
+const getFloatInvalidStringOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/float/1.number.0",
   httpMethod: "GET",
   responses: {
@@ -1569,7 +1354,7 @@ const getFloatInvalidStringOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getDoubleValidOperationSpec: coreHttp.OperationSpec = {
+const getDoubleValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/double/0--0.01-1.2e20",
   httpMethod: "GET",
   responses: {
@@ -1586,7 +1371,7 @@ const getDoubleValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putDoubleValidOperationSpec: coreHttp.OperationSpec = {
+const putDoubleValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/double/0--0.01-1.2e20",
   httpMethod: "PUT",
   responses: {
@@ -1601,7 +1386,7 @@ const putDoubleValidOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getDoubleInvalidNullOperationSpec: coreHttp.OperationSpec = {
+const getDoubleInvalidNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/double/0.0-null-1.2e20",
   httpMethod: "GET",
   responses: {
@@ -1618,7 +1403,7 @@ const getDoubleInvalidNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getDoubleInvalidStringOperationSpec: coreHttp.OperationSpec = {
+const getDoubleInvalidStringOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/double/1.number.0",
   httpMethod: "GET",
   responses: {
@@ -1635,7 +1420,7 @@ const getDoubleInvalidStringOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getStringValidOperationSpec: coreHttp.OperationSpec = {
+const getStringValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/string/foo1.foo2.foo3",
   httpMethod: "GET",
   responses: {
@@ -1652,7 +1437,7 @@ const getStringValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putStringValidOperationSpec: coreHttp.OperationSpec = {
+const putStringValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/string/foo1.foo2.foo3",
   httpMethod: "PUT",
   responses: {
@@ -1667,7 +1452,7 @@ const putStringValidOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getStringWithNullOperationSpec: coreHttp.OperationSpec = {
+const getStringWithNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/string/foo.null.foo2",
   httpMethod: "GET",
   responses: {
@@ -1684,7 +1469,7 @@ const getStringWithNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getStringWithInvalidOperationSpec: coreHttp.OperationSpec = {
+const getStringWithInvalidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/string/foo.123.foo2",
   httpMethod: "GET",
   responses: {
@@ -1701,7 +1486,7 @@ const getStringWithInvalidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getDateValidOperationSpec: coreHttp.OperationSpec = {
+const getDateValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/date/valid",
   httpMethod: "GET",
   responses: {
@@ -1718,7 +1503,7 @@ const getDateValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putDateValidOperationSpec: coreHttp.OperationSpec = {
+const putDateValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/date/valid",
   httpMethod: "PUT",
   responses: {
@@ -1733,7 +1518,7 @@ const putDateValidOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getDateInvalidNullOperationSpec: coreHttp.OperationSpec = {
+const getDateInvalidNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/date/invalidnull",
   httpMethod: "GET",
   responses: {
@@ -1750,7 +1535,7 @@ const getDateInvalidNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getDateInvalidCharsOperationSpec: coreHttp.OperationSpec = {
+const getDateInvalidCharsOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/date/invalidchars",
   httpMethod: "GET",
   responses: {
@@ -1767,7 +1552,7 @@ const getDateInvalidCharsOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getDateTimeValidOperationSpec: coreHttp.OperationSpec = {
+const getDateTimeValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/date-time/valid",
   httpMethod: "GET",
   responses: {
@@ -1784,7 +1569,7 @@ const getDateTimeValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putDateTimeValidOperationSpec: coreHttp.OperationSpec = {
+const putDateTimeValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/date-time/valid",
   httpMethod: "PUT",
   responses: {
@@ -1799,7 +1584,7 @@ const putDateTimeValidOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getDateTimeInvalidNullOperationSpec: coreHttp.OperationSpec = {
+const getDateTimeInvalidNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/date-time/invalidnull",
   httpMethod: "GET",
   responses: {
@@ -1816,7 +1601,7 @@ const getDateTimeInvalidNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getDateTimeInvalidCharsOperationSpec: coreHttp.OperationSpec = {
+const getDateTimeInvalidCharsOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/date-time/invalidchars",
   httpMethod: "GET",
   responses: {
@@ -1833,7 +1618,7 @@ const getDateTimeInvalidCharsOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getDateTimeRfc1123ValidOperationSpec: coreHttp.OperationSpec = {
+const getDateTimeRfc1123ValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/date-time-rfc1123/valid",
   httpMethod: "GET",
   responses: {
@@ -1853,7 +1638,7 @@ const getDateTimeRfc1123ValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putDateTimeRfc1123ValidOperationSpec: coreHttp.OperationSpec = {
+const putDateTimeRfc1123ValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/date-time-rfc1123/valid",
   httpMethod: "PUT",
   responses: {
@@ -1868,7 +1653,7 @@ const putDateTimeRfc1123ValidOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getDurationValidOperationSpec: coreHttp.OperationSpec = {
+const getDurationValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/duration/valid",
   httpMethod: "GET",
   responses: {
@@ -1885,7 +1670,7 @@ const getDurationValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putDurationValidOperationSpec: coreHttp.OperationSpec = {
+const putDurationValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/duration/valid",
   httpMethod: "PUT",
   responses: {
@@ -1900,7 +1685,7 @@ const putDurationValidOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getByteValidOperationSpec: coreHttp.OperationSpec = {
+const getByteValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/byte/valid",
   httpMethod: "GET",
   responses: {
@@ -1917,7 +1702,7 @@ const getByteValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putByteValidOperationSpec: coreHttp.OperationSpec = {
+const putByteValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/byte/valid",
   httpMethod: "PUT",
   responses: {
@@ -1932,7 +1717,7 @@ const putByteValidOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getByteInvalidNullOperationSpec: coreHttp.OperationSpec = {
+const getByteInvalidNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/byte/invalidnull",
   httpMethod: "GET",
   responses: {
@@ -1949,7 +1734,7 @@ const getByteInvalidNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getBase64UrlOperationSpec: coreHttp.OperationSpec = {
+const getBase64UrlOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/prim/base64url/valid",
   httpMethod: "GET",
   responses: {
@@ -1966,7 +1751,7 @@ const getBase64UrlOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getComplexNullOperationSpec: coreHttp.OperationSpec = {
+const getComplexNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/complex/null",
   httpMethod: "GET",
   responses: {
@@ -1986,7 +1771,7 @@ const getComplexNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getComplexEmptyOperationSpec: coreHttp.OperationSpec = {
+const getComplexEmptyOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/complex/empty",
   httpMethod: "GET",
   responses: {
@@ -2006,7 +1791,7 @@ const getComplexEmptyOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getComplexItemNullOperationSpec: coreHttp.OperationSpec = {
+const getComplexItemNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/complex/itemnull",
   httpMethod: "GET",
   responses: {
@@ -2026,7 +1811,7 @@ const getComplexItemNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getComplexItemEmptyOperationSpec: coreHttp.OperationSpec = {
+const getComplexItemEmptyOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/complex/itemempty",
   httpMethod: "GET",
   responses: {
@@ -2046,7 +1831,7 @@ const getComplexItemEmptyOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getComplexValidOperationSpec: coreHttp.OperationSpec = {
+const getComplexValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/complex/valid",
   httpMethod: "GET",
   responses: {
@@ -2066,7 +1851,7 @@ const getComplexValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putComplexValidOperationSpec: coreHttp.OperationSpec = {
+const putComplexValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/complex/valid",
   httpMethod: "PUT",
   responses: {
@@ -2081,7 +1866,7 @@ const putComplexValidOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getArrayNullOperationSpec: coreHttp.OperationSpec = {
+const getArrayNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/array/null",
   httpMethod: "GET",
   responses: {
@@ -2103,7 +1888,7 @@ const getArrayNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getArrayEmptyOperationSpec: coreHttp.OperationSpec = {
+const getArrayEmptyOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/array/empty",
   httpMethod: "GET",
   responses: {
@@ -2125,7 +1910,7 @@ const getArrayEmptyOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getArrayItemNullOperationSpec: coreHttp.OperationSpec = {
+const getArrayItemNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/array/itemnull",
   httpMethod: "GET",
   responses: {
@@ -2147,7 +1932,7 @@ const getArrayItemNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getArrayItemEmptyOperationSpec: coreHttp.OperationSpec = {
+const getArrayItemEmptyOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/array/itemempty",
   httpMethod: "GET",
   responses: {
@@ -2169,7 +1954,7 @@ const getArrayItemEmptyOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getArrayValidOperationSpec: coreHttp.OperationSpec = {
+const getArrayValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/array/valid",
   httpMethod: "GET",
   responses: {
@@ -2191,7 +1976,7 @@ const getArrayValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putArrayValidOperationSpec: coreHttp.OperationSpec = {
+const putArrayValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/array/valid",
   httpMethod: "PUT",
   responses: {
@@ -2206,7 +1991,7 @@ const putArrayValidOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getDictionaryNullOperationSpec: coreHttp.OperationSpec = {
+const getDictionaryNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/dictionary/null",
   httpMethod: "GET",
   responses: {
@@ -2228,7 +2013,7 @@ const getDictionaryNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getDictionaryEmptyOperationSpec: coreHttp.OperationSpec = {
+const getDictionaryEmptyOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/dictionary/empty",
   httpMethod: "GET",
   responses: {
@@ -2250,7 +2035,7 @@ const getDictionaryEmptyOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getDictionaryItemNullOperationSpec: coreHttp.OperationSpec = {
+const getDictionaryItemNullOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/dictionary/itemnull",
   httpMethod: "GET",
   responses: {
@@ -2272,7 +2057,7 @@ const getDictionaryItemNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getDictionaryItemEmptyOperationSpec: coreHttp.OperationSpec = {
+const getDictionaryItemEmptyOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/dictionary/itemempty",
   httpMethod: "GET",
   responses: {
@@ -2294,7 +2079,7 @@ const getDictionaryItemEmptyOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getDictionaryValidOperationSpec: coreHttp.OperationSpec = {
+const getDictionaryValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/dictionary/valid",
   httpMethod: "GET",
   responses: {
@@ -2316,7 +2101,7 @@ const getDictionaryValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putDictionaryValidOperationSpec: coreHttp.OperationSpec = {
+const putDictionaryValidOperationSpec: coreClient.OperationSpec = {
   path: "/dictionary/dictionary/valid",
   httpMethod: "PUT",
   responses: {

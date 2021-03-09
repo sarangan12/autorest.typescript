@@ -43,17 +43,32 @@ import {
 import { getParameterDescription } from "../utils/getParameterDescription";
 import { UnionDetails } from "../models/unionDetails";
 
-export function generateModels(clientDetails: ClientDetails, project: Project) {
+export function generateModels(
+  clientDetails: ClientDetails,
+  project: Project,
+  useCoreV2: boolean
+) {
   const modelsIndexFile = project.createSourceFile(
     `${clientDetails.srcPath}/models/index.ts`,
     undefined,
     { overwrite: true }
   );
 
-  modelsIndexFile.addImportDeclaration({
-    namespaceImport: "coreHttp",
-    moduleSpecifier: "@azure/core-http"
-  });
+  if (!useCoreV2) {
+    modelsIndexFile.addImportDeclaration({
+      namespaceImport: "coreHttp",
+      moduleSpecifier: "@azure/core-http"
+    });
+  } else {
+    modelsIndexFile.addImportDeclaration({
+      namespaceImport: "coreClient",
+      moduleSpecifier: "@azure/core-client"
+    });
+    modelsIndexFile.addImportDeclaration({
+      namespaceImport: "coreHttps",
+      moduleSpecifier: "@azure/core-https"
+    });
+  }
 
   // Import LRO Symbol if any of the operations is an LRO one
   if (
@@ -68,13 +83,14 @@ export function generateModels(clientDetails: ClientDetails, project: Project) {
   writeUniontypes(clientDetails, modelsIndexFile);
   writeObjects(clientDetails, modelsIndexFile);
   writeChoices(clientDetails, modelsIndexFile);
-  writeOperationModels(clientDetails, modelsIndexFile);
-  writeClientModels(clientDetails, modelsIndexFile);
+  writeOperationModels(clientDetails, modelsIndexFile, useCoreV2);
+  writeClientModels(clientDetails, modelsIndexFile, useCoreV2);
 }
 
 const writeClientModels = (
   clientDetails: ClientDetails,
-  modelsIndexFile: SourceFile
+  modelsIndexFile: SourceFile,
+  useCoreV2: boolean
 ) => {
   let clientOptionalParams = clientDetails.parameters.filter(
     p =>
@@ -87,13 +103,19 @@ const writeClientModels = (
     "",
     clientOptionalParams,
     modelsIndexFile,
-    { baseClass: "coreHttp.ServiceClientOptions" }
+    {
+      baseClass: !useCoreV2
+        ? "coreHttp.ServiceClientOptions"
+        : "coreClient.ServiceClientOptions"
+    },
+    useCoreV2
   );
 };
 
 const writeOperationModels = (
   clientDetails: ClientDetails,
-  modelsIndexFile: SourceFile
+  modelsIndexFile: SourceFile,
+  useCoreV2: boolean
 ) => {
   const modelsNames = getAllModelsNames(clientDetails);
   return clientDetails.operationGroups.forEach(operationGroup => {
@@ -102,9 +124,10 @@ const writeOperationModels = (
         clientDetails,
         operationGroup,
         operation,
-        modelsIndexFile
+        modelsIndexFile,
+        useCoreV2
       );
-      writeResponseTypes(operation, modelsIndexFile, modelsNames);
+      writeResponseTypes(operation, modelsIndexFile, modelsNames, useCoreV2);
     });
   });
 };
@@ -116,7 +139,8 @@ function writeOptionsParameter(
   clientDetails: ClientDetails,
   operationGroup: OperationGroupDetails,
   operation: OperationDetails,
-  sourceFile: SourceFile
+  sourceFile: SourceFile,
+  useCoreV2: boolean
 ) {
   const operationParameters = filterOperationParameters(
     clientDetails.parameters,
@@ -146,7 +170,8 @@ function writeOptionsParameter(
     {
       mediaTypes: operationRequestMediaTypes,
       operationFullName: operation.fullName
-    }
+    },
+    useCoreV2
   );
 }
 
@@ -157,7 +182,8 @@ function writeOptionsParameter(
 function writeResponseTypes(
   { responses, name, typeDetails: operationType, isLRO }: OperationDetails,
   modelsIndexFile: SourceFile,
-  allModelsNames: Set<string>
+  allModelsNames: Set<string>,
+  useCoreV2: boolean
 ) {
   const responseName = getResponseTypeName(
     operationType.typeName,
@@ -183,7 +209,7 @@ function writeResponseTypes(
           name: responseName,
           docs: [`Contains response data for the ${name} operation.`],
           isExported: true,
-          type: buildResponseType(operation, isLRO),
+          type: buildResponseType(operation, isLRO, useCoreV2),
           leadingTrivia: writer => writer.blankLine(),
           kind: StructureKind.TypeAlias
         });
@@ -324,8 +350,9 @@ type IntersectionTypeParameters = [
  */
 function buildResponseType(
   operationResponse: OperationResponseDetails,
-  isLro: boolean = false
-): WriterFunction {
+  isLro: boolean = false,
+  useCoreV2: boolean
+): WriterFunction | string {
   // First we get the response Headers and Body details
   const headersProperties = getHeadersProperties(operationResponse);
   const bodyProperties = getBodyProperties(operationResponse);
@@ -344,26 +371,43 @@ function buildResponseType(
     ...(headersProperties?.internalResponseProperties || []),
     ...lroProperties
   ];
-  const innerTypeWriter = Writers.objectType({
-    properties: [
-      ...(bodyProperties?.mainProperties || []),
-      {
-        name: "_response",
-        docs: ["The underlying HTTP response."],
-        type: innerResponseProperties.length
-          ? Writers.intersectionType(
-              "coreHttp.HttpResponse",
-              Writers.objectType({
-                properties: innerResponseProperties
-              })
-            )
-          : "coreHttp.HttpResponse",
-        leadingTrivia: writer => writer.blankLine()
-      }
-    ]
-  });
 
-  let intersectionTypes: WriterFunctionOrValue[] = [innerTypeWriter];
+  let intersectionTypes: WriterFunctionOrValue[] = [];
+  let innerTypeWriter: WriterFunctionOrValue = Writers.objectType({});
+
+  if (useCoreV2) {
+    if (
+      bodyProperties?.mainProperties &&
+      bodyProperties?.mainProperties.length
+    ) {
+      innerTypeWriter = Writers.objectType({
+        properties: bodyProperties?.mainProperties
+      });
+      intersectionTypes.push(innerTypeWriter);
+    }
+  } else {
+    innerTypeWriter = Writers.objectType({
+      properties: [
+        ...(bodyProperties?.mainProperties || []),
+        {
+          name: "_response",
+          docs: ["The underlying HTTP response."],
+          type: innerResponseProperties.length
+            ? Writers.intersectionType(
+                "coreHttp.HttpResponse",
+                Writers.objectType({
+                  properties: innerResponseProperties
+                })
+              )
+            : "coreHttp.HttpResponse",
+          leadingTrivia: writer => writer.blankLine()
+        }
+      ]
+    });
+
+    intersectionTypes = [innerTypeWriter];
+  }
+
   bodyProperties?.intersectionType &&
     intersectionTypes.unshift(bodyProperties.intersectionType);
   headersProperties?.intersectionType &&
@@ -390,16 +434,30 @@ function buildResponseType(
    *      }
    *    }
    */
-  return intersectionTypes.length > 1
-    ? // Using apply instead of calling the method directly to be able to conditionally pass
-      // parameters, this way we don't have to have a nested if/else tree to decide which parameters
-      // to pass, we will pass any intersectionTypes availabe plus the innerType. When there are no intersection types
-      // we just return innerType
-      Writers.intersectionType.apply(
+
+  if (!useCoreV2) {
+    return intersectionTypes.length > 1
+      ? // Using apply instead of calling the method directly to be able to conditionally pass
+        // parameters, this way we don't have to have a nested if/else tree to decide which parameters
+        // to pass, we will pass any intersectionTypes availabe plus the innerType. When there are no intersection types
+        // we just return innerType
+        Writers.intersectionType.apply(
+          Writers,
+          intersectionTypes as IntersectionTypeParameters
+        )
+      : (innerTypeWriter as WriterFunction);
+  } else {
+    if (intersectionTypes.length > 1) {
+      return Writers.intersectionType.apply(
         Writers,
         intersectionTypes as IntersectionTypeParameters
-      )
-    : innerTypeWriter;
+      );
+    } else if (intersectionTypes.length == 1) {
+      return intersectionTypes[0] as WriterFunction | string;
+    } else {
+      return "OperationResponse";
+    }
+  }
 }
 
 const writeChoices = (
@@ -620,7 +678,8 @@ function writeOptionalParameters(
   operationName: string,
   optionalParams: ParameterDetails[],
   modelsIndexFile: SourceFile,
-  { baseClass, mediaTypes, operationFullName }: WriteOptionalParametersOptions
+  { baseClass, mediaTypes, operationFullName }: WriteOptionalParametersOptions,
+  useCoreV2: boolean
 ) {
   if (!optionalParams || !optionalParams.length) {
     return;
@@ -639,7 +698,12 @@ function writeOptionalParameters(
         name: name,
         docs: ["Optional parameters."],
         isExported: true,
-        extends: [baseClass || "coreHttp.OperationOptions"],
+        extends: [
+          baseClass ||
+            (!useCoreV2
+              ? "coreHttp.OperationOptions"
+              : "coreClient.OperationOptions")
+        ],
         properties: [
           ...optionalGroupDeclarations,
           ...optionalParams
@@ -662,7 +726,12 @@ function writeOptionalParameters(
       name: `${operationGroupName}${operationName}OptionalParams`,
       docs: ["Optional parameters."],
       isExported: true,
-      extends: [baseClass || "coreHttp.OperationOptions"],
+      extends: [
+        baseClass ||
+          (!useCoreV2
+            ? "coreHttp.OperationOptions"
+            : "coreClient.OperationOptions")
+      ],
       properties: [
         ...optionalGroupDeclarations,
         ...optionalParams.map<PropertySignatureStructure>(p => {

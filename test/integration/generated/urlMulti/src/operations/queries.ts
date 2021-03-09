@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { UrlMultiClientContext } from "../urlMultiClientContext";
@@ -34,14 +35,11 @@ export class Queries {
    */
   arrayStringMultiNull(
     options?: QueriesArrayStringMultiNullOptionalParams
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       arrayStringMultiNullOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -50,14 +48,11 @@ export class Queries {
    */
   arrayStringMultiEmpty(
     options?: QueriesArrayStringMultiEmptyOptionalParams
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       arrayStringMultiEmptyOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -67,20 +62,17 @@ export class Queries {
    */
   arrayStringMultiValid(
     options?: QueriesArrayStringMultiValidOptionalParams
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       arrayStringMultiValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const arrayStringMultiNullOperationSpec: coreHttp.OperationSpec = {
+const arrayStringMultiNullOperationSpec: coreClient.OperationSpec = {
   path: "/queries/array/multi/string/null",
   httpMethod: "GET",
   responses: {
@@ -94,7 +86,7 @@ const arrayStringMultiNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const arrayStringMultiEmptyOperationSpec: coreHttp.OperationSpec = {
+const arrayStringMultiEmptyOperationSpec: coreClient.OperationSpec = {
   path: "/queries/array/multi/string/empty",
   httpMethod: "GET",
   responses: {
@@ -108,7 +100,7 @@ const arrayStringMultiEmptyOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const arrayStringMultiValidOperationSpec: coreHttp.OperationSpec = {
+const arrayStringMultiValidOperationSpec: coreClient.OperationSpec = {
   path: "/queries/array/multi/string/valid",
   httpMethod: "GET",
   responses: {

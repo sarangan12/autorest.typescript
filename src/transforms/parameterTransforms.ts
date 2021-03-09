@@ -45,7 +45,7 @@ interface OperationParameterDetails {
   targetMediaType?: KnownMediaType;
 }
 
-const buildCredentialsParameter = (): ParameterDetails => ({
+const buildCredentialsParameter = (useCoreV2: boolean): ParameterDetails => ({
   nameRef: "credentials",
   description:
     "Subscription credentials which uniquely identify client subscription.",
@@ -60,7 +60,9 @@ const buildCredentialsParameter = (): ParameterDetails => ({
   parameter: {} as Parameter,
   implementationLocation: ImplementationLocation.Client,
   typeDetails: {
-    typeName: "coreHttp.TokenCredential | coreHttp.ServiceClientCredentials",
+    typeName: !useCoreV2
+      ? "coreHttp.TokenCredential | coreHttp.ServiceClientCredentials"
+      : "coreAuth.TokenCredential | coreHttp.ServiceClientCredentials",
     kind: PropertyKind.Primitive,
     usedModels: []
   },
@@ -94,7 +96,8 @@ const buildEndpointParameter = (): ParameterDetails => ({
 
 export function transformParameters(
   codeModel: CodeModel,
-  options: ClientOptions
+  options: ClientOptions,
+  useCoreV2: boolean
 ): ParameterDetails[] {
   let parameters: ParameterDetails[] = [];
 
@@ -105,6 +108,7 @@ export function transformParameters(
       parameters,
       p.operationName,
       hasXmlMetadata,
+      useCoreV2,
       p.targetMediaType
     )
   );
@@ -112,7 +116,7 @@ export function transformParameters(
   // Adding credentials parameter as a Synthetic parameter, this is to treat this as any another parameter
   // during generation and remove the need of special handling it.
   if (options.addCredentials) {
-    const creds = buildCredentialsParameter();
+    const creds = buildCredentialsParameter(useCoreV2);
     parameters.unshift(creds);
   }
 
@@ -188,6 +192,7 @@ export function populateOperationParameters(
   operationParameters: ParameterDetails[],
   operationName: string,
   hasXmlMetadata: boolean,
+  useCoreV2: boolean,
   targetMediaType?: KnownMediaType
 ): void {
   const parameterName = getParameterName(parameter);
@@ -226,7 +231,7 @@ export function populateOperationParameters(
   const isNullable = !!parameter.nullable;
 
   const collectionFormat = getCollectionFormat(parameter);
-  const typeDetails = getTypeForSchema(parameter.schema);
+  const typeDetails = getTypeForSchema(parameter.schema, false, useCoreV2);
   const paramDetails: ParameterDetails = {
     nameRef: name,
     description:

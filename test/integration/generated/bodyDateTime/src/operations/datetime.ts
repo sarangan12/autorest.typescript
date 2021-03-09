@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { BodyDateTimeClientContext } from "../bodyDateTimeClientContext";
@@ -45,15 +46,9 @@ export class Datetime {
    * @param options The options parameters.
    */
   getNull(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DatetimeGetNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      getNullOperationSpec
-    ) as Promise<DatetimeGetNullResponse>;
+    return this.client.sendOperationRequest({ options }, getNullOperationSpec);
   }
 
   /**
@@ -61,15 +56,12 @@ export class Datetime {
    * @param options The options parameters.
    */
   getInvalid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DatetimeGetInvalidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getInvalidOperationSpec
-    ) as Promise<DatetimeGetInvalidResponse>;
+    );
   }
 
   /**
@@ -77,15 +69,12 @@ export class Datetime {
    * @param options The options parameters.
    */
   getOverflow(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DatetimeGetOverflowResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getOverflowOperationSpec
-    ) as Promise<DatetimeGetOverflowResponse>;
+    );
   }
 
   /**
@@ -93,15 +82,12 @@ export class Datetime {
    * @param options The options parameters.
    */
   getUnderflow(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DatetimeGetUnderflowResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getUnderflowOperationSpec
-    ) as Promise<DatetimeGetUnderflowResponse>;
+    );
   }
 
   /**
@@ -111,16 +97,12 @@ export class Datetime {
    */
   putUtcMaxDateTime(
     datetimeBody: Date,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      datetimeBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { datetimeBody, options },
       putUtcMaxDateTimeOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -131,16 +113,12 @@ export class Datetime {
    */
   putUtcMaxDateTime7Digits(
     datetimeBody: Date,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      datetimeBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { datetimeBody, options },
       putUtcMaxDateTime7DigitsOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -148,15 +126,12 @@ export class Datetime {
    * @param options The options parameters.
    */
   getUtcLowercaseMaxDateTime(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DatetimeGetUtcLowercaseMaxDateTimeResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getUtcLowercaseMaxDateTimeOperationSpec
-    ) as Promise<DatetimeGetUtcLowercaseMaxDateTimeResponse>;
+    );
   }
 
   /**
@@ -164,15 +139,12 @@ export class Datetime {
    * @param options The options parameters.
    */
   getUtcUppercaseMaxDateTime(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DatetimeGetUtcUppercaseMaxDateTimeResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getUtcUppercaseMaxDateTimeOperationSpec
-    ) as Promise<DatetimeGetUtcUppercaseMaxDateTimeResponse>;
+    );
   }
 
   /**
@@ -181,15 +153,12 @@ export class Datetime {
    * @param options The options parameters.
    */
   getUtcUppercaseMaxDateTime7Digits(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DatetimeGetUtcUppercaseMaxDateTime7DigitsResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getUtcUppercaseMaxDateTime7DigitsOperationSpec
-    ) as Promise<DatetimeGetUtcUppercaseMaxDateTime7DigitsResponse>;
+    );
   }
 
   /**
@@ -199,16 +168,12 @@ export class Datetime {
    */
   putLocalPositiveOffsetMaxDateTime(
     datetimeBody: Date,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      datetimeBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { datetimeBody, options },
       putLocalPositiveOffsetMaxDateTimeOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -216,15 +181,12 @@ export class Datetime {
    * @param options The options parameters.
    */
   getLocalPositiveOffsetLowercaseMaxDateTime(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DatetimeGetLocalPositiveOffsetLowercaseMaxDateTimeResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getLocalPositiveOffsetLowercaseMaxDateTimeOperationSpec
-    ) as Promise<DatetimeGetLocalPositiveOffsetLowercaseMaxDateTimeResponse>;
+    );
   }
 
   /**
@@ -232,15 +194,12 @@ export class Datetime {
    * @param options The options parameters.
    */
   getLocalPositiveOffsetUppercaseMaxDateTime(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DatetimeGetLocalPositiveOffsetUppercaseMaxDateTimeResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getLocalPositiveOffsetUppercaseMaxDateTimeOperationSpec
-    ) as Promise<DatetimeGetLocalPositiveOffsetUppercaseMaxDateTimeResponse>;
+    );
   }
 
   /**
@@ -250,16 +209,12 @@ export class Datetime {
    */
   putLocalNegativeOffsetMaxDateTime(
     datetimeBody: Date,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      datetimeBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { datetimeBody, options },
       putLocalNegativeOffsetMaxDateTimeOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -267,15 +222,12 @@ export class Datetime {
    * @param options The options parameters.
    */
   getLocalNegativeOffsetUppercaseMaxDateTime(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DatetimeGetLocalNegativeOffsetUppercaseMaxDateTimeResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getLocalNegativeOffsetUppercaseMaxDateTimeOperationSpec
-    ) as Promise<DatetimeGetLocalNegativeOffsetUppercaseMaxDateTimeResponse>;
+    );
   }
 
   /**
@@ -283,15 +235,12 @@ export class Datetime {
    * @param options The options parameters.
    */
   getLocalNegativeOffsetLowercaseMaxDateTime(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DatetimeGetLocalNegativeOffsetLowercaseMaxDateTimeResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getLocalNegativeOffsetLowercaseMaxDateTimeOperationSpec
-    ) as Promise<DatetimeGetLocalNegativeOffsetLowercaseMaxDateTimeResponse>;
+    );
   }
 
   /**
@@ -301,16 +250,12 @@ export class Datetime {
    */
   putUtcMinDateTime(
     datetimeBody: Date,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      datetimeBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { datetimeBody, options },
       putUtcMinDateTimeOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -318,15 +263,12 @@ export class Datetime {
    * @param options The options parameters.
    */
   getUtcMinDateTime(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DatetimeGetUtcMinDateTimeResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getUtcMinDateTimeOperationSpec
-    ) as Promise<DatetimeGetUtcMinDateTimeResponse>;
+    );
   }
 
   /**
@@ -336,16 +278,12 @@ export class Datetime {
    */
   putLocalPositiveOffsetMinDateTime(
     datetimeBody: Date,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      datetimeBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { datetimeBody, options },
       putLocalPositiveOffsetMinDateTimeOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -353,15 +291,12 @@ export class Datetime {
    * @param options The options parameters.
    */
   getLocalPositiveOffsetMinDateTime(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DatetimeGetLocalPositiveOffsetMinDateTimeResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getLocalPositiveOffsetMinDateTimeOperationSpec
-    ) as Promise<DatetimeGetLocalPositiveOffsetMinDateTimeResponse>;
+    );
   }
 
   /**
@@ -371,16 +306,12 @@ export class Datetime {
    */
   putLocalNegativeOffsetMinDateTime(
     datetimeBody: Date,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      datetimeBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { datetimeBody, options },
       putLocalNegativeOffsetMinDateTimeOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -388,15 +319,12 @@ export class Datetime {
    * @param options The options parameters.
    */
   getLocalNegativeOffsetMinDateTime(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DatetimeGetLocalNegativeOffsetMinDateTimeResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getLocalNegativeOffsetMinDateTimeOperationSpec
-    ) as Promise<DatetimeGetLocalNegativeOffsetMinDateTimeResponse>;
+    );
   }
 
   /**
@@ -404,21 +332,18 @@ export class Datetime {
    * @param options The options parameters.
    */
   getLocalNoOffsetMinDateTime(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DatetimeGetLocalNoOffsetMinDateTimeResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getLocalNoOffsetMinDateTimeOperationSpec
-    ) as Promise<DatetimeGetLocalNoOffsetMinDateTimeResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getNullOperationSpec: coreHttp.OperationSpec = {
+const getNullOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/null",
   httpMethod: "GET",
   responses: {
@@ -433,7 +358,7 @@ const getNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getInvalidOperationSpec: coreHttp.OperationSpec = {
+const getInvalidOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/invalid",
   httpMethod: "GET",
   responses: {
@@ -448,7 +373,7 @@ const getInvalidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getOverflowOperationSpec: coreHttp.OperationSpec = {
+const getOverflowOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/overflow",
   httpMethod: "GET",
   responses: {
@@ -463,7 +388,7 @@ const getOverflowOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getUnderflowOperationSpec: coreHttp.OperationSpec = {
+const getUnderflowOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/underflow",
   httpMethod: "GET",
   responses: {
@@ -478,7 +403,7 @@ const getUnderflowOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putUtcMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
+const putUtcMaxDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/max/utc",
   httpMethod: "PUT",
   responses: {
@@ -493,7 +418,7 @@ const putUtcMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const putUtcMaxDateTime7DigitsOperationSpec: coreHttp.OperationSpec = {
+const putUtcMaxDateTime7DigitsOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/max/utc7ms",
   httpMethod: "PUT",
   responses: {
@@ -508,7 +433,7 @@ const putUtcMaxDateTime7DigitsOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getUtcLowercaseMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
+const getUtcLowercaseMaxDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/max/utc/lowercase",
   httpMethod: "GET",
   responses: {
@@ -523,7 +448,7 @@ const getUtcLowercaseMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getUtcUppercaseMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
+const getUtcUppercaseMaxDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/max/utc/uppercase",
   httpMethod: "GET",
   responses: {
@@ -538,7 +463,7 @@ const getUtcUppercaseMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getUtcUppercaseMaxDateTime7DigitsOperationSpec: coreHttp.OperationSpec = {
+const getUtcUppercaseMaxDateTime7DigitsOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/max/utc7ms/uppercase",
   httpMethod: "GET",
   responses: {
@@ -553,7 +478,7 @@ const getUtcUppercaseMaxDateTime7DigitsOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putLocalPositiveOffsetMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
+const putLocalPositiveOffsetMaxDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/max/localpositiveoffset",
   httpMethod: "PUT",
   responses: {
@@ -568,7 +493,7 @@ const putLocalPositiveOffsetMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getLocalPositiveOffsetLowercaseMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
+const getLocalPositiveOffsetLowercaseMaxDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/max/localpositiveoffset/lowercase",
   httpMethod: "GET",
   responses: {
@@ -583,7 +508,7 @@ const getLocalPositiveOffsetLowercaseMaxDateTimeOperationSpec: coreHttp.Operatio
   headerParameters: [Parameters.accept],
   serializer
 };
-const getLocalPositiveOffsetUppercaseMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
+const getLocalPositiveOffsetUppercaseMaxDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/max/localpositiveoffset/uppercase",
   httpMethod: "GET",
   responses: {
@@ -598,7 +523,7 @@ const getLocalPositiveOffsetUppercaseMaxDateTimeOperationSpec: coreHttp.Operatio
   headerParameters: [Parameters.accept],
   serializer
 };
-const putLocalNegativeOffsetMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
+const putLocalNegativeOffsetMaxDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/max/localnegativeoffset",
   httpMethod: "PUT",
   responses: {
@@ -613,7 +538,7 @@ const putLocalNegativeOffsetMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getLocalNegativeOffsetUppercaseMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
+const getLocalNegativeOffsetUppercaseMaxDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/max/localnegativeoffset/uppercase",
   httpMethod: "GET",
   responses: {
@@ -628,7 +553,7 @@ const getLocalNegativeOffsetUppercaseMaxDateTimeOperationSpec: coreHttp.Operatio
   headerParameters: [Parameters.accept],
   serializer
 };
-const getLocalNegativeOffsetLowercaseMaxDateTimeOperationSpec: coreHttp.OperationSpec = {
+const getLocalNegativeOffsetLowercaseMaxDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/max/localnegativeoffset/lowercase",
   httpMethod: "GET",
   responses: {
@@ -643,7 +568,7 @@ const getLocalNegativeOffsetLowercaseMaxDateTimeOperationSpec: coreHttp.Operatio
   headerParameters: [Parameters.accept],
   serializer
 };
-const putUtcMinDateTimeOperationSpec: coreHttp.OperationSpec = {
+const putUtcMinDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/min/utc",
   httpMethod: "PUT",
   responses: {
@@ -658,7 +583,7 @@ const putUtcMinDateTimeOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getUtcMinDateTimeOperationSpec: coreHttp.OperationSpec = {
+const getUtcMinDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/min/utc",
   httpMethod: "GET",
   responses: {
@@ -673,7 +598,7 @@ const getUtcMinDateTimeOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putLocalPositiveOffsetMinDateTimeOperationSpec: coreHttp.OperationSpec = {
+const putLocalPositiveOffsetMinDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/min/localpositiveoffset",
   httpMethod: "PUT",
   responses: {
@@ -688,7 +613,7 @@ const putLocalPositiveOffsetMinDateTimeOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getLocalPositiveOffsetMinDateTimeOperationSpec: coreHttp.OperationSpec = {
+const getLocalPositiveOffsetMinDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/min/localpositiveoffset",
   httpMethod: "GET",
   responses: {
@@ -703,7 +628,7 @@ const getLocalPositiveOffsetMinDateTimeOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putLocalNegativeOffsetMinDateTimeOperationSpec: coreHttp.OperationSpec = {
+const putLocalNegativeOffsetMinDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/min/localnegativeoffset",
   httpMethod: "PUT",
   responses: {
@@ -718,7 +643,7 @@ const putLocalNegativeOffsetMinDateTimeOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getLocalNegativeOffsetMinDateTimeOperationSpec: coreHttp.OperationSpec = {
+const getLocalNegativeOffsetMinDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/min/localnegativeoffset",
   httpMethod: "GET",
   responses: {
@@ -733,7 +658,7 @@ const getLocalNegativeOffsetMinDateTimeOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getLocalNoOffsetMinDateTimeOperationSpec: coreHttp.OperationSpec = {
+const getLocalNoOffsetMinDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/datetime/min/localnooffset",
   httpMethod: "GET",
   responses: {

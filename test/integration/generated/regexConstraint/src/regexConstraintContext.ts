@@ -6,13 +6,10 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
 import { RegexConstraintOptionalParams } from "./models";
 
-const packageName = "regex-constraint";
-const packageVersion = "1.0.0-preview1";
-
-export class RegexConstraintContext extends coreHttp.ServiceClient {
+export class RegexConstraintContext extends coreClient.ServiceClient {
   $host: string;
 
   /**
@@ -30,17 +27,17 @@ export class RegexConstraintContext extends coreHttp.ServiceClient {
       options = {};
     }
 
-    if (!options.userAgent) {
-      const defaultUserAgent = coreHttp.getDefaultUserAgentValue();
-      options.userAgent = `${packageName}/${packageVersion} ${defaultUserAgent}`;
-    }
+    const defaults: RegexConstraintOptionalParams = {
+      requestContentType: "application/json; charset=utf-8"
+    };
 
-    super(undefined, options);
+    const optionsWithDefaults = {
+      ...defaults,
+      ...options,
+      baseUri: options.endpoint || "{$host}"
+    };
 
-    this.requestContentType = "application/json; charset=utf-8";
-
-    this.baseUri = options.endpoint || "{$host}";
-
+    super(optionsWithDefaults);
     // Parameter assignments
     this.$host = $host;
   }

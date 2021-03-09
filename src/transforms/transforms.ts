@@ -86,13 +86,13 @@ export async function transformCodeModel(
     NameType.Class,
     true /** shouldGuard */
   );
+  const useCoreV2: boolean = (await host.GetValue("use-core-v2")) || false;
 
   sortObjectSchemasHierarchically(codeModel);
   normalizeModelWithExtensions(codeModel);
 
   const [uberParents, operationGroups] = await Promise.all([
-    getUberParents(codeModel),
-
+    getUberParents(codeModel, useCoreV2),
     transformOperationGroups(codeModel)
   ]);
 
@@ -106,11 +106,11 @@ export async function transformCodeModel(
     parameters,
     baseUrl
   ] = await Promise.all([
-    transformObjects(codeModel, uberParents),
-    transformGroups(codeModel),
+    transformObjects(codeModel, uberParents, useCoreV2),
+    transformGroups(codeModel, useCoreV2),
     transformMappers(codeModel, uberParents, options),
     transformChoices(codeModel),
-    transformParameters(codeModel, options),
+    transformParameters(codeModel, options, useCoreV2),
     transformBaseUrl(codeModel)
   ]);
 
@@ -134,7 +134,10 @@ export async function transformCodeModel(
  * An UberParent is an object schema that has no parents but is extended
  * @param codeModel CodeModel
  */
-async function getUberParents(codeModel: CodeModel): Promise<ObjectDetails[]> {
+async function getUberParents(
+  codeModel: CodeModel,
+  useCoreV2: boolean
+): Promise<ObjectDetails[]> {
   if (!codeModel.schemas.objects) {
     return [];
   }
@@ -148,7 +151,7 @@ async function getUberParents(codeModel: CodeModel): Promise<ObjectDetails[]> {
     const hasParents = getSchemaParents(object).length > 0;
 
     if (hasChildren && !hasParents && !isPresent) {
-      const baseObject = transformObject(object, uberParents);
+      const baseObject = transformObject(object, uberParents, useCoreV2);
       uberParents.push(baseObject);
     }
   });

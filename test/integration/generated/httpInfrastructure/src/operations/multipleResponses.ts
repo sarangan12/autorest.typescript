@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { HttpInfrastructureClientContext } from "../httpInfrastructureClientContext";
@@ -51,19 +52,14 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200Model204NoModelDefaultError200Valid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<
     MultipleResponsesGet200Model204NoModelDefaultError200ValidResponse
   > {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200Model204NoModelDefaultError200ValidOperationSpec
-    ) as Promise<
-      MultipleResponsesGet200Model204NoModelDefaultError200ValidResponse
-    >;
+    );
   }
 
   /**
@@ -71,19 +67,14 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200Model204NoModelDefaultError204Valid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<
     MultipleResponsesGet200Model204NoModelDefaultError204ValidResponse
   > {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200Model204NoModelDefaultError204ValidOperationSpec
-    ) as Promise<
-      MultipleResponsesGet200Model204NoModelDefaultError204ValidResponse
-    >;
+    );
   }
 
   /**
@@ -91,19 +82,14 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200Model204NoModelDefaultError201Invalid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<
     MultipleResponsesGet200Model204NoModelDefaultError201InvalidResponse
   > {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200Model204NoModelDefaultError201InvalidOperationSpec
-    ) as Promise<
-      MultipleResponsesGet200Model204NoModelDefaultError201InvalidResponse
-    >;
+    );
   }
 
   /**
@@ -111,19 +97,14 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200Model204NoModelDefaultError202None(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<
     MultipleResponsesGet200Model204NoModelDefaultError202NoneResponse
   > {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200Model204NoModelDefaultError202NoneOperationSpec
-    ) as Promise<
-      MultipleResponsesGet200Model204NoModelDefaultError202NoneResponse
-    >;
+    );
   }
 
   /**
@@ -131,19 +112,14 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200Model204NoModelDefaultError400Valid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<
     MultipleResponsesGet200Model204NoModelDefaultError400ValidResponse
   > {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200Model204NoModelDefaultError400ValidOperationSpec
-    ) as Promise<
-      MultipleResponsesGet200Model204NoModelDefaultError400ValidResponse
-    >;
+    );
   }
 
   /**
@@ -151,17 +127,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200Model201ModelDefaultError200Valid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<MultipleResponsesGet200Model201ModelDefaultError200ValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200Model201ModelDefaultError200ValidOperationSpec
-    ) as Promise<
-      MultipleResponsesGet200Model201ModelDefaultError200ValidResponse
-    >;
+    );
   }
 
   /**
@@ -169,17 +140,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200Model201ModelDefaultError201Valid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<MultipleResponsesGet200Model201ModelDefaultError201ValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200Model201ModelDefaultError201ValidOperationSpec
-    ) as Promise<
-      MultipleResponsesGet200Model201ModelDefaultError201ValidResponse
-    >;
+    );
   }
 
   /**
@@ -187,17 +153,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200Model201ModelDefaultError400Valid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<MultipleResponsesGet200Model201ModelDefaultError400ValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200Model201ModelDefaultError400ValidOperationSpec
-    ) as Promise<
-      MultipleResponsesGet200Model201ModelDefaultError400ValidResponse
-    >;
+    );
   }
 
   /**
@@ -205,19 +166,14 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200ModelA201ModelC404ModelDDefaultError200Valid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<
     MultipleResponsesGet200ModelA201ModelC404ModelDDefaultError200ValidResponse
   > {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200ModelA201ModelC404ModelDDefaultError200ValidOperationSpec
-    ) as Promise<
-      MultipleResponsesGet200ModelA201ModelC404ModelDDefaultError200ValidResponse
-    >;
+    );
   }
 
   /**
@@ -225,19 +181,14 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200ModelA201ModelC404ModelDDefaultError201Valid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<
     MultipleResponsesGet200ModelA201ModelC404ModelDDefaultError201ValidResponse
   > {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200ModelA201ModelC404ModelDDefaultError201ValidOperationSpec
-    ) as Promise<
-      MultipleResponsesGet200ModelA201ModelC404ModelDDefaultError201ValidResponse
-    >;
+    );
   }
 
   /**
@@ -245,19 +196,14 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200ModelA201ModelC404ModelDDefaultError404Valid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<
     MultipleResponsesGet200ModelA201ModelC404ModelDDefaultError404ValidResponse
   > {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200ModelA201ModelC404ModelDDefaultError404ValidOperationSpec
-    ) as Promise<
-      MultipleResponsesGet200ModelA201ModelC404ModelDDefaultError404ValidResponse
-    >;
+    );
   }
 
   /**
@@ -265,19 +211,14 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200ModelA201ModelC404ModelDDefaultError400Valid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<
     MultipleResponsesGet200ModelA201ModelC404ModelDDefaultError400ValidResponse
   > {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200ModelA201ModelC404ModelDDefaultError400ValidOperationSpec
-    ) as Promise<
-      MultipleResponsesGet200ModelA201ModelC404ModelDDefaultError400ValidResponse
-    >;
+    );
   }
 
   /**
@@ -285,15 +226,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get202None204NoneDefaultError202None(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get202None204NoneDefaultError202NoneOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -301,15 +239,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get202None204NoneDefaultError204None(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get202None204NoneDefaultError204NoneOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -317,15 +252,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get202None204NoneDefaultError400Valid(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get202None204NoneDefaultError400ValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -333,15 +265,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get202None204NoneDefaultNone202Invalid(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get202None204NoneDefaultNone202InvalidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -349,15 +278,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get202None204NoneDefaultNone204None(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get202None204NoneDefaultNone204NoneOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -365,15 +291,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get202None204NoneDefaultNone400None(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get202None204NoneDefaultNone400NoneOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -381,15 +304,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get202None204NoneDefaultNone400Invalid(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get202None204NoneDefaultNone400InvalidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -397,15 +317,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   getDefaultModelA200Valid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<MultipleResponsesGetDefaultModelA200ValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDefaultModelA200ValidOperationSpec
-    ) as Promise<MultipleResponsesGetDefaultModelA200ValidResponse>;
+    );
   }
 
   /**
@@ -413,15 +330,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   getDefaultModelA200None(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<MultipleResponsesGetDefaultModelA200NoneResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDefaultModelA200NoneOperationSpec
-    ) as Promise<MultipleResponsesGetDefaultModelA200NoneResponse>;
+    );
   }
 
   /**
@@ -429,15 +343,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   getDefaultModelA400Valid(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDefaultModelA400ValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -445,15 +356,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   getDefaultModelA400None(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDefaultModelA400NoneOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -461,31 +369,23 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   getDefaultNone200Invalid(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDefaultNone200InvalidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
    * Send a 200 response with no payload
    * @param options The options parameters.
    */
-  getDefaultNone200None(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  getDefaultNone200None(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDefaultNone200NoneOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -493,31 +393,23 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   getDefaultNone400Invalid(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDefaultNone400InvalidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
    * Send a 400 response with no payload
    * @param options The options parameters.
    */
-  getDefaultNone400None(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  getDefaultNone400None(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getDefaultNone400NoneOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -526,15 +418,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200ModelA200None(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<MultipleResponsesGet200ModelA200NoneResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200ModelA200NoneOperationSpec
-    ) as Promise<MultipleResponsesGet200ModelA200NoneResponse>;
+    );
   }
 
   /**
@@ -542,15 +431,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200ModelA200Valid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<MultipleResponsesGet200ModelA200ValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200ModelA200ValidOperationSpec
-    ) as Promise<MultipleResponsesGet200ModelA200ValidResponse>;
+    );
   }
 
   /**
@@ -558,15 +444,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200ModelA200Invalid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<MultipleResponsesGet200ModelA200InvalidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200ModelA200InvalidOperationSpec
-    ) as Promise<MultipleResponsesGet200ModelA200InvalidResponse>;
+    );
   }
 
   /**
@@ -574,15 +457,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200ModelA400None(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<MultipleResponsesGet200ModelA400NoneResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200ModelA400NoneOperationSpec
-    ) as Promise<MultipleResponsesGet200ModelA400NoneResponse>;
+    );
   }
 
   /**
@@ -590,15 +470,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200ModelA400Valid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<MultipleResponsesGet200ModelA400ValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200ModelA400ValidOperationSpec
-    ) as Promise<MultipleResponsesGet200ModelA400ValidResponse>;
+    );
   }
 
   /**
@@ -606,15 +483,12 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200ModelA400Invalid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<MultipleResponsesGet200ModelA400InvalidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200ModelA400InvalidOperationSpec
-    ) as Promise<MultipleResponsesGet200ModelA400InvalidResponse>;
+    );
   }
 
   /**
@@ -622,21 +496,18 @@ export class MultipleResponses {
    * @param options The options parameters.
    */
   get200ModelA202Valid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<MultipleResponsesGet200ModelA202ValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       get200ModelA202ValidOperationSpec
-    ) as Promise<MultipleResponsesGet200ModelA202ValidResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const get200Model204NoModelDefaultError200ValidOperationSpec: coreHttp.OperationSpec = {
+const get200Model204NoModelDefaultError200ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/204/none/default/Error/response/200/valid",
   httpMethod: "GET",
   responses: {
@@ -652,7 +523,7 @@ const get200Model204NoModelDefaultError200ValidOperationSpec: coreHttp.Operation
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200Model204NoModelDefaultError204ValidOperationSpec: coreHttp.OperationSpec = {
+const get200Model204NoModelDefaultError204ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/204/none/default/Error/response/204/none",
   httpMethod: "GET",
   responses: {
@@ -668,7 +539,7 @@ const get200Model204NoModelDefaultError204ValidOperationSpec: coreHttp.Operation
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200Model204NoModelDefaultError201InvalidOperationSpec: coreHttp.OperationSpec = {
+const get200Model204NoModelDefaultError201InvalidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/204/none/default/Error/response/201/valid",
   httpMethod: "GET",
   responses: {
@@ -684,7 +555,7 @@ const get200Model204NoModelDefaultError201InvalidOperationSpec: coreHttp.Operati
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200Model204NoModelDefaultError202NoneOperationSpec: coreHttp.OperationSpec = {
+const get200Model204NoModelDefaultError202NoneOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/204/none/default/Error/response/202/none",
   httpMethod: "GET",
   responses: {
@@ -700,7 +571,7 @@ const get200Model204NoModelDefaultError202NoneOperationSpec: coreHttp.OperationS
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200Model204NoModelDefaultError400ValidOperationSpec: coreHttp.OperationSpec = {
+const get200Model204NoModelDefaultError400ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/204/none/default/Error/response/400/valid",
   httpMethod: "GET",
   responses: {
@@ -716,7 +587,7 @@ const get200Model204NoModelDefaultError400ValidOperationSpec: coreHttp.Operation
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200Model201ModelDefaultError200ValidOperationSpec: coreHttp.OperationSpec = {
+const get200Model201ModelDefaultError200ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/201/B/default/Error/response/200/valid",
   httpMethod: "GET",
   responses: {
@@ -734,7 +605,7 @@ const get200Model201ModelDefaultError200ValidOperationSpec: coreHttp.OperationSp
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200Model201ModelDefaultError201ValidOperationSpec: coreHttp.OperationSpec = {
+const get200Model201ModelDefaultError201ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/201/B/default/Error/response/201/valid",
   httpMethod: "GET",
   responses: {
@@ -752,7 +623,7 @@ const get200Model201ModelDefaultError201ValidOperationSpec: coreHttp.OperationSp
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200Model201ModelDefaultError400ValidOperationSpec: coreHttp.OperationSpec = {
+const get200Model201ModelDefaultError400ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/201/B/default/Error/response/400/valid",
   httpMethod: "GET",
   responses: {
@@ -770,7 +641,7 @@ const get200Model201ModelDefaultError400ValidOperationSpec: coreHttp.OperationSp
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200ModelA201ModelC404ModelDDefaultError200ValidOperationSpec: coreHttp.OperationSpec = {
+const get200ModelA201ModelC404ModelDDefaultError200ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid",
   httpMethod: "GET",
   responses: {
@@ -791,7 +662,7 @@ const get200ModelA201ModelC404ModelDDefaultError200ValidOperationSpec: coreHttp.
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200ModelA201ModelC404ModelDDefaultError201ValidOperationSpec: coreHttp.OperationSpec = {
+const get200ModelA201ModelC404ModelDDefaultError201ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid",
   httpMethod: "GET",
   responses: {
@@ -812,7 +683,7 @@ const get200ModelA201ModelC404ModelDDefaultError201ValidOperationSpec: coreHttp.
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200ModelA201ModelC404ModelDDefaultError404ValidOperationSpec: coreHttp.OperationSpec = {
+const get200ModelA201ModelC404ModelDDefaultError404ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid",
   httpMethod: "GET",
   responses: {
@@ -833,7 +704,7 @@ const get200ModelA201ModelC404ModelDDefaultError404ValidOperationSpec: coreHttp.
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200ModelA201ModelC404ModelDDefaultError400ValidOperationSpec: coreHttp.OperationSpec = {
+const get200ModelA201ModelC404ModelDDefaultError400ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid",
   httpMethod: "GET",
   responses: {
@@ -854,7 +725,7 @@ const get200ModelA201ModelC404ModelDDefaultError400ValidOperationSpec: coreHttp.
   headerParameters: [Parameters.accept],
   serializer
 };
-const get202None204NoneDefaultError202NoneOperationSpec: coreHttp.OperationSpec = {
+const get202None204NoneDefaultError202NoneOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/202/none/204/none/default/Error/response/202/none",
   httpMethod: "GET",
   responses: {
@@ -868,7 +739,7 @@ const get202None204NoneDefaultError202NoneOperationSpec: coreHttp.OperationSpec 
   headerParameters: [Parameters.accept],
   serializer
 };
-const get202None204NoneDefaultError204NoneOperationSpec: coreHttp.OperationSpec = {
+const get202None204NoneDefaultError204NoneOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/202/none/204/none/default/Error/response/204/none",
   httpMethod: "GET",
   responses: {
@@ -882,7 +753,7 @@ const get202None204NoneDefaultError204NoneOperationSpec: coreHttp.OperationSpec 
   headerParameters: [Parameters.accept],
   serializer
 };
-const get202None204NoneDefaultError400ValidOperationSpec: coreHttp.OperationSpec = {
+const get202None204NoneDefaultError400ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/202/none/204/none/default/Error/response/400/valid",
   httpMethod: "GET",
   responses: {
@@ -896,35 +767,35 @@ const get202None204NoneDefaultError400ValidOperationSpec: coreHttp.OperationSpec
   headerParameters: [Parameters.accept],
   serializer
 };
-const get202None204NoneDefaultNone202InvalidOperationSpec: coreHttp.OperationSpec = {
+const get202None204NoneDefaultNone202InvalidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/202/none/204/none/default/none/response/202/invalid",
   httpMethod: "GET",
   responses: { 202: {}, 204: {}, default: {} },
   urlParameters: [Parameters.$host],
   serializer
 };
-const get202None204NoneDefaultNone204NoneOperationSpec: coreHttp.OperationSpec = {
+const get202None204NoneDefaultNone204NoneOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/202/none/204/none/default/none/response/204/none",
   httpMethod: "GET",
   responses: { 202: {}, 204: {}, default: {} },
   urlParameters: [Parameters.$host],
   serializer
 };
-const get202None204NoneDefaultNone400NoneOperationSpec: coreHttp.OperationSpec = {
+const get202None204NoneDefaultNone400NoneOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/202/none/204/none/default/none/response/400/none",
   httpMethod: "GET",
   responses: { 202: {}, 204: {}, default: {} },
   urlParameters: [Parameters.$host],
   serializer
 };
-const get202None204NoneDefaultNone400InvalidOperationSpec: coreHttp.OperationSpec = {
+const get202None204NoneDefaultNone400InvalidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/202/none/204/none/default/none/response/400/invalid",
   httpMethod: "GET",
   responses: { 202: {}, 204: {}, default: {} },
   urlParameters: [Parameters.$host],
   serializer
 };
-const getDefaultModelA200ValidOperationSpec: coreHttp.OperationSpec = {
+const getDefaultModelA200ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/default/A/response/200/valid",
   httpMethod: "GET",
   responses: {
@@ -936,7 +807,7 @@ const getDefaultModelA200ValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getDefaultModelA200NoneOperationSpec: coreHttp.OperationSpec = {
+const getDefaultModelA200NoneOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/default/A/response/200/none",
   httpMethod: "GET",
   responses: {
@@ -948,7 +819,7 @@ const getDefaultModelA200NoneOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getDefaultModelA400ValidOperationSpec: coreHttp.OperationSpec = {
+const getDefaultModelA400ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/default/A/response/400/valid",
   httpMethod: "GET",
   responses: {
@@ -961,7 +832,7 @@ const getDefaultModelA400ValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getDefaultModelA400NoneOperationSpec: coreHttp.OperationSpec = {
+const getDefaultModelA400NoneOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/default/A/response/400/none",
   httpMethod: "GET",
   responses: {
@@ -974,35 +845,35 @@ const getDefaultModelA400NoneOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getDefaultNone200InvalidOperationSpec: coreHttp.OperationSpec = {
+const getDefaultNone200InvalidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/default/none/response/200/invalid",
   httpMethod: "GET",
   responses: { 200: {} },
   urlParameters: [Parameters.$host],
   serializer
 };
-const getDefaultNone200NoneOperationSpec: coreHttp.OperationSpec = {
+const getDefaultNone200NoneOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/default/none/response/200/none",
   httpMethod: "GET",
   responses: { 200: {} },
   urlParameters: [Parameters.$host],
   serializer
 };
-const getDefaultNone400InvalidOperationSpec: coreHttp.OperationSpec = {
+const getDefaultNone400InvalidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/default/none/response/400/invalid",
   httpMethod: "GET",
   responses: { 200: {}, default: {} },
   urlParameters: [Parameters.$host],
   serializer
 };
-const getDefaultNone400NoneOperationSpec: coreHttp.OperationSpec = {
+const getDefaultNone400NoneOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/default/none/response/400/none",
   httpMethod: "GET",
   responses: { 200: {}, default: {} },
   urlParameters: [Parameters.$host],
   serializer
 };
-const get200ModelA200NoneOperationSpec: coreHttp.OperationSpec = {
+const get200ModelA200NoneOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/response/200/none",
   httpMethod: "GET",
   responses: {
@@ -1014,7 +885,7 @@ const get200ModelA200NoneOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200ModelA200ValidOperationSpec: coreHttp.OperationSpec = {
+const get200ModelA200ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/response/200/valid",
   httpMethod: "GET",
   responses: {
@@ -1026,7 +897,7 @@ const get200ModelA200ValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200ModelA200InvalidOperationSpec: coreHttp.OperationSpec = {
+const get200ModelA200InvalidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/response/200/invalid",
   httpMethod: "GET",
   responses: {
@@ -1038,7 +909,7 @@ const get200ModelA200InvalidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200ModelA400NoneOperationSpec: coreHttp.OperationSpec = {
+const get200ModelA400NoneOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/response/400/none",
   httpMethod: "GET",
   responses: {
@@ -1050,7 +921,7 @@ const get200ModelA400NoneOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200ModelA400ValidOperationSpec: coreHttp.OperationSpec = {
+const get200ModelA400ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/response/400/valid",
   httpMethod: "GET",
   responses: {
@@ -1062,7 +933,7 @@ const get200ModelA400ValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200ModelA400InvalidOperationSpec: coreHttp.OperationSpec = {
+const get200ModelA400InvalidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/response/400/invalid",
   httpMethod: "GET",
   responses: {
@@ -1074,7 +945,7 @@ const get200ModelA400InvalidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const get200ModelA202ValidOperationSpec: coreHttp.OperationSpec = {
+const get200ModelA202ValidOperationSpec: coreClient.OperationSpec = {
   path: "/http/payloads/200/A/response/202/valid",
   httpMethod: "GET",
   responses: {

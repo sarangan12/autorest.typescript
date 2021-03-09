@@ -6,14 +6,16 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { RequiredOptionalClientContext } from "../requiredOptionalClientContext";
 import {
   ImplicitPutOptionalQueryOptionalParams,
   ImplicitPutOptionalHeaderOptionalParams,
-  ImplicitPutOptionalBodyOptionalParams
+  ImplicitPutOptionalBodyOptionalParams,
+  ImplicitPutOptionalBinaryBodyOptionalParams
 } from "../models";
 
 /** Class representing a Implicit. */
@@ -35,16 +37,12 @@ export class Implicit {
    */
   getRequiredPath(
     pathParameter: string,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      pathParameter,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { pathParameter, options },
       getRequiredPathOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -53,14 +51,11 @@ export class Implicit {
    */
   putOptionalQuery(
     options?: ImplicitPutOptionalQueryOptionalParams
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       putOptionalQueryOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -69,14 +64,11 @@ export class Implicit {
    */
   putOptionalHeader(
     options?: ImplicitPutOptionalHeaderOptionalParams
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       putOptionalHeaderOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -85,68 +77,63 @@ export class Implicit {
    */
   putOptionalBody(
     options?: ImplicitPutOptionalBodyOptionalParams
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       putOptionalBodyOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
+  }
+
+  /**
+   * Test implicitly optional body parameter
+   * @param options The options parameters.
+   */
+  putOptionalBinaryBody(
+    options?: ImplicitPutOptionalBinaryBodyOptionalParams
+  ): Promise<void> {
+    return this.client.sendOperationRequest(
+      { options },
+      putOptionalBinaryBodyOperationSpec
+    );
   }
 
   /**
    * Test implicitly required path parameter
    * @param options The options parameters.
    */
-  getRequiredGlobalPath(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  getRequiredGlobalPath(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getRequiredGlobalPathOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
    * Test implicitly required query parameter
    * @param options The options parameters.
    */
-  getRequiredGlobalQuery(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  getRequiredGlobalQuery(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getRequiredGlobalQueryOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
    * Test implicitly optional query parameter
    * @param options The options parameters.
    */
-  getOptionalGlobalQuery(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  getOptionalGlobalQuery(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getOptionalGlobalQueryOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getRequiredPathOperationSpec: coreHttp.OperationSpec = {
+const getRequiredPathOperationSpec: coreClient.OperationSpec = {
   path: "/reqopt/implicit/required/path/{pathParameter}",
   httpMethod: "GET",
   responses: {
@@ -159,7 +146,7 @@ const getRequiredPathOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putOptionalQueryOperationSpec: coreHttp.OperationSpec = {
+const putOptionalQueryOperationSpec: coreClient.OperationSpec = {
   path: "/reqopt/implicit/optional/query",
   httpMethod: "PUT",
   responses: {
@@ -173,7 +160,7 @@ const putOptionalQueryOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putOptionalHeaderOperationSpec: coreHttp.OperationSpec = {
+const putOptionalHeaderOperationSpec: coreClient.OperationSpec = {
   path: "/reqopt/implicit/optional/header",
   httpMethod: "PUT",
   responses: {
@@ -186,7 +173,7 @@ const putOptionalHeaderOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept, Parameters.queryParameter1],
   serializer
 };
-const putOptionalBodyOperationSpec: coreHttp.OperationSpec = {
+const putOptionalBodyOperationSpec: coreClient.OperationSpec = {
   path: "/reqopt/implicit/optional/body",
   httpMethod: "PUT",
   responses: {
@@ -201,7 +188,22 @@ const putOptionalBodyOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getRequiredGlobalPathOperationSpec: coreHttp.OperationSpec = {
+const putOptionalBinaryBodyOperationSpec: coreClient.OperationSpec = {
+  path: "/reqopt/implicit/optional/binary-body",
+  httpMethod: "PUT",
+  responses: {
+    200: {},
+    default: {
+      bodyMapper: Mappers.ErrorModel
+    }
+  },
+  requestBody: Parameters.bodyParameter1,
+  urlParameters: [Parameters.$host],
+  headerParameters: [Parameters.contentType1, Parameters.accept1],
+  mediaType: "binary",
+  serializer
+};
+const getRequiredGlobalPathOperationSpec: coreClient.OperationSpec = {
   path: "/reqopt/global/required/path/{required-global-path}",
   httpMethod: "GET",
   responses: {
@@ -214,7 +216,7 @@ const getRequiredGlobalPathOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getRequiredGlobalQueryOperationSpec: coreHttp.OperationSpec = {
+const getRequiredGlobalQueryOperationSpec: coreClient.OperationSpec = {
   path: "/reqopt/global/required/query",
   httpMethod: "GET",
   responses: {
@@ -228,7 +230,7 @@ const getRequiredGlobalQueryOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getOptionalGlobalQueryOperationSpec: coreHttp.OperationSpec = {
+const getOptionalGlobalQueryOperationSpec: coreClient.OperationSpec = {
   path: "/reqopt/global/optional/query",
   httpMethod: "GET",
   responses: {

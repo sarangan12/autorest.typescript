@@ -6,13 +6,10 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
 import { UrlClientOptionalParams } from "./models";
 
-const packageName = "url";
-const packageVersion = "1.0.0-preview1";
-
-export class UrlClientContext extends coreHttp.ServiceClient {
+export class UrlClientContext extends coreClient.ServiceClient {
   $host: string;
   globalStringPath: string;
   globalStringQuery?: string;
@@ -32,17 +29,17 @@ export class UrlClientContext extends coreHttp.ServiceClient {
       options = {};
     }
 
-    if (!options.userAgent) {
-      const defaultUserAgent = coreHttp.getDefaultUserAgentValue();
-      options.userAgent = `${packageName}/${packageVersion} ${defaultUserAgent}`;
-    }
+    const defaults: UrlClientOptionalParams = {
+      requestContentType: "application/json; charset=utf-8"
+    };
 
-    super(undefined, options);
+    const optionsWithDefaults = {
+      ...defaults,
+      ...options,
+      baseUri: options.endpoint || "http://localhost:3000"
+    };
 
-    this.requestContentType = "application/json; charset=utf-8";
-
-    this.baseUri = options.endpoint || "http://localhost:3000";
-
+    super(optionsWithDefaults);
     // Parameter assignments
     this.globalStringPath = globalStringPath;
 

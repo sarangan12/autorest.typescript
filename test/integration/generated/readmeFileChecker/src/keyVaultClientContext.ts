@@ -1,10 +1,7 @@
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
 import { ApiVersion72Preview, KeyVaultClientOptionalParams } from "./models";
 
-const packageName = "@azure/keyvault-secrets";
-const packageVersion = "1.0.0-preview1";
-
-export class KeyVaultClientContext extends coreHttp.ServiceClient {
+export class KeyVaultClientContext extends coreClient.ServiceClient {
   apiVersion: ApiVersion72Preview;
 
   /**
@@ -25,17 +22,17 @@ export class KeyVaultClientContext extends coreHttp.ServiceClient {
       options = {};
     }
 
-    if (!options.userAgent) {
-      const defaultUserAgent = coreHttp.getDefaultUserAgentValue();
-      options.userAgent = `${packageName}/${packageVersion} ${defaultUserAgent}`;
-    }
+    const defaults: KeyVaultClientOptionalParams = {
+      requestContentType: "application/json; charset=utf-8"
+    };
 
-    super(undefined, options);
+    const optionsWithDefaults = {
+      ...defaults,
+      ...options,
+      baseUri: options.endpoint || "{vaultBaseUrl}"
+    };
 
-    this.requestContentType = "application/json; charset=utf-8";
-
-    this.baseUri = options.endpoint || "{vaultBaseUrl}";
-
+    super(optionsWithDefaults);
     // Parameter assignments
     this.apiVersion = apiVersion;
   }

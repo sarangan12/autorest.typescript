@@ -6,7 +6,7 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { XmsErrorResponsesClientContext } from "../xmsErrorResponsesClientContext";
@@ -31,16 +31,12 @@ export class Pet {
    */
   getPetById(
     petId: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PetGetPetByIdResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      petId,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { petId, options },
       getPetByIdOperationSpec
-    ) as Promise<PetGetPetByIdResponse>;
+    );
   }
 
   /**
@@ -50,22 +46,18 @@ export class Pet {
    */
   doSomething(
     whatAction: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PetDoSomethingResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      whatAction,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { whatAction, options },
       doSomethingOperationSpec
-    ) as Promise<PetDoSomethingResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getPetByIdOperationSpec: coreHttp.OperationSpec = {
+const getPetByIdOperationSpec: coreClient.OperationSpec = {
   path: "/errorStatusCodes/Pets/{petId}/GetPet",
   httpMethod: "GET",
   responses: {
@@ -91,7 +83,7 @@ const getPetByIdOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const doSomethingOperationSpec: coreHttp.OperationSpec = {
+const doSomethingOperationSpec: coreClient.OperationSpec = {
   path: "/errorStatusCodes/Pets/doSomething/{whatAction}",
   httpMethod: "POST",
   responses: {

@@ -26,7 +26,8 @@ import { logger } from "../utils/logger";
 
 export function generateMappers(
   clientDetails: ClientDetails,
-  project: Project
+  project: Project,
+  useCoreV2: boolean
 ) {
   if (!clientDetails.mappers.length) {
     logger.info("No mappers in code model, skipping mapper file generation");
@@ -38,19 +39,30 @@ export function generateMappers(
     { overwrite: true }
   );
 
-  writeMappers(mappersFile, clientDetails);
+  writeMappers(mappersFile, clientDetails, useCoreV2);
   writeDiscriminatorsMapping(mappersFile, clientDetails);
 
-  mappersFile.addImportDeclaration({
-    namespaceImport: "coreHttp",
-    moduleSpecifier: "@azure/core-http"
-  });
+  if (!useCoreV2) {
+    mappersFile.addImportDeclaration({
+      namespaceImport: "coreHttp",
+      moduleSpecifier: "@azure/core-http"
+    });
+  } else {
+    mappersFile.addImportDeclaration({
+      namespaceImport: "coreClient",
+      moduleSpecifier: "@azure/core-client"
+    });
+  }
 }
 
 /**
  * This function writes to the mappers.ts file all the mappers to be used by @azure/core-http for serialization
  */
-function writeMappers(sourceFile: SourceFile, { mappers }: ClientDetails) {
+function writeMappers(
+  sourceFile: SourceFile,
+  { mappers }: ClientDetails,
+  useCoreV2: boolean
+) {
   const generatedMappers: Map<string, Mapper> = new Map<string, Mapper>();
 
   mappers.forEach(mapper => {
@@ -82,7 +94,9 @@ function writeMappers(sourceFile: SourceFile, { mappers }: ClientDetails) {
             (mapper as CompositeMapper).type.className || "MISSING_MAPPER",
             NameType.Class
           ),
-          type: "coreHttp.CompositeMapper",
+          type: !useCoreV2
+            ? "coreHttp.CompositeMapper"
+            : "coreClient.CompositeMapper",
           initializer: writer => writeMapper(writer, mapper)
         }
       ],

@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 
 export interface ErrorModel {
   status?: number;
@@ -29,9 +30,6 @@ export type FilesGetFileResponse = {
    * Always `undefined` in the browser.
    */
   readableStreamBody?: NodeJS.ReadableStream;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse;
 };
 
 /** Contains response data for the getFileLarge operation. */
@@ -50,9 +48,6 @@ export type FilesGetFileLargeResponse = {
    * Always `undefined` in the browser.
    */
   readableStreamBody?: NodeJS.ReadableStream;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse;
 };
 
 /** Contains response data for the getEmptyFile operation. */
@@ -71,14 +66,11 @@ export type FilesGetEmptyFileResponse = {
    * Always `undefined` in the browser.
    */
   readableStreamBody?: NodeJS.ReadableStream;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse;
 };
 
 /** Optional parameters. */
 export interface BodyFileClientOptionalParams
-  extends coreHttp.ServiceClientOptions {
+  extends coreClient.ServiceClientOptions {
   /** server parameter */
   $host?: string;
   /** Overrides client endpoint. */

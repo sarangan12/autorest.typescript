@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 
 export interface SampleResourceGroup {
   /** resource group name 'testgroup101' */
@@ -21,20 +22,11 @@ export interface ErrorModel {
 }
 
 /** Contains response data for the getSampleResourceGroup operation. */
-export type GroupGetSampleResourceGroupResponse = SampleResourceGroup & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: SampleResourceGroup;
-  };
-};
+export type GroupGetSampleResourceGroupResponse = SampleResourceGroup;
 
 /** Optional parameters. */
 export interface SubscriptionIdApiVersionClientOptionalParams
-  extends coreHttp.ServiceClientOptions {
+  extends coreClient.ServiceClientOptions {
   /** server parameter */
   $host?: string;
   /** Api Version */

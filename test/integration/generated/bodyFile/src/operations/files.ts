@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { BodyFileClientContext } from "../bodyFileClientContext";
@@ -32,14 +33,10 @@ export class Files {
    * Get file
    * @param options The options parameters.
    */
-  getFile(options?: coreHttp.OperationOptions): Promise<FilesGetFileResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      getFileOperationSpec
-    ) as Promise<FilesGetFileResponse>;
+  getFile(
+    options?: coreClient.OperationOptions
+  ): Promise<FilesGetFileResponse> {
+    return this.client.sendOperationRequest({ options }, getFileOperationSpec);
   }
 
   /**
@@ -47,15 +44,12 @@ export class Files {
    * @param options The options parameters.
    */
   getFileLarge(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<FilesGetFileLargeResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getFileLargeOperationSpec
-    ) as Promise<FilesGetFileLargeResponse>;
+    );
   }
 
   /**
@@ -63,21 +57,18 @@ export class Files {
    * @param options The options parameters.
    */
   getEmptyFile(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<FilesGetEmptyFileResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getEmptyFileOperationSpec
-    ) as Promise<FilesGetEmptyFileResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getFileOperationSpec: coreHttp.OperationSpec = {
+const getFileOperationSpec: coreClient.OperationSpec = {
   path: "/files/stream/nonempty",
   httpMethod: "GET",
   responses: {
@@ -92,7 +83,7 @@ const getFileOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getFileLargeOperationSpec: coreHttp.OperationSpec = {
+const getFileLargeOperationSpec: coreClient.OperationSpec = {
   path: "/files/stream/verylarge",
   httpMethod: "GET",
   responses: {
@@ -107,7 +98,7 @@ const getFileLargeOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getEmptyFileOperationSpec: coreHttp.OperationSpec = {
+const getEmptyFileOperationSpec: coreClient.OperationSpec = {
   path: "/files/stream/empty",
   httpMethod: "GET",
   responses: {

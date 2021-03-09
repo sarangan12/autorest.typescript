@@ -8,7 +8,8 @@
 
 import { CanonicalCode } from "@opentelemetry/api";
 import { createSpan } from "../tracing";
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { BodyComplexWithTracingContext } from "../bodyComplexWithTracingContext";
@@ -54,18 +55,15 @@ export class Primitive {
    * @param options The options parameters.
    */
   async getInt(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PrimitiveGetIntResponse> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-getInt",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { options },
         getIntOperationSpec
       );
       return result as PrimitiveGetIntResponse;
@@ -87,22 +85,18 @@ export class Primitive {
    */
   async putInt(
     complexBody: IntWrapper,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-putInt",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      complexBody,
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { complexBody, options },
         putIntOperationSpec
       );
-      return result as coreHttp.RestResponse;
+      return result as void;
     } catch (error) {
       span.setStatus({
         code: CanonicalCode.UNKNOWN,
@@ -119,18 +113,15 @@ export class Primitive {
    * @param options The options parameters.
    */
   async getLong(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PrimitiveGetLongResponse> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-getLong",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { options },
         getLongOperationSpec
       );
       return result as PrimitiveGetLongResponse;
@@ -152,22 +143,18 @@ export class Primitive {
    */
   async putLong(
     complexBody: LongWrapper,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-putLong",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      complexBody,
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { complexBody, options },
         putLongOperationSpec
       );
-      return result as coreHttp.RestResponse;
+      return result as void;
     } catch (error) {
       span.setStatus({
         code: CanonicalCode.UNKNOWN,
@@ -184,18 +171,15 @@ export class Primitive {
    * @param options The options parameters.
    */
   async getFloat(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PrimitiveGetFloatResponse> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-getFloat",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { options },
         getFloatOperationSpec
       );
       return result as PrimitiveGetFloatResponse;
@@ -217,22 +201,18 @@ export class Primitive {
    */
   async putFloat(
     complexBody: FloatWrapper,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-putFloat",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      complexBody,
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { complexBody, options },
         putFloatOperationSpec
       );
-      return result as coreHttp.RestResponse;
+      return result as void;
     } catch (error) {
       span.setStatus({
         code: CanonicalCode.UNKNOWN,
@@ -249,18 +229,15 @@ export class Primitive {
    * @param options The options parameters.
    */
   async getDouble(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PrimitiveGetDoubleResponse> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-getDouble",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { options },
         getDoubleOperationSpec
       );
       return result as PrimitiveGetDoubleResponse;
@@ -283,22 +260,18 @@ export class Primitive {
    */
   async putDouble(
     complexBody: DoubleWrapper,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-putDouble",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      complexBody,
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { complexBody, options },
         putDoubleOperationSpec
       );
-      return result as coreHttp.RestResponse;
+      return result as void;
     } catch (error) {
       span.setStatus({
         code: CanonicalCode.UNKNOWN,
@@ -315,18 +288,15 @@ export class Primitive {
    * @param options The options parameters.
    */
   async getBool(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PrimitiveGetBoolResponse> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-getBool",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { options },
         getBoolOperationSpec
       );
       return result as PrimitiveGetBoolResponse;
@@ -348,22 +318,18 @@ export class Primitive {
    */
   async putBool(
     complexBody: BooleanWrapper,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-putBool",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      complexBody,
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { complexBody, options },
         putBoolOperationSpec
       );
-      return result as coreHttp.RestResponse;
+      return result as void;
     } catch (error) {
       span.setStatus({
         code: CanonicalCode.UNKNOWN,
@@ -380,18 +346,15 @@ export class Primitive {
    * @param options The options parameters.
    */
   async getString(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PrimitiveGetStringResponse> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-getString",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { options },
         getStringOperationSpec
       );
       return result as PrimitiveGetStringResponse;
@@ -413,22 +376,18 @@ export class Primitive {
    */
   async putString(
     complexBody: StringWrapper,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-putString",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      complexBody,
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { complexBody, options },
         putStringOperationSpec
       );
-      return result as coreHttp.RestResponse;
+      return result as void;
     } catch (error) {
       span.setStatus({
         code: CanonicalCode.UNKNOWN,
@@ -445,18 +404,15 @@ export class Primitive {
    * @param options The options parameters.
    */
   async getDate(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PrimitiveGetDateResponse> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-getDate",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { options },
         getDateOperationSpec
       );
       return result as PrimitiveGetDateResponse;
@@ -478,22 +434,18 @@ export class Primitive {
    */
   async putDate(
     complexBody: DateWrapper,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-putDate",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      complexBody,
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { complexBody, options },
         putDateOperationSpec
       );
-      return result as coreHttp.RestResponse;
+      return result as void;
     } catch (error) {
       span.setStatus({
         code: CanonicalCode.UNKNOWN,
@@ -510,18 +462,15 @@ export class Primitive {
    * @param options The options parameters.
    */
   async getDateTime(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PrimitiveGetDateTimeResponse> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-getDateTime",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { options },
         getDateTimeOperationSpec
       );
       return result as PrimitiveGetDateTimeResponse;
@@ -543,22 +492,18 @@ export class Primitive {
    */
   async putDateTime(
     complexBody: DatetimeWrapper,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-putDateTime",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      complexBody,
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { complexBody, options },
         putDateTimeOperationSpec
       );
-      return result as coreHttp.RestResponse;
+      return result as void;
     } catch (error) {
       span.setStatus({
         code: CanonicalCode.UNKNOWN,
@@ -575,18 +520,15 @@ export class Primitive {
    * @param options The options parameters.
    */
   async getDateTimeRfc1123(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PrimitiveGetDateTimeRfc1123Response> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-getDateTimeRfc1123",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { options },
         getDateTimeRfc1123OperationSpec
       );
       return result as PrimitiveGetDateTimeRfc1123Response;
@@ -608,22 +550,18 @@ export class Primitive {
    */
   async putDateTimeRfc1123(
     complexBody: Datetimerfc1123Wrapper,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-putDateTimeRfc1123",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      complexBody,
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { complexBody, options },
         putDateTimeRfc1123OperationSpec
       );
-      return result as coreHttp.RestResponse;
+      return result as void;
     } catch (error) {
       span.setStatus({
         code: CanonicalCode.UNKNOWN,
@@ -640,18 +578,15 @@ export class Primitive {
    * @param options The options parameters.
    */
   async getDuration(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PrimitiveGetDurationResponse> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-getDuration",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { options },
         getDurationOperationSpec
       );
       return result as PrimitiveGetDurationResponse;
@@ -673,22 +608,18 @@ export class Primitive {
    */
   async putDuration(
     complexBody: DurationWrapper,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-putDuration",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      complexBody,
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { complexBody, options },
         putDurationOperationSpec
       );
-      return result as coreHttp.RestResponse;
+      return result as void;
     } catch (error) {
       span.setStatus({
         code: CanonicalCode.UNKNOWN,
@@ -705,18 +636,15 @@ export class Primitive {
    * @param options The options parameters.
    */
   async getByte(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PrimitiveGetByteResponse> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-getByte",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { options },
         getByteOperationSpec
       );
       return result as PrimitiveGetByteResponse;
@@ -738,22 +666,18 @@ export class Primitive {
    */
   async putByte(
     complexBody: ByteWrapper,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-putByte",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      complexBody,
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { complexBody, options },
         putByteOperationSpec
       );
-      return result as coreHttp.RestResponse;
+      return result as void;
     } catch (error) {
       span.setStatus({
         code: CanonicalCode.UNKNOWN,
@@ -766,9 +690,9 @@ export class Primitive {
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getIntOperationSpec: coreHttp.OperationSpec = {
+const getIntOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/integer",
   httpMethod: "GET",
   responses: {
@@ -783,7 +707,7 @@ const getIntOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putIntOperationSpec: coreHttp.OperationSpec = {
+const putIntOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/integer",
   httpMethod: "PUT",
   responses: {
@@ -798,7 +722,7 @@ const putIntOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getLongOperationSpec: coreHttp.OperationSpec = {
+const getLongOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/long",
   httpMethod: "GET",
   responses: {
@@ -813,7 +737,7 @@ const getLongOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putLongOperationSpec: coreHttp.OperationSpec = {
+const putLongOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/long",
   httpMethod: "PUT",
   responses: {
@@ -828,7 +752,7 @@ const putLongOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getFloatOperationSpec: coreHttp.OperationSpec = {
+const getFloatOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/float",
   httpMethod: "GET",
   responses: {
@@ -843,7 +767,7 @@ const getFloatOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putFloatOperationSpec: coreHttp.OperationSpec = {
+const putFloatOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/float",
   httpMethod: "PUT",
   responses: {
@@ -858,7 +782,7 @@ const putFloatOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getDoubleOperationSpec: coreHttp.OperationSpec = {
+const getDoubleOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/double",
   httpMethod: "GET",
   responses: {
@@ -873,7 +797,7 @@ const getDoubleOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putDoubleOperationSpec: coreHttp.OperationSpec = {
+const putDoubleOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/double",
   httpMethod: "PUT",
   responses: {
@@ -888,7 +812,7 @@ const putDoubleOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getBoolOperationSpec: coreHttp.OperationSpec = {
+const getBoolOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/bool",
   httpMethod: "GET",
   responses: {
@@ -903,7 +827,7 @@ const getBoolOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putBoolOperationSpec: coreHttp.OperationSpec = {
+const putBoolOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/bool",
   httpMethod: "PUT",
   responses: {
@@ -918,7 +842,7 @@ const putBoolOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getStringOperationSpec: coreHttp.OperationSpec = {
+const getStringOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/string",
   httpMethod: "GET",
   responses: {
@@ -933,7 +857,7 @@ const getStringOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putStringOperationSpec: coreHttp.OperationSpec = {
+const putStringOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/string",
   httpMethod: "PUT",
   responses: {
@@ -948,7 +872,7 @@ const putStringOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getDateOperationSpec: coreHttp.OperationSpec = {
+const getDateOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/date",
   httpMethod: "GET",
   responses: {
@@ -963,7 +887,7 @@ const getDateOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putDateOperationSpec: coreHttp.OperationSpec = {
+const putDateOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/date",
   httpMethod: "PUT",
   responses: {
@@ -978,7 +902,7 @@ const putDateOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getDateTimeOperationSpec: coreHttp.OperationSpec = {
+const getDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/datetime",
   httpMethod: "GET",
   responses: {
@@ -993,7 +917,7 @@ const getDateTimeOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putDateTimeOperationSpec: coreHttp.OperationSpec = {
+const putDateTimeOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/datetime",
   httpMethod: "PUT",
   responses: {
@@ -1008,7 +932,7 @@ const putDateTimeOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getDateTimeRfc1123OperationSpec: coreHttp.OperationSpec = {
+const getDateTimeRfc1123OperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/datetimerfc1123",
   httpMethod: "GET",
   responses: {
@@ -1023,7 +947,7 @@ const getDateTimeRfc1123OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putDateTimeRfc1123OperationSpec: coreHttp.OperationSpec = {
+const putDateTimeRfc1123OperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/datetimerfc1123",
   httpMethod: "PUT",
   responses: {
@@ -1038,7 +962,7 @@ const putDateTimeRfc1123OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getDurationOperationSpec: coreHttp.OperationSpec = {
+const getDurationOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/duration",
   httpMethod: "GET",
   responses: {
@@ -1053,7 +977,7 @@ const getDurationOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putDurationOperationSpec: coreHttp.OperationSpec = {
+const putDurationOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/duration",
   httpMethod: "PUT",
   responses: {
@@ -1068,7 +992,7 @@ const putDurationOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getByteOperationSpec: coreHttp.OperationSpec = {
+const getByteOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/byte",
   httpMethod: "GET",
   responses: {
@@ -1083,7 +1007,7 @@ const getByteOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putByteOperationSpec: coreHttp.OperationSpec = {
+const putByteOperationSpec: coreClient.OperationSpec = {
   path: "/complex/primitive/byte",
   httpMethod: "PUT",
   responses: {

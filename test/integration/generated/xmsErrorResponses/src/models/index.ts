@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 
 export type NotFoundErrorBaseUnion =
   | NotFoundErrorBase
@@ -66,32 +67,14 @@ export type PetHungryOrThirstyError = PetSadError & {
 };
 
 /** Contains response data for the getPetById operation. */
-export type PetGetPetByIdResponse = Pet & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Pet;
-  };
-};
+export type PetGetPetByIdResponse = Pet;
 
 /** Contains response data for the doSomething operation. */
-export type PetDoSomethingResponse = PetAction & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: PetAction;
-  };
-};
+export type PetDoSomethingResponse = PetAction;
 
 /** Optional parameters. */
 export interface XmsErrorResponsesClientOptionalParams
-  extends coreHttp.ServiceClientOptions {
+  extends coreClient.ServiceClientOptions {
   /** server parameter */
   $host?: string;
   /** Overrides client endpoint. */

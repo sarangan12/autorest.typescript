@@ -1,4 +1,5 @@
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 
 /** A group of properties representing a pet. */
 export interface Pet {
@@ -56,7 +57,7 @@ export interface PathsQ1AtbnPetPetidUploadimagePostRequestbodyContentMultipartFo
   /** Additional data to pass to server */
   additionalMetadata?: string;
   /** file to upload */
-  file?: coreHttp.HttpRequestBody;
+  file?: coreHttps.RequestBodyType;
 }
 
 /** Known values of {@link PetStatus} that the service accepts. */
@@ -97,62 +98,44 @@ export type OrderStatus = string;
 
 /** Optional parameters. */
 export interface PetStoreAddPetUsingByteArrayOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** Pet object in the form of byte array */
-  body?: coreHttp.HttpRequestBody;
+  body?: coreHttps.RequestBodyType;
 }
 
 /** Optional parameters. */
 export interface PetStoreAddPetOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** Pet object that needs to be added to the store */
   body?: Pet;
 }
 
 /** Optional parameters. */
 export interface PetStoreUpdatePetOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** Pet object that needs to be added to the store */
   body?: Pet;
 }
 
 /** Optional parameters. */
 export interface PetStoreFindPetsByStatusOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** Status values that need to be considered for filter */
   status?: string[];
 }
 
 /** Contains response data for the findPetsByStatus operation. */
-export type PetStoreFindPetsByStatusResponse = Pet[] & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Pet[];
-  };
-};
+export type PetStoreFindPetsByStatusResponse = Pet[];
 
 /** Optional parameters. */
 export interface PetStoreFindPetsByTagsOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** Tags to filter by */
   tags?: string[];
 }
 
 /** Contains response data for the findPetsByTags operation. */
-export type PetStoreFindPetsByTagsResponse = Pet[] & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Pet[];
-  };
-};
+export type PetStoreFindPetsByTagsResponse = Pet[];
 
 /** Contains response data for the findPetsWithByteArray operation. */
 export type PetStoreFindPetsWithByteArrayResponse = {
@@ -170,113 +153,72 @@ export type PetStoreFindPetsWithByteArrayResponse = {
    * Always `undefined` in the browser.
    */
   readableStreamBody?: NodeJS.ReadableStream;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse;
 };
 
 /** Contains response data for the getPetById operation. */
-export type PetStoreGetPetByIdResponse = Pet & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Pet;
-  };
-};
+export type PetStoreGetPetByIdResponse = Pet;
 
 /** Optional parameters. */
 export interface PetStoreUpdatePetWithFormOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   status?: PathsN18Gb4PetPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema;
 }
 
 /** Optional parameters. */
 export interface PetStoreDeletePetOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   apiKey?: string;
 }
 
 /** Optional parameters. */
 export interface PetStoreUploadFileOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** Additional data to pass to server */
   additionalMetadata?: string;
   /** file to upload */
-  file?: coreHttp.HttpRequestBody;
+  file?: coreHttps.RequestBodyType;
 }
 
 /** Contains response data for the getInventory operation. */
-export type PetStoreGetInventoryResponse = {
-  [propertyName: string]: number;
-} & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: { [propertyName: string]: number };
-  };
-};
+export type PetStoreGetInventoryResponse = { [propertyName: string]: number };
 
 /** Optional parameters. */
 export interface PetStorePlaceOrderOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** order placed for purchasing the pet */
   body?: Order;
 }
 
 /** Contains response data for the placeOrder operation. */
-export type PetStorePlaceOrderResponse = Order & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Order;
-  };
-};
+export type PetStorePlaceOrderResponse = Order;
 
 /** Contains response data for the getOrderById operation. */
-export type PetStoreGetOrderByIdResponse = Order & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Order;
-  };
-};
+export type PetStoreGetOrderByIdResponse = Order;
 
 /** Optional parameters. */
 export interface PetStoreCreateUserOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** Created user object */
   body?: User;
 }
 
 /** Optional parameters. */
 export interface PetStoreCreateUsersWithArrayInputOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** List of user object */
   body?: User[];
 }
 
 /** Optional parameters. */
 export interface PetStoreCreateUsersWithListInputOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** List of user object */
   body?: User[];
 }
 
 /** Optional parameters. */
 export interface PetStoreLoginUserOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** The user name for login */
   username?: string;
   /** The password for login in clear text */
@@ -287,38 +229,21 @@ export interface PetStoreLoginUserOptionalParams
 export type PetStoreLoginUserResponse = {
   /** The parsed response body. */
   body: string;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: string;
-  };
 };
 
 /** Contains response data for the getUserByName operation. */
-export type PetStoreGetUserByNameResponse = User & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: User;
-  };
-};
+export type PetStoreGetUserByNameResponse = User;
 
 /** Optional parameters. */
 export interface PetStoreUpdateUserOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** Updated user object */
   body?: User;
 }
 
 /** Optional parameters. */
-export interface PetStoreOptionalParams extends coreHttp.ServiceClientOptions {
+export interface PetStoreOptionalParams
+  extends coreClient.ServiceClientOptions {
   /** server parameter */
   $host?: string;
   /** Overrides client endpoint. */

@@ -1,4 +1,5 @@
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 
 export type MethodRequestUnion =
   | MethodRequest
@@ -762,7 +763,7 @@ export type MediaGraphImageFormatRawPixelFormat = string;
 
 /** Optional parameters. */
 export interface MediaServicesClientOptionalParams
-  extends coreHttp.ServiceClientOptions {
+  extends coreClient.ServiceClientOptions {
   /** Overrides client endpoint. */
   endpoint?: string;
 }

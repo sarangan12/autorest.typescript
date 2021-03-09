@@ -6,13 +6,10 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
 import { ValidationClientOptionalParams } from "./models";
 
-const packageName = "validation";
-const packageVersion = "1.0.0-preview1";
-
-export class ValidationClientContext extends coreHttp.ServiceClient {
+export class ValidationClientContext extends coreClient.ServiceClient {
   $host: string;
   subscriptionId: string;
   apiVersion: string;
@@ -35,17 +32,17 @@ export class ValidationClientContext extends coreHttp.ServiceClient {
       options = {};
     }
 
-    if (!options.userAgent) {
-      const defaultUserAgent = coreHttp.getDefaultUserAgentValue();
-      options.userAgent = `${packageName}/${packageVersion} ${defaultUserAgent}`;
-    }
+    const defaults: ValidationClientOptionalParams = {
+      requestContentType: "application/json; charset=utf-8"
+    };
 
-    super(undefined, options);
+    const optionsWithDefaults = {
+      ...defaults,
+      ...options,
+      baseUri: options.endpoint || "http://localhost:3000"
+    };
 
-    this.requestContentType = "application/json; charset=utf-8";
-
-    this.baseUri = options.endpoint || "http://localhost:3000";
-
+    super(optionsWithDefaults);
     // Parameter assignments
     this.subscriptionId = subscriptionId;
 

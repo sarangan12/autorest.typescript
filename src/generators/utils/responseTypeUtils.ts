@@ -45,7 +45,8 @@ export function getResponseTypeName(
 export function getOperationResponseType(
   operation: OperationDetails,
   importedModels: Set<string>,
-  modelNames: Set<string>
+  modelNames: Set<string>,
+  useCoreV2: boolean
 ) {
   const hasSuccessResponse = operation.responses.some(
     ({ isError, mappers }) =>
@@ -60,7 +61,7 @@ export function getOperationResponseType(
     return typeName;
   }
 
-  return "coreHttp.RestResponse";
+  return !useCoreV2 ? "coreHttp.RestResponse" : "void";
 }
 
 /**

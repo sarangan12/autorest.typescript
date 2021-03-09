@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Parameters from "../models/parameters";
 import { MediaTypesV3ClientContext } from "../mediaTypesV3ClientContext";
 import {
@@ -35,20 +36,16 @@ export class BarApi {
     data: string,
     options?: BarApiPostSendOnDefaultOptionalParams
   ): Promise<BarApiPostSendOnDefaultResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      data,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { data, options },
       postSendOnDefaultOperationSpec
-    ) as Promise<BarApiPostSendOnDefaultResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer({}, /* isXml */ false);
+const serializer = coreClient.createSerializer({}, /* isXml */ false);
 
-const postSendOnDefaultOperationSpec: coreHttp.OperationSpec = {
+const postSendOnDefaultOperationSpec: coreClient.OperationSpec = {
   path: "/bar/api/v1",
   httpMethod: "POST",
   responses: {

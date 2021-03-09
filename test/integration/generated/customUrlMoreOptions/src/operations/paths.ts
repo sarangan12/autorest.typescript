@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { CustomUrlMoreOptionsClientContext } from "../customUrlMoreOptionsClientContext";
@@ -36,23 +37,17 @@ export class Paths {
     secret: string,
     keyName: string,
     options?: PathsGetEmptyOptionalParams
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      vault,
-      secret,
-      keyName,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { vault, secret, keyName, options },
       getEmptyOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getEmptyOperationSpec: coreHttp.OperationSpec = {
+const getEmptyOperationSpec: coreClient.OperationSpec = {
   path: "/customuri/{subscriptionId}/{keyName}",
   httpMethod: "GET",
   responses: {

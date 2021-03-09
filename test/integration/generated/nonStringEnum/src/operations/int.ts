@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Parameters from "../models/parameters";
 import { NonStringEnumClientContext } from "../nonStringEnumClientContext";
 import {
@@ -32,33 +33,21 @@ export class Int {
    * @param options The options parameters.
    */
   put(options?: IntPutOptionalParams): Promise<IntPutResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      putOperationSpec
-    ) as Promise<IntPutResponse>;
+    return this.client.sendOperationRequest({ options }, putOperationSpec);
   }
 
   /**
    * Get an int enum
    * @param options The options parameters.
    */
-  get(options?: coreHttp.OperationOptions): Promise<IntGetResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      getOperationSpec
-    ) as Promise<IntGetResponse>;
+  get(options?: coreClient.OperationOptions): Promise<IntGetResponse> {
+    return this.client.sendOperationRequest({ options }, getOperationSpec);
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer({}, /* isXml */ false);
+const serializer = coreClient.createSerializer({}, /* isXml */ false);
 
-const putOperationSpec: coreHttp.OperationSpec = {
+const putOperationSpec: coreClient.OperationSpec = {
   path: "/nonStringEnums/int/put",
   httpMethod: "PUT",
   responses: {
@@ -72,7 +61,7 @@ const putOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getOperationSpec: coreHttp.OperationSpec = {
+const getOperationSpec: coreClient.OperationSpec = {
   path: "/nonStringEnums/int/get",
   httpMethod: "GET",
   responses: {

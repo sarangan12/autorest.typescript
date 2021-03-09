@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { ExtensibleEnumsClientContext } from "../extensibleEnumsClientContext";
@@ -35,16 +36,12 @@ export class Pet {
    */
   getByPetId(
     petId: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PetGetByPetIdResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      petId,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { petId, options },
       getByPetIdOperationSpec
-    ) as Promise<PetGetByPetIdResponse>;
+    );
   }
 
   /**
@@ -52,19 +49,13 @@ export class Pet {
    * @param options The options parameters.
    */
   addPet(options?: PetAddPetOptionalParams): Promise<PetAddPetResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      addPetOperationSpec
-    ) as Promise<PetAddPetResponse>;
+    return this.client.sendOperationRequest({ options }, addPetOperationSpec);
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getByPetIdOperationSpec: coreHttp.OperationSpec = {
+const getByPetIdOperationSpec: coreClient.OperationSpec = {
   path: "/extensibleenums/pet/{petId}",
   httpMethod: "GET",
   responses: {
@@ -76,7 +67,7 @@ const getByPetIdOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const addPetOperationSpec: coreHttp.OperationSpec = {
+const addPetOperationSpec: coreClient.OperationSpec = {
   path: "/extensibleenums/pet/addPet",
   httpMethod: "POST",
   responses: {

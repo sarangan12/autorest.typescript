@@ -18,7 +18,8 @@ import { logger } from "../utils/logger";
 
 export function generateParameters(
   clientDetails: ClientDetails,
-  project: Project
+  project: Project,
+  useCoreV2: boolean
 ): void {
   if (!shouldImportParameters(clientDetails)) {
     logger.verbose(
@@ -33,11 +34,11 @@ export function generateParameters(
     { overwrite: true }
   );
 
-  const importedCoreHttp = getCoreHttpImports(clientDetails);
+  const importedCoreHttp = getCoreHttpImports(clientDetails, useCoreV2);
   if (importedCoreHttp.length) {
     parametersFile.addImportDeclaration({
       namedImports: importedCoreHttp,
-      moduleSpecifier: "@azure/core-http"
+      moduleSpecifier: !useCoreV2 ? "@azure/core-http" : "@azure/core-client"
     });
   }
 
@@ -56,7 +57,7 @@ export function generateParameters(
     .forEach(param => {
       parametersFile.addVariableStatement({
         isExported: true,
-        declarations: [buildParameterInitializer(param)],
+        declarations: [buildParameterInitializer(param, useCoreV2)],
         declarationKind: VariableDeclarationKind.Const,
         leadingTrivia: writer => writer.blankLine()
       });
@@ -64,7 +65,8 @@ export function generateParameters(
 }
 
 function buildParameterInitializer(
-  parameter: ParameterDetails
+  parameter: ParameterDetails,
+  useCoreV2: boolean
 ): VariableDeclarationStructure {
   const { nameRef, location } = parameter;
   const type = getParameterType(location);
@@ -75,7 +77,7 @@ function buildParameterInitializer(
       writer.block(() => {
         writeParameterPath(writer, parameter);
         writeParameterMapper(writer, parameter);
-        writeParameterCollectionFormat(writer, parameter);
+        writeParameterCollectionFormat(writer, parameter, useCoreV2);
         writeParameterSkipEncoding(writer, parameter);
       });
     },
@@ -85,8 +87,34 @@ function buildParameterInitializer(
 
 function writeParameterCollectionFormat(
   writer: CodeBlockWriter,
-  { collectionFormat }: ParameterDetails
+  { collectionFormat }: ParameterDetails,
+  useCoreV2: boolean
 ) {
+  if (useCoreV2) {
+    switch (collectionFormat) {
+      case "Csv":
+        collectionFormat = '"CSV"';
+        break;
+      case "Ssv":
+        collectionFormat = '"SSV"';
+        break;
+      case "Tsv":
+        collectionFormat = '"TSV"';
+        break;
+      case "Pipes":
+        collectionFormat = '"Pipes"';
+        break;
+      case "Multi":
+        collectionFormat = '"Multi"';
+        break;
+    }
+
+    return writer.conditionalWrite(
+      !!collectionFormat,
+      () => `collectionFormat: ${collectionFormat},`
+    );
+  }
+
   return writer.conditionalWrite(
     !!collectionFormat,
     () => `collectionFormat: QueryCollectionFormat.${collectionFormat},`
@@ -134,7 +162,7 @@ function getParameterType(location: ParameterLocation) {
   }
 }
 
-function getCoreHttpImports(clientDetails: ClientDetails) {
+function getCoreHttpImports(clientDetails: ClientDetails, useCoreV2: boolean) {
   const parameterTypes: string[] = clientDetails.parameters
     .filter(p => !p.isSynthetic)
     .map(p => getParameterType(p.location));
@@ -142,7 +170,8 @@ function getCoreHttpImports(clientDetails: ClientDetails) {
   if (
     clientDetails.parameters
       .filter(p => !p.isSynthetic)
-      .some(p => p.collectionFormat)
+      .some(p => p.collectionFormat) &&
+    !useCoreV2
   ) {
     parameterTypes.push("QueryCollectionFormat");
   }

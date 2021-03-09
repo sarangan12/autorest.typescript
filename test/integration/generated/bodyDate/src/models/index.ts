@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 
 export interface ErrorModel {
   status?: number;
@@ -17,95 +18,41 @@ export interface ErrorModel {
 export type DateGetNullResponse = {
   /** The parsed response body. */
   body: Date;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Date;
-  };
 };
 
 /** Contains response data for the getInvalidDate operation. */
 export type DateGetInvalidDateResponse = {
   /** The parsed response body. */
   body: Date;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Date;
-  };
 };
 
 /** Contains response data for the getOverflowDate operation. */
 export type DateGetOverflowDateResponse = {
   /** The parsed response body. */
   body: Date;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Date;
-  };
 };
 
 /** Contains response data for the getUnderflowDate operation. */
 export type DateGetUnderflowDateResponse = {
   /** The parsed response body. */
   body: Date;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Date;
-  };
 };
 
 /** Contains response data for the getMaxDate operation. */
 export type DateGetMaxDateResponse = {
   /** The parsed response body. */
   body: Date;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Date;
-  };
 };
 
 /** Contains response data for the getMinDate operation. */
 export type DateGetMinDateResponse = {
   /** The parsed response body. */
   body: Date;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: Date;
-  };
 };
 
 /** Optional parameters. */
 export interface BodyDateClientOptionalParams
-  extends coreHttp.ServiceClientOptions {
+  extends coreClient.ServiceClientOptions {
   /** server parameter */
   $host?: string;
   /** Overrides client endpoint. */

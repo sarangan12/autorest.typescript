@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 
 export interface PetAPTrue {
   /** Describes unknown properties. The value of an unknown property can be of "any" type. */
@@ -66,80 +67,26 @@ export type CatAPTrue = PetAPTrue & {
 };
 
 /** Contains response data for the createAPTrue operation. */
-export type PetsCreateAPTrueResponse = PetAPTrue & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: PetAPTrue;
-  };
-};
+export type PetsCreateAPTrueResponse = PetAPTrue;
 
 /** Contains response data for the createCatAPTrue operation. */
-export type PetsCreateCatAPTrueResponse = CatAPTrue & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: CatAPTrue;
-  };
-};
+export type PetsCreateCatAPTrueResponse = CatAPTrue;
 
 /** Contains response data for the createAPObject operation. */
-export type PetsCreateAPObjectResponse = PetAPObject & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: PetAPObject;
-  };
-};
+export type PetsCreateAPObjectResponse = PetAPObject;
 
 /** Contains response data for the createAPString operation. */
-export type PetsCreateAPStringResponse = PetAPString & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: PetAPString;
-  };
-};
+export type PetsCreateAPStringResponse = PetAPString;
 
 /** Contains response data for the createAPInProperties operation. */
-export type PetsCreateAPInPropertiesResponse = PetAPInProperties & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: PetAPInProperties;
-  };
-};
+export type PetsCreateAPInPropertiesResponse = PetAPInProperties;
 
 /** Contains response data for the createAPInPropertiesWithAPString operation. */
-export type PetsCreateAPInPropertiesWithAPStringResponse = PetAPInPropertiesWithAPString & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: PetAPInPropertiesWithAPString;
-  };
-};
+export type PetsCreateAPInPropertiesWithAPStringResponse = PetAPInPropertiesWithAPString;
 
 /** Optional parameters. */
 export interface AdditionalPropertiesClientOptionalParams
-  extends coreHttp.ServiceClientOptions {
+  extends coreClient.ServiceClientOptions {
   /** server parameter */
   $host?: string;
   /** Overrides client endpoint. */

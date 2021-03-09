@@ -59,7 +59,8 @@ import {
  */
 export function generateOperations(
   clientDetails: ClientDetails,
-  project: Project
+  project: Project,
+  useCoreV2: boolean
 ): void {
   let fileNames: string[] = [];
 
@@ -70,7 +71,7 @@ export function generateOperations(
 
   operationGroups.forEach(operationDetails => {
     fileNames.push(normalizeName(operationDetails.name, NameType.File));
-    generateOperation(operationDetails, clientDetails, project);
+    generateOperation(operationDetails, clientDetails, project, useCoreV2);
   });
 
   if (operationGroups.length) {
@@ -96,7 +97,8 @@ export function generateOperations(
 function generateOperation(
   operationGroupDetails: OperationGroupDetails,
   clientDetails: ClientDetails,
-  project: Project
+  project: Project,
+  useCoreV2: boolean
 ): void {
   const name = normalizeName(operationGroupDetails.name, NameType.File);
   const hasMappers = !!clientDetails.mappers.length;
@@ -106,34 +108,54 @@ function generateOperation(
     { overwrite: true }
   );
 
-  addImports(operationGroupDetails, operationGroupFile, clientDetails);
-  addClass(operationGroupFile, operationGroupDetails, clientDetails);
+  addImports(
+    operationGroupDetails,
+    operationGroupFile,
+    clientDetails,
+    useCoreV2
+  );
+  addClass(operationGroupFile, operationGroupDetails, clientDetails, useCoreV2);
   addOperationSpecs(
     operationGroupDetails,
     operationGroupFile,
     clientDetails.parameters,
-    hasMappers
+    hasMappers,
+    useCoreV2
   );
 }
 
 export function writeGetOperationOptions(
-  operationGroupClass: ClassDeclaration
+  operationGroupClass: ClassDeclaration,
+  useCoreV2: boolean
 ) {
   operationGroupClass.addMethod({
     scope: Scope.Private,
-    name: "getOperationOptions<TOptions extends coreHttp.OperationOptions>",
+    name: !useCoreV2
+      ? "getOperationOptions<TOptions extends coreHttp.OperationOptions>"
+      : "getOperationOptions<TOptions extends coreClient.OperationOptions>",
     parameters: [
       { name: "options", type: "TOptions | undefined" },
       { name: "finalStateVia", type: "string", hasQuestionToken: true }
     ],
-    returnType: `coreHttp.RequestOptionsBase`,
-    statements: `
+    returnType: !useCoreV2
+      ? `coreHttp.RequestOptionsBase`
+      : `coreClient.OperationOptions`,
+    statements: !useCoreV2
+      ? `
     const operationOptions: coreHttp.OperationOptions = options || {};
     operationOptions.requestOptions = {
       ...operationOptions.requestOptions,
       shouldDeserialize: shouldDeserializeLRO(finalStateVia),
     };
     return coreHttp.operationOptionsToRequestOptionsBase(operationOptions);
+    `
+      : `
+    const operationOptions: coreClient.OperationOptions = options || {};
+    operationOptions.requestOptions = {
+      ...operationOptions.requestOptions,
+      shouldDeserialize: shouldDeserializeLRO(finalStateVia),
+    };
+    return operationOptions;
     `
   });
 }
@@ -403,12 +425,14 @@ function buildMapper(
 function getReturnType(
   operation: OperationDetails,
   importedModels: Set<string>,
-  modelNames: Set<string>
+  modelNames: Set<string>,
+  useCoreV2: boolean
 ) {
   const responseName = getOperationResponseType(
     operation,
     importedModels,
-    modelNames
+    modelNames,
+    useCoreV2
   );
 
   return operation.isLRO
@@ -422,7 +446,8 @@ function getReturnType(
 function addClass(
   operationGroupFile: SourceFile,
   operationGroupDetails: OperationGroupDetails,
-  clientDetails: ClientDetails
+  clientDetails: ClientDetails,
+  useCoreV2: boolean
 ) {
   let importedModels = new Set<string>();
 
@@ -466,11 +491,12 @@ function addClass(
     importedModels,
     allModelsNames,
     clientDetails,
-    false /** isInline */
+    false /** isInline */,
+    useCoreV2
   );
 
   if (hasLROOperation(operationGroupDetails)) {
-    writeGetOperationOptions(operationGroupClass);
+    writeGetOperationOptions(operationGroupClass, useCoreV2);
   }
 
   // Use named import from Models
@@ -506,14 +532,16 @@ export function writeOperations(
   importedModels: Set<string>,
   modelNames: Set<string>,
   clientDetails: ClientDetails,
-  isInline = false
+  isInline = false,
+  useCoreV2: boolean
 ) {
   preparePageableOperations(operationGroupDetails, clientDetails);
   writeAsyncIterators(
     operationGroupDetails,
     clientDetails,
     operationGroupClass,
-    importedModels
+    importedModels,
+    useCoreV2
   );
   operationGroupDetails.operations.forEach(operation => {
     const {
@@ -523,14 +551,22 @@ export function writeOperations(
       operation,
       clientDetails.parameters,
       importedModels,
-      operationGroupClass
+      operationGroupClass,
+      useCoreV2
     );
+
     const responseName = getOperationResponseType(
       operation,
       importedModels,
-      modelNames
+      modelNames,
+      useCoreV2
     );
-    const returnType = getReturnType(operation, importedModels, modelNames);
+    const returnType = getReturnType(
+      operation,
+      importedModels,
+      modelNames,
+      useCoreV2
+    );
     const name = `${operation.namePrefix || ""}${normalizeName(
       operation.name,
       NameType.Property
@@ -560,7 +596,8 @@ export function writeOperations(
       overloadParameterDeclarations,
       clientDetails,
       responseName,
-      isInline
+      isInline,
+      useCoreV2
     );
   });
 }
@@ -574,7 +611,8 @@ function writeOperationBody(
   overloadDeclarations: OverloadDeclarations,
   clientDetails: ClientDetails,
   responseName: string,
-  isInline: boolean
+  isInline: boolean,
+  useCoreV2: boolean
 ): void {
   if (overloadDeclarations.length === 1) {
     // No overloads
@@ -584,7 +622,8 @@ function writeOperationBody(
       generatedOperation,
       overloadDeclarations[0],
       clientDetails,
-      isInline
+      isInline,
+      useCoreV2
     );
   } else {
     // This condition implies that the user can specify a contentType,
@@ -595,7 +634,8 @@ function writeOperationBody(
       overloadDeclarations,
       responseName,
       clientDetails,
-      isInline
+      isInline,
+      useCoreV2
     );
   }
 }
@@ -640,7 +680,8 @@ function writeNoOverloadsOperationBody(
   operationMethod: MethodDeclaration,
   parameterDeclarations: ParameterWithDescription[],
   clientDetails: ClientDetails,
-  isInline: boolean
+  isInline: boolean,
+  useCoreV2: boolean
 ): void {
   const finalStateVia =
     operation.lroOptions && operation.lroOptions["final-state-via"];
@@ -652,7 +693,9 @@ function writeNoOverloadsOperationBody(
   // the private getOperationOptions function instead of the one in core-http
   const toOptionsBase = operation.isLRO
     ? `this.getOperationOptions(options, "${finalStateVia}")`
-    : `coreHttp.operationOptionsToRequestOptionsBase(options || {})`;
+    : !useCoreV2
+    ? `coreHttp.operationOptionsToRequestOptionsBase(options || {})`
+    : `options || {}`;
 
   let options = toOptionsBase;
 
@@ -666,31 +709,55 @@ function writeNoOverloadsOperationBody(
   }
 
   const sendParams = parameterDeclarations
-    .map(p => (p.name === "options" ? `options: ${options}` : p.name))
+    .map(p =>
+      p.name === "options"
+        ? !useCoreV2
+          ? `options: ${options}`
+          : `options`
+        : p.name
+    )
     .join(",");
 
   // Create an object to hold all the arguments for send request
-  operationMethod.addStatements(
-    `const operationArguments: coreHttp.OperationArguments = {${sendParams}}`
-  );
+  if (!useCoreV2) {
+    operationMethod.addStatements(
+      `const operationArguments: coreHttp.OperationArguments = {${sendParams}}`
+    );
+  }
 
   if (operation.isLRO) {
-    writeLROOperationBody(
-      "operationArguments",
-      responseName,
-      operationSpecName,
-      operationMethod,
-      finalStateVia,
-      isInline,
-      !!clientDetails.tracing
-    );
+    if (!useCoreV2) {
+      writeLROOperationBody(
+        "operationArguments",
+        responseName,
+        operationSpecName,
+        operationMethod,
+        useCoreV2,
+        finalStateVia,
+        isInline,
+        !!clientDetails.tracing
+      );
+    } else {
+      writeLROOperationBody(
+        `{${sendParams}}`,
+        responseName,
+        operationSpecName,
+        operationMethod,
+        useCoreV2,
+        finalStateVia,
+        isInline,
+        !!clientDetails.tracing
+      );
+    }
   } else {
     writeSendOperationRequest(
       responseName,
       operationMethod,
       operationSpecName,
       clientDetails,
-      isInline
+      isInline,
+      `{${sendParams}}`,
+      useCoreV2
     );
   }
 }
@@ -708,10 +775,14 @@ function writeSendOperationRequest(
   operationMethod: MethodDeclaration,
   operationSpecName: string,
   clientDetails: ClientDetails,
-  isInline = false
+  isInline = false,
+  sendParams: string,
+  useCoreV2: boolean
 ) {
   const client = isInline ? "" : ".client";
-  const sendRequestStatement = `this${client}.sendOperationRequest(operationArguments, ${operationSpecName})`;
+  const sendRequestStatement = !useCoreV2
+    ? `this${client}.sendOperationRequest(operationArguments, ${operationSpecName})`
+    : `this${client}.sendOperationRequest(${sendParams}, ${operationSpecName})`;
 
   // When tracing is enabled we want to report success and failures through OpenTelemetry
   // so we create a span and mark it as succeeded or failed
@@ -719,7 +790,8 @@ function writeSendOperationRequest(
     getTracingTryCatchStatement(
       sendRequestStatement,
       responseName,
-      !!clientDetails.tracing
+      !!clientDetails.tracing,
+      useCoreV2
     )
   );
 }
@@ -727,7 +799,8 @@ function writeSendOperationRequest(
 function getTracingTryCatchStatement(
   sendRequestStatement: string,
   responseName: string,
-  isTracingEnabled: boolean
+  isTracingEnabled: boolean,
+  useCoreV2: boolean
 ) {
   if (isTracingEnabled) {
     return `try {
@@ -743,7 +816,9 @@ function getTracingTryCatchStatement(
       span.end();
     }`;
   } else {
-    return `return ${sendRequestStatement} as Promise<${responseName}>`;
+    return !useCoreV2
+      ? `return ${sendRequestStatement} as Promise<${responseName}>`
+      : `return ${sendRequestStatement}`;
   }
 }
 
@@ -752,6 +827,7 @@ function writeLROOperationBody(
   responseName: string,
   operationSpecName: string,
   methodDeclaration: MethodDeclaration,
+  useCoreV2: boolean,
   finalStateVia?: string,
   isInline?: boolean,
   isTracingEnabled = false
@@ -763,11 +839,21 @@ function writeLROOperationBody(
     ? `finalStateVia: "${finalStateVia.toLowerCase()}"`
     : "";
   const asyncKeyword = isTracingEnabled ? "async" : "";
-  let sendOperationStatement = `const sendOperation = ${asyncKeyword} (args: coreHttp.OperationArguments, spec: coreHttp.OperationSpec) => {
+  let sendOperationStatement = !useCoreV2
+    ? `const sendOperation = ${asyncKeyword} (args: coreHttp.OperationArguments, spec: coreHttp.OperationSpec) => {
     ${getTracingTryCatchStatement(
       sendRequestStatement,
       responseName,
-      isTracingEnabled
+      isTracingEnabled,
+      useCoreV2
+    )}
+  }`
+    : `const sendOperation = ${asyncKeyword} (args: coreClient.OperationArguments, spec: coreClient.OperationSpec) => {
+    ${getTracingTryCatchStatement(
+      sendRequestStatement,
+      responseName,
+      isTracingEnabled,
+      useCoreV2
     )}
   }`;
 
@@ -797,12 +883,20 @@ function writeMultiMediaTypeOperationBody(
   overloadParameterDeclarations: ParameterWithDescription[][],
   responseName: string,
   clientDetails: ClientDetails,
-  isInline = false
+  isInline = false,
+  useCoreV2: boolean
 ): void {
-  operationMethod.addStatements([
-    "let operationSpec: coreHttp.OperationSpec;",
-    "let operationArguments: coreHttp.OperationArguments;"
-  ]);
+  if (!useCoreV2) {
+    operationMethod.addStatements([
+      "let operationSpec: coreHttp.OperationSpec;",
+      "let operationArguments: coreHttp.OperationArguments;"
+    ]);
+  } else {
+    operationMethod.addStatements([
+      "let operationSpec: coreClient.OperationSpec;",
+      "let operationArguments: coreClient.OperationArguments;"
+    ]);
+  }
 
   // We need to use the contentType parameter to determine which spec to use.
   const requests = operation.requests;
@@ -869,7 +963,9 @@ function writeMultiMediaTypeOperationBody(
   }`
   ]);
 
-  const toOptionsBase = `coreHttp.operationOptionsToRequestOptionsBase(operationArguments.options || {})`;
+  const toOptionsBase = !useCoreV2
+    ? `coreHttp.operationOptionsToRequestOptionsBase(operationArguments.options || {})`
+    : `operationArguments.options || {}`;
 
   if (clientDetails.tracing) {
     const operationName = operationMethod.getName();
@@ -889,7 +985,9 @@ function writeMultiMediaTypeOperationBody(
       operationMethod,
       "operationSpec",
       clientDetails,
-      isInline
+      isInline,
+      "operationArguments",
+      useCoreV2
     );
   } else {
     const finalStateVia =
@@ -900,6 +998,7 @@ function writeMultiMediaTypeOperationBody(
       responseName,
       "operationSpec",
       operationMethod,
+      useCoreV2,
       finalStateVia,
       isInline,
       !!clientDetails.tracing
@@ -957,7 +1056,8 @@ export function addOperationSpecs(
   operationGroupDetails: OperationGroupDetails,
   file: SourceFile,
   parameters: ParameterDetails[],
-  hasMappers: boolean
+  hasMappers: boolean,
+  useCoreV2: boolean
 ): void {
   const hasXml = operationGroupDetails.operations.some(operation =>
     hasMediaType(operation, KnownMediaType.Xml)
@@ -972,11 +1072,11 @@ export function addOperationSpecs(
   file.addStatements("// Operation Specifications");
 
   if (hasXml) {
-    writeSerializer(hasMappers, file, SerializerKind.Xml);
+    writeSerializer(hasMappers, file, SerializerKind.Xml, useCoreV2);
   }
 
   if (hasJson || needsDefault) {
-    writeSerializer(hasMappers, file, SerializerKind.Json);
+    writeSerializer(hasMappers, file, SerializerKind.Json, useCoreV2);
   }
 
   operationGroupDetails.operations.forEach(operation => {
@@ -988,7 +1088,9 @@ export function addOperationSpecs(
         declarations: [
           {
             name: operationSpec.name,
-            type: "coreHttp.OperationSpec",
+            type: !useCoreV2
+              ? "coreHttp.OperationSpec"
+              : "coreClient.OperationSpec",
             initializer: writer => writeSpec(operationSpec, writer)
           }
         ]
@@ -1005,7 +1107,8 @@ enum SerializerKind {
 function writeSerializer(
   hasMappers: boolean,
   file: SourceFile,
-  kind: SerializerKind = SerializerKind.Json
+  kind: SerializerKind = SerializerKind.Json,
+  useCoreV2: boolean
 ) {
   const isXml = kind === SerializerKind.Xml;
   const mappers = hasMappers ? "Mappers" : "{}";
@@ -1015,7 +1118,9 @@ function writeSerializer(
     declarations: [
       {
         name,
-        initializer: `new coreHttp.Serializer(${mappers}, /* isXml */ ${isXml});`
+        initializer: !useCoreV2
+          ? `new coreHttp.Serializer(${mappers}, /* isXml */ ${isXml});`
+          : `coreClient.createSerializer(${mappers}, /* isXml */ ${isXml});`
       }
     ]
   });
@@ -1027,7 +1132,8 @@ function writeSerializer(
 function addImports(
   operationGroupDetails: OperationGroupDetails,
   operationGroupFile: SourceFile,
-  clientDetails: ClientDetails
+  clientDetails: ClientDetails,
+  useCoreV2: boolean
 ) {
   const { className, sourceFileName, mappers } = clientDetails;
 
@@ -1038,10 +1144,21 @@ function addImports(
     operationGroupFile
   );
 
-  operationGroupFile.addImportDeclaration({
-    namespaceImport: "coreHttp",
-    moduleSpecifier: "@azure/core-http"
-  });
+  if (!useCoreV2) {
+    operationGroupFile.addImportDeclaration({
+      namespaceImport: "coreHttp",
+      moduleSpecifier: "@azure/core-http"
+    });
+  } else {
+    operationGroupFile.addImportDeclaration({
+      namespaceImport: "coreClient",
+      moduleSpecifier: "@azure/core-client"
+    });
+    operationGroupFile.addImportDeclaration({
+      namespaceImport: "coreHttps",
+      moduleSpecifier: "@azure/core-https"
+    });
+  }
 
   if (mappers.length) {
     operationGroupFile.addImportDeclaration({

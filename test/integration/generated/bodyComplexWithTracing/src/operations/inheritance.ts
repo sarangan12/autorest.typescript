@@ -8,7 +8,8 @@
 
 import { CanonicalCode } from "@opentelemetry/api";
 import { createSpan } from "../tracing";
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { BodyComplexWithTracingContext } from "../bodyComplexWithTracingContext";
@@ -31,18 +32,15 @@ export class Inheritance {
    * @param options The options parameters.
    */
   async getValid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<InheritanceGetValidResponse> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-getValid",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { options },
         getValidOperationSpec
       );
       return result as InheritanceGetValidResponse;
@@ -66,22 +64,18 @@ export class Inheritance {
    */
   async putValid(
     complexBody: Siamese,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     const { span, updatedOptions } = createSpan(
       "BodyComplexWithTracing-putValid",
-      coreHttp.operationOptionsToRequestOptionsBase(options || {})
+      options || {}
     );
-    const operationArguments: coreHttp.OperationArguments = {
-      complexBody,
-      options: updatedOptions
-    };
     try {
       const result = await this.client.sendOperationRequest(
-        operationArguments,
+        { complexBody, options },
         putValidOperationSpec
       );
-      return result as coreHttp.RestResponse;
+      return result as void;
     } catch (error) {
       span.setStatus({
         code: CanonicalCode.UNKNOWN,
@@ -94,9 +88,9 @@ export class Inheritance {
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getValidOperationSpec: coreHttp.OperationSpec = {
+const getValidOperationSpec: coreClient.OperationSpec = {
   path: "/complex/inheritance/valid",
   httpMethod: "GET",
   responses: {
@@ -111,7 +105,7 @@ const getValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putValidOperationSpec: coreHttp.OperationSpec = {
+const putValidOperationSpec: coreClient.OperationSpec = {
   path: "/complex/inheritance/valid",
   httpMethod: "PUT",
   responses: {

@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { BodyStringClientContext } from "../bodyStringClientContext";
@@ -35,15 +36,12 @@ export class Enum {
    * @param options The options parameters.
    */
   getNotExpandable(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<EnumGetNotExpandableResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getNotExpandableOperationSpec
-    ) as Promise<EnumGetNotExpandableResponse>;
+    );
   }
 
   /**
@@ -53,16 +51,12 @@ export class Enum {
    */
   putNotExpandable(
     stringBody: Colors,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      stringBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { stringBody, options },
       putNotExpandableOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -70,15 +64,12 @@ export class Enum {
    * @param options The options parameters.
    */
   getReferenced(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<EnumGetReferencedResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getReferencedOperationSpec
-    ) as Promise<EnumGetReferencedResponse>;
+    );
   }
 
   /**
@@ -88,16 +79,12 @@ export class Enum {
    */
   putReferenced(
     enumStringBody: Colors,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      enumStringBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { enumStringBody, options },
       putReferencedOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -105,15 +92,12 @@ export class Enum {
    * @param options The options parameters.
    */
   getReferencedConstant(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<EnumGetReferencedConstantResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getReferencedConstantOperationSpec
-    ) as Promise<EnumGetReferencedConstantResponse>;
+    );
   }
 
   /**
@@ -123,22 +107,18 @@ export class Enum {
    */
   putReferencedConstant(
     enumStringBody: RefColorConstant,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      enumStringBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { enumStringBody, options },
       putReferencedConstantOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getNotExpandableOperationSpec: coreHttp.OperationSpec = {
+const getNotExpandableOperationSpec: coreClient.OperationSpec = {
   path: "/string/enum/notExpandable",
   httpMethod: "GET",
   responses: {
@@ -158,7 +138,7 @@ const getNotExpandableOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putNotExpandableOperationSpec: coreHttp.OperationSpec = {
+const putNotExpandableOperationSpec: coreClient.OperationSpec = {
   path: "/string/enum/notExpandable",
   httpMethod: "PUT",
   responses: {
@@ -173,7 +153,7 @@ const putNotExpandableOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getReferencedOperationSpec: coreHttp.OperationSpec = {
+const getReferencedOperationSpec: coreClient.OperationSpec = {
   path: "/string/enum/Referenced",
   httpMethod: "GET",
   responses: {
@@ -193,7 +173,7 @@ const getReferencedOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putReferencedOperationSpec: coreHttp.OperationSpec = {
+const putReferencedOperationSpec: coreClient.OperationSpec = {
   path: "/string/enum/Referenced",
   httpMethod: "PUT",
   responses: {
@@ -208,7 +188,7 @@ const putReferencedOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getReferencedConstantOperationSpec: coreHttp.OperationSpec = {
+const getReferencedConstantOperationSpec: coreClient.OperationSpec = {
   path: "/string/enum/ReferencedConstant",
   httpMethod: "GET",
   responses: {
@@ -223,7 +203,7 @@ const getReferencedConstantOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putReferencedConstantOperationSpec: coreHttp.OperationSpec = {
+const putReferencedConstantOperationSpec: coreClient.OperationSpec = {
   path: "/string/enum/ReferencedConstant",
   httpMethod: "PUT",
   responses: {

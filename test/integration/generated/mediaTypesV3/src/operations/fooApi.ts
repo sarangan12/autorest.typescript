@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Parameters from "../models/parameters";
 import { MediaTypesV3ClientContext } from "../mediaTypesV3ClientContext";
 import {
@@ -38,7 +39,7 @@ export class FooApi {
    */
   postSendOnDefault(
     contentType: "application/octet-stream",
-    data: coreHttp.HttpRequestBody,
+    data: coreHttps.RequestBodyType,
     options?: FooApiPostSendOnDefault$binaryOptionalParams
   ): Promise<FooApiPostSendOnDefaultResponse>;
   /**
@@ -60,13 +61,13 @@ export class FooApi {
     ...args:
       | [
           "application/octet-stream",
-          coreHttp.HttpRequestBody,
+          coreHttps.RequestBodyType,
           FooApiPostSendOnDefault$binaryOptionalParams?
         ]
       | ["text/plain", string, FooApiPostSendOnDefault$textOptionalParams?]
   ): Promise<FooApiPostSendOnDefaultResponse> {
-    let operationSpec: coreHttp.OperationSpec;
-    let operationArguments: coreHttp.OperationArguments;
+    let operationSpec: coreClient.OperationSpec;
+    let operationArguments: coreClient.OperationArguments;
     if (args[0] === "application/octet-stream") {
       operationSpec = postSendOnDefault$binaryOperationSpec;
       operationArguments = {
@@ -86,13 +87,8 @@ export class FooApi {
         `"contentType" must be a valid value but instead was "${args[0]}".`
       );
     }
-    operationArguments.options = coreHttp.operationOptionsToRequestOptionsBase(
-      operationArguments.options || {}
-    );
-    return this.client.sendOperationRequest(
-      operationArguments,
-      operationSpec
-    ) as Promise<FooApiPostSendOnDefaultResponse>;
+    operationArguments.options = operationArguments.options || {};
+    return this.client.sendOperationRequest(operationArguments, operationSpec);
   }
 
   /**
@@ -105,7 +101,7 @@ export class FooApi {
   postSend(
     thing: string,
     contentType: "application/octet-stream",
-    data: coreHttp.HttpRequestBody,
+    data: coreHttps.RequestBodyType,
     options?: FooApiPostSend$binaryOptionalParams
   ): Promise<FooApiPostSendResponse>;
   /**
@@ -130,13 +126,13 @@ export class FooApi {
       | [
           string,
           "application/octet-stream",
-          coreHttp.HttpRequestBody,
+          coreHttps.RequestBodyType,
           FooApiPostSend$binaryOptionalParams?
         ]
       | [string, "text/plain", string, FooApiPostSend$textOptionalParams?]
   ): Promise<FooApiPostSendResponse> {
-    let operationSpec: coreHttp.OperationSpec;
-    let operationArguments: coreHttp.OperationArguments;
+    let operationSpec: coreClient.OperationSpec;
+    let operationArguments: coreClient.OperationArguments;
     if (args[1] === "application/octet-stream") {
       operationSpec = postSend$binaryOperationSpec;
       operationArguments = {
@@ -158,19 +154,14 @@ export class FooApi {
         `"contentType" must be a valid value but instead was "${args[1]}".`
       );
     }
-    operationArguments.options = coreHttp.operationOptionsToRequestOptionsBase(
-      operationArguments.options || {}
-    );
-    return this.client.sendOperationRequest(
-      operationArguments,
-      operationSpec
-    ) as Promise<FooApiPostSendResponse>;
+    operationArguments.options = operationArguments.options || {};
+    return this.client.sendOperationRequest(operationArguments, operationSpec);
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer({}, /* isXml */ false);
+const serializer = coreClient.createSerializer({}, /* isXml */ false);
 
-const postSendOnDefault$binaryOperationSpec: coreHttp.OperationSpec = {
+const postSendOnDefault$binaryOperationSpec: coreClient.OperationSpec = {
   path: "/foo/api/v1",
   httpMethod: "POST",
   responses: {
@@ -186,7 +177,7 @@ const postSendOnDefault$binaryOperationSpec: coreHttp.OperationSpec = {
   mediaType: "binary",
   serializer
 };
-const postSendOnDefault$textOperationSpec: coreHttp.OperationSpec = {
+const postSendOnDefault$textOperationSpec: coreClient.OperationSpec = {
   path: "/foo/api/v1",
   httpMethod: "POST",
   responses: {
@@ -202,7 +193,7 @@ const postSendOnDefault$textOperationSpec: coreHttp.OperationSpec = {
   mediaType: "text",
   serializer
 };
-const postSend$binaryOperationSpec: coreHttp.OperationSpec = {
+const postSend$binaryOperationSpec: coreClient.OperationSpec = {
   path: "/foo/api/v1/things/{thing}",
   httpMethod: "POST",
   responses: {
@@ -218,7 +209,7 @@ const postSend$binaryOperationSpec: coreHttp.OperationSpec = {
   mediaType: "binary",
   serializer
 };
-const postSend$textOperationSpec: coreHttp.OperationSpec = {
+const postSend$textOperationSpec: coreClient.OperationSpec = {
   path: "/foo/api/v1/things/{thing}",
   httpMethod: "POST",
   responses: {

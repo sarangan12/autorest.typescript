@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 
 export interface ErrorModel {
   status?: number;
@@ -18,140 +19,140 @@ export type UriColor = "red color" | "green color" | "blue color";
 
 /** Optional parameters. */
 export interface QueriesGetBooleanNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** null boolean value */
   boolQuery?: boolean;
 }
 
 /** Optional parameters. */
 export interface QueriesGetIntNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** null integer value */
   intQuery?: number;
 }
 
 /** Optional parameters. */
 export interface QueriesGetLongNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** null 64 bit integer value */
   longQuery?: number;
 }
 
 /** Optional parameters. */
 export interface QueriesFloatNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** null numeric value */
   floatQuery?: number;
 }
 
 /** Optional parameters. */
 export interface QueriesDoubleNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** null numeric value */
   doubleQuery?: number;
 }
 
 /** Optional parameters. */
 export interface QueriesStringNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** null string value */
   stringQuery?: string;
 }
 
 /** Optional parameters. */
 export interface QueriesEnumValidOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** 'green color' enum value */
   enumQuery?: UriColor;
 }
 
 /** Optional parameters. */
 export interface QueriesEnumNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** null string value */
   enumQuery?: UriColor;
 }
 
 /** Optional parameters. */
 export interface QueriesByteMultiByteOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array */
   byteQuery?: Uint8Array;
 }
 
 /** Optional parameters. */
 export interface QueriesByteNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** null as byte array (no query parameters in uri) */
   byteQuery?: Uint8Array;
 }
 
 /** Optional parameters. */
 export interface QueriesDateNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** null as date (no query parameters in uri) */
   dateQuery?: Date;
 }
 
 /** Optional parameters. */
 export interface QueriesDateTimeNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** null as date-time (no query parameters) */
   dateTimeQuery?: Date;
 }
 
 /** Optional parameters. */
 export interface QueriesArrayStringCsvValidOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format */
   arrayQuery?: string[];
 }
 
 /** Optional parameters. */
 export interface QueriesArrayStringCsvNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** a null array of string using the csv-array format */
   arrayQuery?: string[];
 }
 
 /** Optional parameters. */
 export interface QueriesArrayStringCsvEmptyOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** an empty array [] of string using the csv-array format */
   arrayQuery?: string[];
 }
 
 /** Optional parameters. */
 export interface QueriesArrayStringNoCollectionFormatEmptyOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. */
   arrayQuery?: string[];
 }
 
 /** Optional parameters. */
 export interface QueriesArrayStringSsvValidOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the ssv-array format */
   arrayQuery?: string[];
 }
 
 /** Optional parameters. */
 export interface QueriesArrayStringTsvValidOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the tsv-array format */
   arrayQuery?: string[];
 }
 
 /** Optional parameters. */
 export interface QueriesArrayStringPipesValidOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the pipes-array format */
   arrayQuery?: string[];
 }
 
 /** Optional parameters. */
 export interface PathItemsGetAllWithValuesOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** A string value 'pathItemStringQuery' that appears as a query parameter */
   pathItemStringQuery?: string;
   /** should contain value 'localStringQuery' */
@@ -160,7 +161,7 @@ export interface PathItemsGetAllWithValuesOptionalParams
 
 /** Optional parameters. */
 export interface PathItemsGetGlobalQueryNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** A string value 'pathItemStringQuery' that appears as a query parameter */
   pathItemStringQuery?: string;
   /** should contain value 'localStringQuery' */
@@ -169,7 +170,7 @@ export interface PathItemsGetGlobalQueryNullOptionalParams
 
 /** Optional parameters. */
 export interface PathItemsGetGlobalAndLocalQueryNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** A string value 'pathItemStringQuery' that appears as a query parameter */
   pathItemStringQuery?: string;
   /** should contain null value */
@@ -178,7 +179,7 @@ export interface PathItemsGetGlobalAndLocalQueryNullOptionalParams
 
 /** Optional parameters. */
 export interface PathItemsGetLocalPathItemQueryNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** should contain value null */
   pathItemStringQuery?: string;
   /** should contain value null */
@@ -186,7 +187,8 @@ export interface PathItemsGetLocalPathItemQueryNullOptionalParams
 }
 
 /** Optional parameters. */
-export interface UrlClientOptionalParams extends coreHttp.ServiceClientOptions {
+export interface UrlClientOptionalParams
+  extends coreClient.ServiceClientOptions {
   /** server parameter */
   $host?: string;
   /** should contain value null */

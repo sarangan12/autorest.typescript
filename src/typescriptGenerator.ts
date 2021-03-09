@@ -77,27 +77,34 @@ export async function generateTypeScriptLibrary(
     (await host.GetValue("license-header")) || false;
 
   const hideClients: boolean = (await host.GetValue("hide-clients")) || false;
+  const useCoreV2: boolean = (await host.GetValue("use-core-v2")) || false;
 
   // Skip metadata generation if `generate-metadata` is explicitly false
   if ((await host.GetValue("generate-metadata")) !== false) {
-    generatePackageJson(clientDetails, packageDetails, project);
+    generatePackageJson(clientDetails, packageDetails, project, useCoreV2);
     generateLicenseFile(project, shouldGenerateLicense);
     generateReadmeFile(clientDetails, packageDetails, project);
     generateTsConfig(project);
-    generateRollupConfig(clientDetails, packageDetails, project);
+    generateRollupConfig(clientDetails, packageDetails, project, useCoreV2);
     generateApiExtractorConfig(clientDetails, project);
   }
 
-  generateClient(clientDetails, project, hideClients);
-  generateClientContext(clientDetails, packageDetails, project, hideClients);
-  generateModels(clientDetails, project);
+  generateClient(clientDetails, project, hideClients, useCoreV2);
+  generateClientContext(
+    clientDetails,
+    packageDetails,
+    project,
+    hideClients,
+    useCoreV2
+  );
+  generateModels(clientDetails, project, useCoreV2);
 
-  generateMappers(clientDetails, project);
-  generateOperations(clientDetails, project);
-  generateParameters(clientDetails, project);
+  generateMappers(clientDetails, project, useCoreV2);
+  generateOperations(clientDetails, project, useCoreV2);
+  generateParameters(clientDetails, project, useCoreV2);
   generateIndexFile(clientDetails, project);
-  await generateLROFiles(clientDetails, project);
-  generateTracingFile(clientDetails, project);
+  await generateLROFiles(clientDetails, project, useCoreV2);
+  generateTracingFile(clientDetails, project, useCoreV2);
 
   const licenseHeader = `
 /*

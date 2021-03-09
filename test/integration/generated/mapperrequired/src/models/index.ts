@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 
 /** The certificate issuer update parameters. */
 export interface CertificateIssuerUpdateParameters {
@@ -16,7 +17,7 @@ export interface CertificateIssuerUpdateParameters {
 
 /** Optional parameters. */
 export interface MapperRequiredClientUpdateCertificateIssuerOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** The issuer provider. */
   provider?: string;
 }
@@ -25,20 +26,11 @@ export interface MapperRequiredClientUpdateCertificateIssuerOptionalParams
 export type MapperRequiredClientUpdateCertificateIssuerResponse = {
   /** The parsed response body. */
   body: string;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: string;
-  };
 };
 
 /** Optional parameters. */
 export interface MapperRequiredClientOptionalParams
-  extends coreHttp.ServiceClientOptions {
+  extends coreClient.ServiceClientOptions {
   /** Overrides client endpoint. */
   endpoint?: string;
 }

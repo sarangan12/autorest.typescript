@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 
 export interface ErrorModel {
   status?: number;
@@ -17,65 +18,29 @@ export interface ErrorModel {
 export type BoolGetTrueResponse = {
   /** The parsed response body. */
   body: boolean;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: boolean;
-  };
 };
 
 /** Contains response data for the getFalse operation. */
 export type BoolGetFalseResponse = {
   /** The parsed response body. */
   body: boolean;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: boolean;
-  };
 };
 
 /** Contains response data for the getNull operation. */
 export type BoolGetNullResponse = {
   /** The parsed response body. */
   body: boolean;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: boolean;
-  };
 };
 
 /** Contains response data for the getInvalid operation. */
 export type BoolGetInvalidResponse = {
   /** The parsed response body. */
   body: boolean;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: boolean;
-  };
 };
 
 /** Optional parameters. */
 export interface BodyBooleanClientOptionalParams
-  extends coreHttp.ServiceClientOptions {
+  extends coreClient.ServiceClientOptions {
   /** server parameter */
   $host?: string;
   /** Overrides client endpoint. */

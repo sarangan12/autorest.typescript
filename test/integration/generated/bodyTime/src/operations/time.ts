@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { BodyTimeClientContext } from "../bodyTimeClientContext";
@@ -28,14 +29,8 @@ export class Time {
    * Get time value "11:34:56"
    * @param options The options parameters.
    */
-  get(options?: coreHttp.OperationOptions): Promise<TimeGetResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      getOperationSpec
-    ) as Promise<TimeGetResponse>;
+  get(options?: coreClient.OperationOptions): Promise<TimeGetResponse> {
+    return this.client.sendOperationRequest({ options }, getOperationSpec);
   }
 
   /**
@@ -47,22 +42,18 @@ export class Time {
    */
   put(
     timeBody: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<TimePutResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      timeBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { timeBody, options },
       putOperationSpec
-    ) as Promise<TimePutResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getOperationSpec: coreHttp.OperationSpec = {
+const getOperationSpec: coreClient.OperationSpec = {
   path: "/time/get",
   httpMethod: "GET",
   responses: {
@@ -77,7 +68,7 @@ const getOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putOperationSpec: coreHttp.OperationSpec = {
+const putOperationSpec: coreClient.OperationSpec = {
   path: "/time/put",
   httpMethod: "PUT",
   responses: {

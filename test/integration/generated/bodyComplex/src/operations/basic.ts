@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { BodyComplexClientContext } from "../bodyComplexClientContext";
@@ -36,15 +37,9 @@ export class Basic {
    * @param options The options parameters.
    */
   getValid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<BasicGetValidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      getValidOperationSpec
-    ) as Promise<BasicGetValidResponse>;
+    return this.client.sendOperationRequest({ options }, getValidOperationSpec);
   }
 
   /**
@@ -54,16 +49,12 @@ export class Basic {
    */
   putValid(
     complexBody: BasicModel,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      complexBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { complexBody, options },
       putValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -71,15 +62,12 @@ export class Basic {
    * @param options The options parameters.
    */
   getInvalid(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<BasicGetInvalidResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getInvalidOperationSpec
-    ) as Promise<BasicGetInvalidResponse>;
+    );
   }
 
   /**
@@ -87,29 +75,19 @@ export class Basic {
    * @param options The options parameters.
    */
   getEmpty(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<BasicGetEmptyResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      getEmptyOperationSpec
-    ) as Promise<BasicGetEmptyResponse>;
+    return this.client.sendOperationRequest({ options }, getEmptyOperationSpec);
   }
 
   /**
    * Get a basic complex type whose properties are null
    * @param options The options parameters.
    */
-  getNull(options?: coreHttp.OperationOptions): Promise<BasicGetNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      getNullOperationSpec
-    ) as Promise<BasicGetNullResponse>;
+  getNull(
+    options?: coreClient.OperationOptions
+  ): Promise<BasicGetNullResponse> {
+    return this.client.sendOperationRequest({ options }, getNullOperationSpec);
   }
 
   /**
@@ -117,21 +95,18 @@ export class Basic {
    * @param options The options parameters.
    */
   getNotProvided(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<BasicGetNotProvidedResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getNotProvidedOperationSpec
-    ) as Promise<BasicGetNotProvidedResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getValidOperationSpec: coreHttp.OperationSpec = {
+const getValidOperationSpec: coreClient.OperationSpec = {
   path: "/complex/basic/valid",
   httpMethod: "GET",
   responses: {
@@ -146,7 +121,7 @@ const getValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putValidOperationSpec: coreHttp.OperationSpec = {
+const putValidOperationSpec: coreClient.OperationSpec = {
   path: "/complex/basic/valid",
   httpMethod: "PUT",
   responses: {
@@ -162,7 +137,7 @@ const putValidOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getInvalidOperationSpec: coreHttp.OperationSpec = {
+const getInvalidOperationSpec: coreClient.OperationSpec = {
   path: "/complex/basic/invalid",
   httpMethod: "GET",
   responses: {
@@ -177,7 +152,7 @@ const getInvalidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getEmptyOperationSpec: coreHttp.OperationSpec = {
+const getEmptyOperationSpec: coreClient.OperationSpec = {
   path: "/complex/basic/empty",
   httpMethod: "GET",
   responses: {
@@ -192,7 +167,7 @@ const getEmptyOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getNullOperationSpec: coreHttp.OperationSpec = {
+const getNullOperationSpec: coreClient.OperationSpec = {
   path: "/complex/basic/null",
   httpMethod: "GET",
   responses: {
@@ -207,7 +182,7 @@ const getNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getNotProvidedOperationSpec: coreHttp.OperationSpec = {
+const getNotProvidedOperationSpec: coreClient.OperationSpec = {
   path: "/complex/basic/notprovided",
   httpMethod: "GET",
   responses: {

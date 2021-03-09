@@ -99,7 +99,8 @@ export function writeAsyncIterators(
   operationGroupDetails: OperationGroupDetails,
   clientDetails: ClientDetails,
   operationGroupClass: ClassDeclaration,
-  importedModels: Set<string>
+  importedModels: Set<string>,
+  useCoreV2: boolean
 ) {
   if (clientDetails.options.disablePagingAsyncIterators) {
     return;
@@ -154,7 +155,8 @@ export function writeAsyncIterators(
           nextOperation,
           clientDetails.parameters,
           importedModels,
-          operationGroupClass
+          operationGroupClass,
+          useCoreV2
         ).baseMethodParameters.map(parameter => {
           if (parameter.name === "nextLink") {
             return { ...parameter, hasQuestionToken: true };
@@ -170,7 +172,8 @@ export function writeAsyncIterators(
         operation,
         clientDetails.parameters,
         importedModels,
-        operationGroupClass
+        operationGroupClass,
+        useCoreV2
       );
 
       // Build an object with all the information about the paging methods

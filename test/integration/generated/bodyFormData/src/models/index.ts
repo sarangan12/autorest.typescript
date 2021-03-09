@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 
 export interface ErrorModel {
   status?: number;
@@ -15,14 +16,14 @@ export interface ErrorModel {
 
 export interface Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema {
   /** File to upload. */
-  fileContent: coreHttp.HttpRequestBody;
+  fileContent: coreHttps.RequestBodyType;
   /** File name to upload. Name has to be spelled exactly as written here. */
   fileName: string;
 }
 
 export interface Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema {
   /** Files to upload. */
-  fileContent: coreHttp.HttpRequestBody[];
+  fileContent: coreHttps.RequestBodyType[];
 }
 
 /** Contains response data for the uploadFile operation. */
@@ -41,9 +42,6 @@ export type FormdataUploadFileResponse = {
    * Always `undefined` in the browser.
    */
   readableStreamBody?: NodeJS.ReadableStream;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse;
 };
 
 /** Contains response data for the uploadFileViaBody operation. */
@@ -62,9 +60,6 @@ export type FormdataUploadFileViaBodyResponse = {
    * Always `undefined` in the browser.
    */
   readableStreamBody?: NodeJS.ReadableStream;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse;
 };
 
 /** Contains response data for the uploadFiles operation. */
@@ -83,14 +78,11 @@ export type FormdataUploadFilesResponse = {
    * Always `undefined` in the browser.
    */
   readableStreamBody?: NodeJS.ReadableStream;
-
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse;
 };
 
 /** Optional parameters. */
 export interface BodyFormDataClientOptionalParams
-  extends coreHttp.ServiceClientOptions {
+  extends coreClient.ServiceClientOptions {
   /** server parameter */
   $host?: string;
   /** Overrides client endpoint. */

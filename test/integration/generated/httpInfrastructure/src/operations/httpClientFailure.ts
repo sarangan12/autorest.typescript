@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { HttpInfrastructureClientContext } from "../httpInfrastructureClientContext";
@@ -27,388 +28,232 @@ export class HttpClientFailure {
    * Return 400 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  head400(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      head400OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  head400(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, head400OperationSpec);
   }
 
   /**
    * Return 400 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  get400(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      get400OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  get400(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, get400OperationSpec);
   }
 
   /**
    * Return 400 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  options400(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  options400(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       options400OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
    * Return 400 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  put400(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      put400OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  put400(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, put400OperationSpec);
   }
 
   /**
    * Return 400 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  patch400(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      patch400OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  patch400(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, patch400OperationSpec);
   }
 
   /**
    * Return 400 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  post400(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      post400OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  post400(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, post400OperationSpec);
   }
 
   /**
    * Return 400 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  delete400(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  delete400(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       delete400OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
    * Return 401 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  head401(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      head401OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  head401(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, head401OperationSpec);
   }
 
   /**
    * Return 402 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  get402(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      get402OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  get402(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, get402OperationSpec);
   }
 
   /**
    * Return 403 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  options403(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  options403(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       options403OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
    * Return 403 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  get403(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      get403OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  get403(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, get403OperationSpec);
   }
 
   /**
    * Return 404 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  put404(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      put404OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  put404(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, put404OperationSpec);
   }
 
   /**
    * Return 405 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  patch405(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      patch405OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  patch405(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, patch405OperationSpec);
   }
 
   /**
    * Return 406 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  post406(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      post406OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  post406(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, post406OperationSpec);
   }
 
   /**
    * Return 407 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  delete407(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  delete407(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       delete407OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
    * Return 409 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  put409(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      put409OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  put409(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, put409OperationSpec);
   }
 
   /**
    * Return 410 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  head410(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      head410OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  head410(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, head410OperationSpec);
   }
 
   /**
    * Return 411 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  get411(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      get411OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  get411(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, get411OperationSpec);
   }
 
   /**
    * Return 412 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  options412(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  options412(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       options412OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
    * Return 412 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  get412(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      get412OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  get412(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, get412OperationSpec);
   }
 
   /**
    * Return 413 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  put413(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      put413OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  put413(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, put413OperationSpec);
   }
 
   /**
    * Return 414 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  patch414(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      patch414OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  patch414(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, patch414OperationSpec);
   }
 
   /**
    * Return 415 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  post415(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      post415OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  post415(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, post415OperationSpec);
   }
 
   /**
    * Return 416 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  get416(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      get416OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  get416(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, get416OperationSpec);
   }
 
   /**
    * Return 417 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  delete417(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  delete417(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       delete417OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
    * Return 429 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  head429(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      head429OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  head429(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, head429OperationSpec);
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const head400OperationSpec: coreHttp.OperationSpec = {
+const head400OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/400",
   httpMethod: "HEAD",
   responses: {
@@ -420,7 +265,7 @@ const head400OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const get400OperationSpec: coreHttp.OperationSpec = {
+const get400OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/400",
   httpMethod: "GET",
   responses: {
@@ -432,7 +277,7 @@ const get400OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const options400OperationSpec: coreHttp.OperationSpec = {
+const options400OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/400",
   httpMethod: "OPTIONS",
   responses: {
@@ -444,7 +289,7 @@ const options400OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const put400OperationSpec: coreHttp.OperationSpec = {
+const put400OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/400",
   httpMethod: "PUT",
   responses: {
@@ -458,7 +303,7 @@ const put400OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const patch400OperationSpec: coreHttp.OperationSpec = {
+const patch400OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/400",
   httpMethod: "PATCH",
   responses: {
@@ -472,7 +317,7 @@ const patch400OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const post400OperationSpec: coreHttp.OperationSpec = {
+const post400OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/400",
   httpMethod: "POST",
   responses: {
@@ -486,7 +331,7 @@ const post400OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const delete400OperationSpec: coreHttp.OperationSpec = {
+const delete400OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/400",
   httpMethod: "DELETE",
   responses: {
@@ -500,7 +345,7 @@ const delete400OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const head401OperationSpec: coreHttp.OperationSpec = {
+const head401OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/401",
   httpMethod: "HEAD",
   responses: {
@@ -512,7 +357,7 @@ const head401OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const get402OperationSpec: coreHttp.OperationSpec = {
+const get402OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/402",
   httpMethod: "GET",
   responses: {
@@ -524,7 +369,7 @@ const get402OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const options403OperationSpec: coreHttp.OperationSpec = {
+const options403OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/403",
   httpMethod: "OPTIONS",
   responses: {
@@ -536,7 +381,7 @@ const options403OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const get403OperationSpec: coreHttp.OperationSpec = {
+const get403OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/403",
   httpMethod: "GET",
   responses: {
@@ -548,7 +393,7 @@ const get403OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const put404OperationSpec: coreHttp.OperationSpec = {
+const put404OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/404",
   httpMethod: "PUT",
   responses: {
@@ -562,7 +407,7 @@ const put404OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const patch405OperationSpec: coreHttp.OperationSpec = {
+const patch405OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/405",
   httpMethod: "PATCH",
   responses: {
@@ -576,7 +421,7 @@ const patch405OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const post406OperationSpec: coreHttp.OperationSpec = {
+const post406OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/406",
   httpMethod: "POST",
   responses: {
@@ -590,7 +435,7 @@ const post406OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const delete407OperationSpec: coreHttp.OperationSpec = {
+const delete407OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/407",
   httpMethod: "DELETE",
   responses: {
@@ -604,7 +449,7 @@ const delete407OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const put409OperationSpec: coreHttp.OperationSpec = {
+const put409OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/409",
   httpMethod: "PUT",
   responses: {
@@ -618,7 +463,7 @@ const put409OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const head410OperationSpec: coreHttp.OperationSpec = {
+const head410OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/410",
   httpMethod: "HEAD",
   responses: {
@@ -630,7 +475,7 @@ const head410OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const get411OperationSpec: coreHttp.OperationSpec = {
+const get411OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/411",
   httpMethod: "GET",
   responses: {
@@ -642,7 +487,7 @@ const get411OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const options412OperationSpec: coreHttp.OperationSpec = {
+const options412OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/412",
   httpMethod: "OPTIONS",
   responses: {
@@ -654,7 +499,7 @@ const options412OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const get412OperationSpec: coreHttp.OperationSpec = {
+const get412OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/412",
   httpMethod: "GET",
   responses: {
@@ -666,7 +511,7 @@ const get412OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const put413OperationSpec: coreHttp.OperationSpec = {
+const put413OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/413",
   httpMethod: "PUT",
   responses: {
@@ -680,7 +525,7 @@ const put413OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const patch414OperationSpec: coreHttp.OperationSpec = {
+const patch414OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/414",
   httpMethod: "PATCH",
   responses: {
@@ -694,7 +539,7 @@ const patch414OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const post415OperationSpec: coreHttp.OperationSpec = {
+const post415OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/415",
   httpMethod: "POST",
   responses: {
@@ -708,7 +553,7 @@ const post415OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const get416OperationSpec: coreHttp.OperationSpec = {
+const get416OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/416",
   httpMethod: "GET",
   responses: {
@@ -720,7 +565,7 @@ const get416OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const delete417OperationSpec: coreHttp.OperationSpec = {
+const delete417OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/417",
   httpMethod: "DELETE",
   responses: {
@@ -734,7 +579,7 @@ const delete417OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const head429OperationSpec: coreHttp.OperationSpec = {
+const head429OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/client/429",
   httpMethod: "HEAD",
   responses: {

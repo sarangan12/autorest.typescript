@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Parameters from "../models/parameters";
 import { NonStringEnumClientContext } from "../nonStringEnumClientContext";
 import {
@@ -32,33 +33,21 @@ export class Float {
    * @param options The options parameters.
    */
   put(options?: FloatPutOptionalParams): Promise<FloatPutResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      putOperationSpec
-    ) as Promise<FloatPutResponse>;
+    return this.client.sendOperationRequest({ options }, putOperationSpec);
   }
 
   /**
    * Get a float enum
    * @param options The options parameters.
    */
-  get(options?: coreHttp.OperationOptions): Promise<FloatGetResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      getOperationSpec
-    ) as Promise<FloatGetResponse>;
+  get(options?: coreClient.OperationOptions): Promise<FloatGetResponse> {
+    return this.client.sendOperationRequest({ options }, getOperationSpec);
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer({}, /* isXml */ false);
+const serializer = coreClient.createSerializer({}, /* isXml */ false);
 
-const putOperationSpec: coreHttp.OperationSpec = {
+const putOperationSpec: coreClient.OperationSpec = {
   path: "/nonStringEnums/float/put",
   httpMethod: "PUT",
   responses: {
@@ -72,7 +61,7 @@ const putOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getOperationSpec: coreHttp.OperationSpec = {
+const getOperationSpec: coreClient.OperationSpec = {
   path: "/nonStringEnums/float/get",
   httpMethod: "GET",
   responses: {

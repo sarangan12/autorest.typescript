@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { HttpInfrastructureClientContext } from "../httpInfrastructureClientContext";
@@ -27,64 +28,41 @@ export class HttpServerFailure {
    * Return 501 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  head501(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      head501OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  head501(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, head501OperationSpec);
   }
 
   /**
    * Return 501 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  get501(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      get501OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  get501(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, get501OperationSpec);
   }
 
   /**
    * Return 505 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  post505(options?: coreHttp.OperationOptions): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      post505OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+  post505(options?: coreClient.OperationOptions): Promise<void> {
+    return this.client.sendOperationRequest({ options }, post505OperationSpec);
   }
 
   /**
    * Return 505 status code - should be represented in the client as an error
    * @param options The options parameters.
    */
-  delete505(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  delete505(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       delete505OperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const head501OperationSpec: coreHttp.OperationSpec = {
+const head501OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/server/501",
   httpMethod: "HEAD",
   responses: {
@@ -96,7 +74,7 @@ const head501OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const get501OperationSpec: coreHttp.OperationSpec = {
+const get501OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/server/501",
   httpMethod: "GET",
   responses: {
@@ -108,7 +86,7 @@ const get501OperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const post505OperationSpec: coreHttp.OperationSpec = {
+const post505OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/server/505",
   httpMethod: "POST",
   responses: {
@@ -122,7 +100,7 @@ const post505OperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const delete505OperationSpec: coreHttp.OperationSpec = {
+const delete505OperationSpec: coreClient.OperationSpec = {
   path: "/http/failure/server/505",
   httpMethod: "DELETE",
   responses: {

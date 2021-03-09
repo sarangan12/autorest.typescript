@@ -63,7 +63,8 @@ export function getAdditionalProperties(
  */
 export function getTypeForSchema(
   schema: Schema,
-  isNullable: boolean = false
+  isNullable: boolean = false,
+  useCoreV2: boolean = false
 ): TypeDetails {
   let typeName: string = "";
   let usedModels: string[] = [];
@@ -77,7 +78,8 @@ export function getTypeForSchema(
       const arraySchema = schema as ArraySchema;
       const itemsType = getTypeForSchema(
         arraySchema.elementType,
-        arraySchema.nullableItems
+        arraySchema.nullableItems,
+        useCoreV2
       );
       const itemsName = itemsType.typeName;
       kind = itemsType.kind;
@@ -96,7 +98,9 @@ export function getTypeForSchema(
       typeName = "boolean";
       break;
     case SchemaType.Binary:
-      typeName = "coreHttp.HttpRequestBody";
+      typeName = !useCoreV2
+        ? "coreHttp.HttpRequestBody"
+        : "coreHttps.RequestBodyType";
       break;
     case SchemaType.ByteArray:
       typeName = "Uint8Array";

@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { BodyDateClientContext } from "../bodyDateClientContext";
@@ -35,14 +36,8 @@ export class DateOperations {
    * Get null date value
    * @param options The options parameters.
    */
-  getNull(options?: coreHttp.OperationOptions): Promise<DateGetNullResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
-    return this.client.sendOperationRequest(
-      operationArguments,
-      getNullOperationSpec
-    ) as Promise<DateGetNullResponse>;
+  getNull(options?: coreClient.OperationOptions): Promise<DateGetNullResponse> {
+    return this.client.sendOperationRequest({ options }, getNullOperationSpec);
   }
 
   /**
@@ -50,15 +45,12 @@ export class DateOperations {
    * @param options The options parameters.
    */
   getInvalidDate(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DateGetInvalidDateResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getInvalidDateOperationSpec
-    ) as Promise<DateGetInvalidDateResponse>;
+    );
   }
 
   /**
@@ -66,15 +58,12 @@ export class DateOperations {
    * @param options The options parameters.
    */
   getOverflowDate(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DateGetOverflowDateResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getOverflowDateOperationSpec
-    ) as Promise<DateGetOverflowDateResponse>;
+    );
   }
 
   /**
@@ -82,15 +71,12 @@ export class DateOperations {
    * @param options The options parameters.
    */
   getUnderflowDate(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DateGetUnderflowDateResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getUnderflowDateOperationSpec
-    ) as Promise<DateGetUnderflowDateResponse>;
+    );
   }
 
   /**
@@ -100,16 +86,12 @@ export class DateOperations {
    */
   putMaxDate(
     dateBody: Date,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      dateBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { dateBody, options },
       putMaxDateOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -117,15 +99,12 @@ export class DateOperations {
    * @param options The options parameters.
    */
   getMaxDate(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DateGetMaxDateResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getMaxDateOperationSpec
-    ) as Promise<DateGetMaxDateResponse>;
+    );
   }
 
   /**
@@ -135,16 +114,12 @@ export class DateOperations {
    */
   putMinDate(
     dateBody: Date,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      dateBody,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { dateBody, options },
       putMinDateOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -152,21 +127,18 @@ export class DateOperations {
    * @param options The options parameters.
    */
   getMinDate(
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<DateGetMinDateResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getMinDateOperationSpec
-    ) as Promise<DateGetMinDateResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getNullOperationSpec: coreHttp.OperationSpec = {
+const getNullOperationSpec: coreClient.OperationSpec = {
   path: "/date/null",
   httpMethod: "GET",
   responses: {
@@ -181,7 +153,7 @@ const getNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getInvalidDateOperationSpec: coreHttp.OperationSpec = {
+const getInvalidDateOperationSpec: coreClient.OperationSpec = {
   path: "/date/invaliddate",
   httpMethod: "GET",
   responses: {
@@ -196,7 +168,7 @@ const getInvalidDateOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getOverflowDateOperationSpec: coreHttp.OperationSpec = {
+const getOverflowDateOperationSpec: coreClient.OperationSpec = {
   path: "/date/overflowdate",
   httpMethod: "GET",
   responses: {
@@ -211,7 +183,7 @@ const getOverflowDateOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getUnderflowDateOperationSpec: coreHttp.OperationSpec = {
+const getUnderflowDateOperationSpec: coreClient.OperationSpec = {
   path: "/date/underflowdate",
   httpMethod: "GET",
   responses: {
@@ -226,7 +198,7 @@ const getUnderflowDateOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putMaxDateOperationSpec: coreHttp.OperationSpec = {
+const putMaxDateOperationSpec: coreClient.OperationSpec = {
   path: "/date/max",
   httpMethod: "PUT",
   responses: {
@@ -241,7 +213,7 @@ const putMaxDateOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getMaxDateOperationSpec: coreHttp.OperationSpec = {
+const getMaxDateOperationSpec: coreClient.OperationSpec = {
   path: "/date/max",
   httpMethod: "GET",
   responses: {
@@ -256,7 +228,7 @@ const getMaxDateOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const putMinDateOperationSpec: coreHttp.OperationSpec = {
+const putMinDateOperationSpec: coreClient.OperationSpec = {
   path: "/date/min",
   httpMethod: "PUT",
   responses: {
@@ -271,7 +243,7 @@ const putMinDateOperationSpec: coreHttp.OperationSpec = {
   mediaType: "json",
   serializer
 };
-const getMinDateOperationSpec: coreHttp.OperationSpec = {
+const getMinDateOperationSpec: coreClient.OperationSpec = {
   path: "/date/min",
   httpMethod: "GET",
   responses: {
