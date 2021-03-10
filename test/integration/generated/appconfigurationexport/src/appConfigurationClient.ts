@@ -7,6 +7,7 @@
  */
 
 import * as coreClient from "@azure/core-client";
+import "@azure/core-paging";
 import { PagedAsyncIterableIterator } from "@azure/core-paging";
 import * as Parameters from "./models/parameters";
 import * as Mappers from "./models/mappers";
@@ -54,6 +55,7 @@ import {
   AppConfigurationClientGetRevisionsNextResponse
 } from "./models";
 
+/// <reference lib="esnext.asynciterable" />
 /** @internal */
 export class AppConfigurationClient extends AppConfigurationClientContext {
   /**

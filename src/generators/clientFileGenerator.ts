@@ -23,7 +23,7 @@ import { formatJsDocParam } from "./utils/parameterUtils";
 import { shouldImportParameters } from "./utils/importUtils";
 import { getAllModelsNames } from "./utils/responseTypeUtils";
 import { addTracingOperationImports } from "./utils/tracingUtils";
-import { addPagingImports } from "./utils/pagingOperations";
+import { addPagingEsNextRef, addPagingImports } from "./utils/pagingOperations";
 
 type OperationDeclarationDetails = { name: string; typeName: string };
 
@@ -89,12 +89,12 @@ export function generateClient(
       }
     }
   }
-
   const flattenedInlineOperations = inlineOperations.reduce<OperationDetails[]>(
     (acc, curr) => (acc = [...acc, ...curr.operations]),
     []
   );
 
+  addPagingEsNextRef(flattenedInlineOperations, clientDetails, clientFile);
   addPagingImports(flattenedInlineOperations, clientDetails, clientFile);
 
   const hasLRO = inlineOperations.some(og => og.operations.some(o => o.isLRO));

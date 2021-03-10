@@ -68,6 +68,7 @@ export class FooApi {
   ): Promise<FooApiPostSendOnDefaultResponse> {
     let operationSpec: coreClient.OperationSpec;
     let operationArguments: coreClient.OperationArguments;
+    let options;
     if (args[0] === "application/octet-stream") {
       operationSpec = postSendOnDefault$binaryOperationSpec;
       operationArguments = {
@@ -75,6 +76,7 @@ export class FooApi {
         data: args[1],
         options: args[2]
       };
+      options = args[2];
     } else if (args[0] === "text/plain") {
       operationSpec = postSendOnDefault$textOperationSpec;
       operationArguments = {
@@ -82,12 +84,13 @@ export class FooApi {
         data: args[1],
         options: args[2]
       };
+      options = args[2];
     } else {
       throw new TypeError(
         `"contentType" must be a valid value but instead was "${args[0]}".`
       );
     }
-    operationArguments.options = operationArguments.options || {};
+    operationArguments.options = options || {};
     return this.client.sendOperationRequest(operationArguments, operationSpec);
   }
 
@@ -133,6 +136,7 @@ export class FooApi {
   ): Promise<FooApiPostSendResponse> {
     let operationSpec: coreClient.OperationSpec;
     let operationArguments: coreClient.OperationArguments;
+    let options;
     if (args[1] === "application/octet-stream") {
       operationSpec = postSend$binaryOperationSpec;
       operationArguments = {
@@ -141,6 +145,7 @@ export class FooApi {
         data: args[2],
         options: args[3]
       };
+      options = args[3];
     } else if (args[1] === "text/plain") {
       operationSpec = postSend$textOperationSpec;
       operationArguments = {
@@ -149,12 +154,13 @@ export class FooApi {
         data: args[2],
         options: args[3]
       };
+      options = args[3];
     } else {
       throw new TypeError(
         `"contentType" must be a valid value but instead was "${args[1]}".`
       );
     }
-    operationArguments.options = operationArguments.options || {};
+    operationArguments.options = options || {};
     return this.client.sendOperationRequest(operationArguments, operationSpec);
   }
 }

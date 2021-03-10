@@ -32,7 +32,7 @@ export function generatePackageJson(
       ...(useCoreV2 && { "@azure/core-client": "1.0.0-beta.1" }),
       ...(useCoreV2 && { "@azure/core-rest-pipeline": "1.0.0-beta.1" }),
       ...(clientDetails.tracing && {
-        "@azure/core-tracing": "1.0.0-preview.9",
+        "@azure/core-tracing": "1.0.0-preview.10",
         "@opentelemetry/api": "^0.10.2"
       }),
 

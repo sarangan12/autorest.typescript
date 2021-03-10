@@ -6,8 +6,10 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
+import "@azure/core-paging";
 import { PagedAsyncIterableIterator } from "@azure/core-paging";
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-rest-pipeline";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { CustomUrlPagingClientContext } from "../customUrlPagingClientContext";
@@ -19,6 +21,7 @@ import {
   PagingGetPagesPartialUrlNextResponse
 } from "../models";
 
+/// <reference lib="esnext.asynciterable" />
 /** Class representing a Paging. */
 export class Paging {
   private readonly client: CustomUrlPagingClientContext;
@@ -38,7 +41,7 @@ export class Paging {
    */
   public listPagesPartialUrl(
     accountName: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): PagedAsyncIterableIterator<Product> {
     const iter = this.getPagesPartialUrlPagingAll(accountName, options);
     return {
@@ -56,7 +59,7 @@ export class Paging {
 
   private async *getPagesPartialUrlPagingPage(
     accountName: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): AsyncIterableIterator<Product[]> {
     let result = await this._getPagesPartialUrl(accountName, options);
     yield result.values || [];
@@ -74,7 +77,7 @@ export class Paging {
 
   private async *getPagesPartialUrlPagingAll(
     accountName: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): AsyncIterableIterator<Product> {
     for await (const page of this.getPagesPartialUrlPagingPage(
       accountName,
@@ -91,7 +94,7 @@ export class Paging {
    */
   public listPagesPartialUrlOperation(
     accountName: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): PagedAsyncIterableIterator<Product> {
     const iter = this.getPagesPartialUrlOperationPagingAll(
       accountName,
@@ -112,7 +115,7 @@ export class Paging {
 
   private async *getPagesPartialUrlOperationPagingPage(
     accountName: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): AsyncIterableIterator<Product[]> {
     let result = await this._getPagesPartialUrlOperation(accountName, options);
     yield result.values || [];
@@ -130,7 +133,7 @@ export class Paging {
 
   private async *getPagesPartialUrlOperationPagingAll(
     accountName: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): AsyncIterableIterator<Product> {
     for await (const page of this.getPagesPartialUrlOperationPagingPage(
       accountName,
@@ -149,7 +152,7 @@ export class Paging {
   public listPagesPartialUrlOperationNext(
     accountName: string,
     nextLink: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): PagedAsyncIterableIterator<Product> {
     const iter = this.getPagesPartialUrlOperationNextPagingAll(
       accountName,
@@ -176,7 +179,7 @@ export class Paging {
   private async *getPagesPartialUrlOperationNextPagingPage(
     accountName: string,
     nextLink: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): AsyncIterableIterator<Product[]> {
     let result = await this._getPagesPartialUrlOperationNext(
       accountName,
@@ -199,7 +202,7 @@ export class Paging {
   private async *getPagesPartialUrlOperationNextPagingAll(
     accountName: string,
     nextLink: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): AsyncIterableIterator<Product> {
     for await (const page of this.getPagesPartialUrlOperationNextPagingPage(
       accountName,
@@ -217,16 +220,12 @@ export class Paging {
    */
   private _getPagesPartialUrl(
     accountName: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PagingGetPagesPartialUrlResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      accountName,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { accountName, options },
       getPagesPartialUrlOperationSpec
-    ) as Promise<PagingGetPagesPartialUrlResponse>;
+    );
   }
 
   /**
@@ -236,16 +235,12 @@ export class Paging {
    */
   private _getPagesPartialUrlOperation(
     accountName: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PagingGetPagesPartialUrlOperationResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      accountName,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { accountName, options },
       getPagesPartialUrlOperationOperationSpec
-    ) as Promise<PagingGetPagesPartialUrlOperationResponse>;
+    );
   }
 
   /**
@@ -257,17 +252,12 @@ export class Paging {
   private _getPagesPartialUrlOperationNext(
     accountName: string,
     nextLink: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PagingGetPagesPartialUrlOperationNextResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      accountName,
-      nextLink,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { accountName, nextLink, options },
       getPagesPartialUrlOperationNextOperationSpec
-    ) as Promise<PagingGetPagesPartialUrlOperationNextResponse>;
+    );
   }
 
   /**
@@ -279,23 +269,18 @@ export class Paging {
   private _getPagesPartialUrlNext(
     accountName: string,
     nextLink: string,
-    options?: coreHttp.OperationOptions
+    options?: coreClient.OperationOptions
   ): Promise<PagingGetPagesPartialUrlNextResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      accountName,
-      nextLink,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
     return this.client.sendOperationRequest(
-      operationArguments,
+      { accountName, nextLink, options },
       getPagesPartialUrlNextOperationSpec
-    ) as Promise<PagingGetPagesPartialUrlNextResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getPagesPartialUrlOperationSpec: coreHttp.OperationSpec = {
+const getPagesPartialUrlOperationSpec: coreClient.OperationSpec = {
   path: "/paging/customurl/partialnextlink",
   httpMethod: "GET",
   responses: {
@@ -308,7 +293,7 @@ const getPagesPartialUrlOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getPagesPartialUrlOperationOperationSpec: coreHttp.OperationSpec = {
+const getPagesPartialUrlOperationOperationSpec: coreClient.OperationSpec = {
   path: "/paging/customurl/partialnextlinkop",
   httpMethod: "GET",
   responses: {
@@ -321,7 +306,7 @@ const getPagesPartialUrlOperationOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getPagesPartialUrlOperationNextOperationSpec: coreHttp.OperationSpec = {
+const getPagesPartialUrlOperationNextOperationSpec: coreClient.OperationSpec = {
   path: "/paging/customurl/{nextLink}",
   httpMethod: "GET",
   responses: {
@@ -334,7 +319,7 @@ const getPagesPartialUrlOperationNextOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getPagesPartialUrlNextOperationSpec: coreHttp.OperationSpec = {
+const getPagesPartialUrlNextOperationSpec: coreClient.OperationSpec = {
   path: "{nextLink}",
   httpMethod: "GET",
   responses: {

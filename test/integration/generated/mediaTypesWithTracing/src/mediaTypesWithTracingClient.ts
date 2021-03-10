@@ -66,6 +66,7 @@ export class MediaTypesWithTracingClient extends MediaTypesWithTracingClientCont
   ): Promise<MediaTypesWithTracingClientAnalyzeBodyResponse> {
     let operationSpec: coreClient.OperationSpec;
     let operationArguments: coreClient.OperationArguments;
+    let options;
     if (
       args[0] === "application/pdf" ||
       args[0] === "image/jpeg" ||
@@ -74,9 +75,11 @@ export class MediaTypesWithTracingClient extends MediaTypesWithTracingClientCont
     ) {
       operationSpec = analyzeBody$binaryOperationSpec;
       operationArguments = { contentType: args[0], options: args[1] };
+      options = args[1];
     } else if (args[0] === "application/json") {
       operationSpec = analyzeBody$jsonOperationSpec;
       operationArguments = { contentType: args[0], options: args[1] };
+      options = args[1];
     } else {
       throw new TypeError(
         `"contentType" must be a valid value but instead was "${args[0]}".`
@@ -84,9 +87,9 @@ export class MediaTypesWithTracingClient extends MediaTypesWithTracingClientCont
     }
     const { span, updatedOptions } = createSpan(
       "MediaTypesWithTracingClient-analyzeBody",
-      operationArguments.options || {}
+      options
     );
-    operationArguments.options = updatedOptions;
+    operationArguments.options = updatedOptions || {};
     try {
       const result = await this.sendOperationRequest(
         operationArguments,

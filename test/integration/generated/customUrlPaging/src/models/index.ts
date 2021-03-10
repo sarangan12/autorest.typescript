@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-rest-pipeline";
 
 export interface ProductResult {
   values?: Product[];
@@ -28,56 +29,20 @@ export interface ErrorModel {
 }
 
 /** Contains response data for the getPagesPartialUrl operation. */
-export type PagingGetPagesPartialUrlResponse = ProductResult & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: ProductResult;
-  };
-};
+export type PagingGetPagesPartialUrlResponse = ProductResult;
 
 /** Contains response data for the getPagesPartialUrlOperation operation. */
-export type PagingGetPagesPartialUrlOperationResponse = ProductResult & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: ProductResult;
-  };
-};
+export type PagingGetPagesPartialUrlOperationResponse = ProductResult;
 
 /** Contains response data for the getPagesPartialUrlOperationNext operation. */
-export type PagingGetPagesPartialUrlOperationNextResponse = ProductResult & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: ProductResult;
-  };
-};
+export type PagingGetPagesPartialUrlOperationNextResponse = ProductResult;
 
 /** Contains response data for the getPagesPartialUrlNext operation. */
-export type PagingGetPagesPartialUrlNextResponse = ProductResult & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The response body as text (string format) */
-    bodyAsText: string;
-
-    /** The response body as parsed JSON or XML */
-    parsedBody: ProductResult;
-  };
-};
+export type PagingGetPagesPartialUrlNextResponse = ProductResult;
 
 /** Optional parameters. */
 export interface CustomUrlPagingClientOptionalParams
-  extends coreHttp.ServiceClientOptions {
+  extends coreClient.ServiceClientOptions {
   /** A string value that is used as a global part of the parameterized host */
   host?: string;
   /** Overrides client endpoint. */
