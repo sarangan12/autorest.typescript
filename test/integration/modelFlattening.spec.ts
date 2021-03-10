@@ -1,6 +1,4 @@
-import { FullOperationResponse } from "@azure/core-client";
 import { assert } from "chai";
-import { response } from "express";
 import { ModelFlatteningClient } from "./generated/modelFlattening/src";
 import {
   FlattenedProduct,
@@ -8,14 +6,10 @@ import {
   ResourceCollection,
   SimpleProduct
 } from "./generated/modelFlattening/src/models";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("ModelFlatteningClient", () => {
   let client: ModelFlatteningClient;
-  const defaultOptions = {
-    onResponse: (rawResponse: FullOperationResponse) => {
-      assert.equal(rawResponse.status, 200);
-    }
-  };
 
   beforeEach(() => {
     client = new ModelFlatteningClient();
@@ -70,7 +64,10 @@ describe("ModelFlatteningClient", () => {
       }
     ];
 
-    await client.putArray({ resourceArray, ...defaultOptions });
+    await client.putArray({
+      ...responseStatusChecker,
+      resourceArray
+    });
   });
 
   it("should get dictionary", async () => {
@@ -120,9 +117,9 @@ describe("ModelFlatteningClient", () => {
       }
     };
 
-    const result = await client.putDictionary({
-      resourceDictionary,
-      ...defaultOptions
+    await client.putDictionary({
+      ...responseStatusChecker,
+      resourceDictionary
     });
   });
 
@@ -231,9 +228,9 @@ describe("ModelFlatteningClient", () => {
       }
     };
 
-    const result = await client.putResourceCollection({
-      resourceComplexObject,
-      ...defaultOptions
+    await client.putResourceCollection({
+      ...responseStatusChecker,
+      resourceComplexObject
     });
   });
 

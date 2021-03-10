@@ -1,33 +1,29 @@
 import { RequiredOptionalClient } from "./generated/requiredOptional/src";
 import { assert } from "chai";
-import { FullOperationResponse } from "@azure/core-client";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("Swagger that needs no mapper", () => {
   let client: RequiredOptionalClient;
-  const defaultOptions = {
-    onResponse: (rawResponse: FullOperationResponse) => {
-      assert.equal(rawResponse.status, 200);
-    }
-  };
+
   beforeEach(() => {
     client = new RequiredOptionalClient("one", "two");
   });
 
   describe("Implicit Optional", () => {
     it("should handle putOptionalQuery", async () => {
-      await client.implicit.putOptionalQuery(defaultOptions);
+      await client.implicit.putOptionalQuery(responseStatusChecker);
     });
 
     it("should handle putOptionalHeader", async () => {
-      await client.implicit.putOptionalHeader(defaultOptions);
+      await client.implicit.putOptionalHeader(responseStatusChecker);
     });
 
     it("should handle putOptionalBody", async () => {
-      await client.implicit.putOptionalBody(defaultOptions);
+      await client.implicit.putOptionalBody(responseStatusChecker);
     });
 
     it("should handle getOptionalGlobalQuery", async () => {
-      await client.implicit.getOptionalGlobalQuery(defaultOptions);
+      await client.implicit.getOptionalGlobalQuery(responseStatusChecker);
     });
 
     it("should handle getRequiredPath", async () => {
@@ -62,47 +58,47 @@ describe("Swagger that needs no mapper", () => {
 
   describe("Explicit Optional", () => {
     it("should handle postOptionalArrayHeader", async () => {
-      await client.explicit.postOptionalArrayHeader(defaultOptions);
+      await client.explicit.postOptionalArrayHeader(responseStatusChecker);
     });
 
     it("should handle postOptionalArrayParameter", async () => {
-      await client.explicit.postOptionalArrayParameter(defaultOptions);
+      await client.explicit.postOptionalArrayParameter(responseStatusChecker);
     });
 
     it("should handle postOptionalArrayProperty", async () => {
-      await client.explicit.postOptionalArrayProperty(defaultOptions);
+      await client.explicit.postOptionalArrayProperty(responseStatusChecker);
     });
 
     it("should handle postOptionalClassParameter", async () => {
-      await client.explicit.postOptionalClassParameter(defaultOptions);
+      await client.explicit.postOptionalClassParameter(responseStatusChecker);
     });
 
     it("should handle postOptionalClassProperty", async () => {
-      await client.explicit.postOptionalClassProperty(defaultOptions);
+      await client.explicit.postOptionalClassProperty(responseStatusChecker);
     });
 
     it("should handle postOptionalIntegerHeader", async () => {
-      await client.explicit.postOptionalIntegerHeader(defaultOptions);
+      await client.explicit.postOptionalIntegerHeader(responseStatusChecker);
     });
 
     it("should handle postOptionalIntegerParameter", async () => {
-      await client.explicit.postOptionalIntegerParameter(defaultOptions);
+      await client.explicit.postOptionalIntegerParameter(responseStatusChecker);
     });
 
     it("should handle postOptionalIntegerProperty", async () => {
-      await client.explicit.postOptionalIntegerProperty(defaultOptions);
+      await client.explicit.postOptionalIntegerProperty(responseStatusChecker);
     });
 
     it("should handle postOptionalStringHeader", async () => {
-      await client.explicit.postOptionalStringHeader(defaultOptions);
+      await client.explicit.postOptionalStringHeader(responseStatusChecker);
     });
 
     it("should handle postOptionalStringParameter", async () => {
-      await client.explicit.postOptionalStringParameter(defaultOptions);
+      await client.explicit.postOptionalStringParameter(responseStatusChecker);
     });
 
     it("should handle postOptionalStringProperty", async () => {
-      await client.explicit.postOptionalStringProperty(defaultOptions);
+      await client.explicit.postOptionalStringProperty(responseStatusChecker);
     });
 
     it("should handle postRequiredArrayHeader", async () => {

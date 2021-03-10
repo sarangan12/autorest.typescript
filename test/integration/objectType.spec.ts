@@ -1,14 +1,9 @@
-import { FullOperationResponse } from "@azure/core-client";
 import { assert } from "chai";
 import { ObjectTypeClient } from "./generated/objectType/src";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("ObjectType", () => {
   let client: ObjectTypeClient;
-  const defaultOptions = {
-    onResponse: (rawResponse: FullOperationResponse) => {
-      assert.equal(rawResponse.status, 200);
-    }
-  };
 
   beforeEach(() => {
     client = new ObjectTypeClient();
@@ -22,7 +17,7 @@ describe("ObjectType", () => {
   });
 
   it("should put an object", async () => {
-    await client.put({ foo: "bar" }, defaultOptions);
+    await client.put({ foo: "bar" }, responseStatusChecker);
   });
 
   it("should throw puttin and invalid object", async () => {

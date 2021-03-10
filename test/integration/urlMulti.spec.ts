@@ -1,39 +1,35 @@
-import { FullOperationResponse } from "@azure/core-client";
-import { assert } from "chai";
 import { UrlMultiClient } from "./generated/urlMulti/src";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("URLMultiCollectionFormat", () => {
   let client: UrlMultiClient;
-  const defaultOptions = {
-    onResponse: (rawResponse: FullOperationResponse) => {
-      assert.equal(rawResponse.status, 200);
-    }
-  };
 
   beforeEach(() => {
     client = new UrlMultiClient();
   });
 
   it("should handle arrayStringMultiEmpty", async () => {
-    await client.queries.arrayStringMultiEmpty({
-      arrayQuery: [],
-      ...defaultOptions
+    const result = await client.queries.arrayStringMultiEmpty({
+      ...responseStatusChecker,
+      arrayQuery: []
     });
   });
 
   it("should handle arrayStringMultiNull", async () => {
-    await client.queries.arrayStringMultiNull(defaultOptions);
+    const result = await client.queries.arrayStringMultiNull(
+      responseStatusChecker
+    );
   });
 
   it("should handle arrayStringMultiValid", async () => {
     const result = await client.queries.arrayStringMultiValid({
+      ...responseStatusChecker,
       arrayQuery: [
         "ArrayQuery1",
         "begin!*'();:@ &=+$,/?#[]end",
         null as any,
         ""
-      ],
-      ...defaultOptions
+      ]
     });
   });
 });

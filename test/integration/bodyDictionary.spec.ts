@@ -1,4 +1,3 @@
-import { FullOperationResponse } from "@azure/core-client";
 import { assert } from "chai";
 import {
   BodyDictionaryClient,
@@ -16,21 +15,19 @@ import {
   DictionaryGetFloatInvalidNullResponse,
   DictionaryGetFloatInvalidStringResponse
 } from "./generated/bodyDictionary/src";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("BodyDictionary", () => {
   let client: BodyDictionaryClient;
-  const defaultOptions = {
-    onResponse: (rawResponse: FullOperationResponse) => {
-      assert.equal(rawResponse.status, 200);
-    }
-  };
 
   beforeEach(() => {
     client = new BodyDictionaryClient();
   });
 
   it("should getArrayItemEmpty", async () => {
-    const result = await client.dictionary.getArrayItemEmpty(defaultOptions);
+    const result = await client.dictionary.getArrayItemEmpty(
+      responseStatusChecker
+    );
     assert.deepEqual(result, {
       "0": ["1", "2", "3"],
       "1": [],
@@ -41,17 +38,19 @@ describe("BodyDictionary", () => {
   // FIXME we should de-serialize the incoming value as a null
   // https://github.com/Azure/azure-sdk-for-js/issues/12009
   it("should getArrayNull", async () => {
-    const result = await client.dictionary.getArrayNull(defaultOptions);
+    const result = await client.dictionary.getArrayNull(responseStatusChecker);
     assert.deepEqual(result, {});
   });
 
   it("should getArrayEmpty", async () => {
-    const result = await client.dictionary.getArrayEmpty(defaultOptions);
+    const result = await client.dictionary.getArrayEmpty(responseStatusChecker);
     assert.deepEqual(result, {});
   });
 
   it("should getArrayItemNull", async () => {
-    const result = await client.dictionary.getArrayItemNull(defaultOptions);
+    const result = await client.dictionary.getArrayItemNull(
+      responseStatusChecker
+    );
     const expected: { [propertyName: string]: string[] | null } = {
       "0": ["1", "2", "3"],
       "1": null,
@@ -61,7 +60,7 @@ describe("BodyDictionary", () => {
   });
 
   it("should getArrayValid", async () => {
-    const result = await client.dictionary.getArrayValid(defaultOptions);
+    const result = await client.dictionary.getArrayValid(responseStatusChecker);
     const expected: { [propertyName: string]: string[] } = {
       "0": ["1", "2", "3"],
       "1": ["4", "5", "6"],
@@ -71,19 +70,25 @@ describe("BodyDictionary", () => {
   });
 
   it("should getComplexEmpty", async () => {
-    const result = await client.dictionary.getComplexEmpty(defaultOptions);
+    const result = await client.dictionary.getComplexEmpty(
+      responseStatusChecker
+    );
     assert.deepEqual(result, {});
   });
 
   // FIXME we should de-serialize the incoming value as a null
   // https://github.com/Azure/azure-sdk-for-js/issues/12009
   it("should getComplexNull", async () => {
-    const result = await client.dictionary.getComplexNull(defaultOptions);
+    const result = await client.dictionary.getComplexNull(
+      responseStatusChecker
+    );
     assert.deepEqual(result, {});
   });
 
   it("should getComplexItemNull", async () => {
-    const result = await client.dictionary.getComplexItemNull(defaultOptions);
+    const result = await client.dictionary.getComplexItemNull(
+      responseStatusChecker
+    );
     assert.deepEqual(result, {
       "0": { integer: 1, string: "2" },
       "1": null,
@@ -92,7 +97,9 @@ describe("BodyDictionary", () => {
   });
 
   it("should getComplexValid", async () => {
-    const result = await client.dictionary.getComplexValid(defaultOptions);
+    const result = await client.dictionary.getComplexValid(
+      responseStatusChecker
+    );
     assert.deepEqual(result, {
       "0": { integer: 1, string: "2" },
       "1": { integer: 3, string: "4" },
@@ -107,12 +114,14 @@ describe("BodyDictionary", () => {
         "1": { integer: 3, string: "4" },
         "2": { integer: 5, string: "6" }
       },
-      defaultOptions
+      responseStatusChecker
     );
   });
 
   it("should getComplexItemEmpty", async () => {
-    const result = await client.dictionary.getComplexItemEmpty(defaultOptions);
+    const result = await client.dictionary.getComplexItemEmpty(
+      responseStatusChecker
+    );
     assert.deepEqual(result, {
       "0": { integer: 1, string: "2" },
       "1": {},
@@ -123,18 +132,22 @@ describe("BodyDictionary", () => {
   // FIXME we should de-serialize the incoming value as a null
   // https://github.com/Azure/azure-sdk-for-js/issues/12009
   it("should getDictionaryNull", async () => {
-    const result = await client.dictionary.getDictionaryNull(defaultOptions);
+    const result = await client.dictionary.getDictionaryNull(
+      responseStatusChecker
+    );
     assert.deepEqual(result, {});
   });
 
   it("should getDictionaryEmpty", async () => {
-    const result = await client.dictionary.getDictionaryEmpty(defaultOptions);
+    const result = await client.dictionary.getDictionaryEmpty(
+      responseStatusChecker
+    );
     assert.deepEqual(result, {});
   });
 
   it("should getDictionaryItemEmpty", async () => {
     const result = await client.dictionary.getDictionaryItemEmpty(
-      defaultOptions
+      responseStatusChecker
     );
     const expected = {
       "0": { "1": "one", "2": "two", "3": "three" },
@@ -146,7 +159,7 @@ describe("BodyDictionary", () => {
 
   it("should getDictionaryItemNull", async () => {
     const result = await client.dictionary.getDictionaryItemNull(
-      defaultOptions
+      responseStatusChecker
     );
     const expected = {
       "0": { "1": "one", "2": "two", "3": "three" },
@@ -157,7 +170,9 @@ describe("BodyDictionary", () => {
   });
 
   it("should getDictionaryValid", async () => {
-    const result = await client.dictionary.getDictionaryValid(defaultOptions);
+    const result = await client.dictionary.getDictionaryValid(
+      responseStatusChecker
+    );
     const expected = {
       "0": { "1": "one", "2": "two", "3": "three" },
       "1": { "4": "four", "5": "five", "6": "six" },
@@ -173,7 +188,7 @@ describe("BodyDictionary", () => {
         "1": ["4", "5", "6"],
         "2": ["7", "8", "9"]
       },
-      defaultOptions
+      responseStatusChecker
     );
   });
 
@@ -184,7 +199,7 @@ describe("BodyDictionary", () => {
         "1": { "4": "four", "5": "five", "6": "six" },
         "2": { "7": "seven", "8": "eight", "9": "nine" }
       },
-      defaultOptions
+      responseStatusChecker
     );
   });
 
@@ -194,15 +209,12 @@ describe("BodyDictionary", () => {
   });
 
   it("should put an empty dictionary", async () => {
-    await client.dictionary.putEmpty({}, defaultOptions);
+    await client.dictionary.putEmpty({}, responseStatusChecker);
   });
 
   it("should get null dictionary", async () => {
-    const result = await client.dictionary.getNull({
-      onResponse: rawResponse => {
-        assert.deepEqual(rawResponse.parsedBody, undefined);
-      }
-    });
+    await client.dictionary.getNull();
+    // assert.deepEqual(result._response.parsedBody, undefined);
   });
 
   it("should get an invalid dictionary", async () => {
@@ -273,7 +285,10 @@ describe("BodyDictionary", () => {
       "3": true
     };
 
-    await client.dictionary.putBooleanTfft(testDictionary, defaultOptions);
+    await client.dictionary.putBooleanTfft(
+      testDictionary,
+      responseStatusChecker
+    );
   });
 
   it("should get boolean dictionaries with null value", async () => {
@@ -318,7 +333,7 @@ describe("BodyDictionary", () => {
       "3": 300
     };
 
-    await client.dictionary.putIntegerValid(dictionary, defaultOptions);
+    await client.dictionary.putIntegerValid(dictionary, responseStatusChecker);
   });
 
   it("should get integer dictionaries with null value", async () => {
@@ -363,7 +378,7 @@ describe("BodyDictionary", () => {
       "3": 300
     };
 
-    await client.dictionary.putLongValid(dictionary, defaultOptions);
+    await client.dictionary.putLongValid(dictionary, responseStatusChecker);
   });
 
   it("should get long dictionaries with null value", async () => {
@@ -403,7 +418,7 @@ describe("BodyDictionary", () => {
       "1": -0.01,
       "2": -1.2e20
     };
-    await client.dictionary.putFloatValid(dictionary, defaultOptions);
+    await client.dictionary.putFloatValid(dictionary, responseStatusChecker);
   });
 
   it("should get float dictionaries with null value", async () => {
@@ -442,7 +457,7 @@ describe("BodyDictionary", () => {
       "1": -0.01,
       "2": -1.2e20
     };
-    await client.dictionary.putDoubleValid(dictionary, defaultOptions);
+    await client.dictionary.putDoubleValid(dictionary, responseStatusChecker);
   });
 
   it("should get double dictionaries with null value", async () => {
@@ -481,7 +496,7 @@ describe("BodyDictionary", () => {
       "1": "foo2",
       "2": "foo3"
     };
-    await client.dictionary.putStringValid(dictionary, defaultOptions);
+    await client.dictionary.putStringValid(dictionary, responseStatusChecker);
   });
 
   it("should get string dictionaries with null value", async () => {
@@ -520,7 +535,7 @@ describe("BodyDictionary", () => {
       1: new Date("1980-01-02"),
       2: new Date("1492-10-12")
     };
-    await client.dictionary.putDateValid(dictionary, defaultOptions);
+    await client.dictionary.putDateValid(dictionary, responseStatusChecker);
   });
 
   it("should get date dictionaries with null value", async () => {
@@ -558,7 +573,7 @@ describe("BodyDictionary", () => {
       1: new Date("1980-01-01T23:11:35Z"),
       2: new Date("1492-10-12T18:15:01Z")
     };
-    await client.dictionary.putDateTimeValid(dictionary, defaultOptions);
+    await client.dictionary.putDateTimeValid(dictionary, responseStatusChecker);
   });
 
   it("should get datetime dictionaries with null value", async () => {
@@ -595,7 +610,10 @@ describe("BodyDictionary", () => {
       1: new Date("Wed, 02 Jan 1980 00:11:35 GMT"),
       2: new Date("Wed, 12 Oct 1492 10:15:01 GMT")
     };
-    await client.dictionary.putDateTimeRfc1123Valid(dictionary, defaultOptions);
+    await client.dictionary.putDateTimeRfc1123Valid(
+      dictionary,
+      responseStatusChecker
+    );
   });
 
   it("should get duration dictionaries", async () => {
@@ -612,7 +630,7 @@ describe("BodyDictionary", () => {
       0: "P123DT22H14M12.011S",
       1: "P5DT1H"
     };
-    await client.dictionary.putDurationValid(dictionary, defaultOptions);
+    await client.dictionary.putDurationValid(dictionary, responseStatusChecker);
   });
 
   it("should get byte dictionaries", async () => {
@@ -637,7 +655,7 @@ describe("BodyDictionary", () => {
       1: bytes2,
       2: bytes3
     };
-    await client.dictionary.putByteValid(dictionary, defaultOptions);
+    await client.dictionary.putByteValid(dictionary, responseStatusChecker);
   });
 
   it("should get byte dictionaries with null values", async () => {

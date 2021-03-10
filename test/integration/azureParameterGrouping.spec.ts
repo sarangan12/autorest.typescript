@@ -1,9 +1,5 @@
-import {
-  AzureParameterGroupingClient,
-  ParameterGroupingPostOptionalOptionalParams
-} from "./generated/azureParameterGrouping/src";
-import { assert } from "chai";
-import { FullOperationResponse } from "@azure/core-client";
+import { AzureParameterGroupingClient } from "./generated/azureParameterGrouping/src";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("AzureParameterGrouping", () => {
   let client: AzureParameterGroupingClient;
@@ -11,51 +7,45 @@ describe("AzureParameterGrouping", () => {
   const query = 21;
   const header = "header";
   const path = "path";
-  const goodResponseCheck = (rawResponse: FullOperationResponse) => {
-    assert.equal(rawResponse.status, 200);
-  };
-  const defaultOptions = {
-    onResponse: goodResponseCheck
-  };
 
   beforeEach(() => {
     client = new AzureParameterGroupingClient();
   });
 
   it("should post optional", async () => {
-    const options: ParameterGroupingPostOptionalOptionalParams = {
+    const options = {
+      ...responseStatusChecker,
       parameterGroupingPostOptionalParameters: {
         query: query,
         customHeader: header
-      },
-      onResponse: goodResponseCheck
+      }
     };
-    const result = await client.parameterGrouping.postOptional(options);
+    await client.parameterGrouping.postOptional(options);
   });
 
   it("should accept empty optional parameters", async () => {
-    const result = await client.parameterGrouping.postOptional(defaultOptions);
+    await client.parameterGrouping.postOptional(responseStatusChecker);
   });
 
   it("should post required", async () => {
-    const result = await client.parameterGrouping.postRequired(
+    await client.parameterGrouping.postRequired(
       {
         body: body,
         customHeader: header,
         query: query,
         path: path
       },
-      defaultOptions
+      responseStatusChecker
     );
   });
 
   it("should post required with only required parameters", async () => {
-    const result = await client.parameterGrouping.postRequired(
+    await client.parameterGrouping.postRequired(
       {
         body: body,
         path: path
       },
-      defaultOptions
+      responseStatusChecker
     );
   });
 
@@ -66,10 +56,10 @@ describe("AzureParameterGrouping", () => {
       queryTwo: 42
     };
 
-    const result = await client.parameterGrouping.postMultiParamGroups({
+    await client.parameterGrouping.postMultiParamGroups({
+      ...responseStatusChecker,
       firstParameterGroup,
-      parameterGroupingPostMultiParamGroupsSecondParamGroup,
-      onResponse: goodResponseCheck
+      parameterGroupingPostMultiParamGroupsSecondParamGroup
     });
   });
 
@@ -79,19 +69,17 @@ describe("AzureParameterGrouping", () => {
       queryTwo: 42
     };
 
-    const result = await client.parameterGrouping.postMultiParamGroups({
+    await client.parameterGrouping.postMultiParamGroups({
+      ...responseStatusChecker,
       firstParameterGroup,
-      parameterGroupingPostMultiParamGroupsSecondParamGroup,
-      onResponse: goodResponseCheck
+      parameterGroupingPostMultiParamGroupsSecondParamGroup
     });
   });
 
   it("should allow parameter group objects to be shared between operations", async function() {
-    const result = await client.parameterGrouping.postSharedParameterGroupObject(
-      {
-        firstParameterGroup: { headerOne: header, queryOne: 42 },
-        onResponse: goodResponseCheck
-      }
-    );
+    await client.parameterGrouping.postSharedParameterGroupObject({
+      ...responseStatusChecker,
+      firstParameterGroup: { headerOne: header, queryOne: 42 }
+    });
   });
 });

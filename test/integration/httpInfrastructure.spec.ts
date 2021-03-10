@@ -6,30 +6,20 @@ import {
   exponentialRetryPolicy,
   RestError
 } from "@azure/core-rest-pipeline";
-import {
-  deserializationPolicy,
-  FullOperationResponse
-} from "@azure/core-client";
+import { deserializationPolicy } from "@azure/core-client";
 import { isNode } from "@azure/core-util";
+import {
+  responseStatusChecker,
+  responseStatusChecker201,
+  responseStatusChecker202,
+  responseStatusChecker204,
+  responseStatusChecker301,
+  responseStatusChecker302,
+  responseStatusChecker404
+} from "../utils/responseStatusChecker";
+
 describe("Http infrastructure Client", () => {
   let client: HttpInfrastructureClient;
-  function checkStatus(code: number) {
-    return (rawResponse: FullOperationResponse) => {
-      assert.equal(rawResponse.status, code);
-    };
-  }
-  function buildOptions(code: number) {
-    return {
-      onResponse: checkStatus(code)
-    };
-  }
-  const check200 = buildOptions(200);
-  const check201 = buildOptions(201);
-  const check202 = buildOptions(202);
-  const check204 = buildOptions(204);
-  const check301 = buildOptions(301);
-  const check302 = buildOptions(302);
-  const check404 = buildOptions(404);
 
   // Prevents caching redirects
   const preventCachingPolicy: PipelinePolicy = {
@@ -60,79 +50,79 @@ describe("Http infrastructure Client", () => {
 
   describe("Success scenarios", () => {
     it("should work for all delete200", async () => {
-      await client.httpSuccess.delete200(check200);
+      await client.httpSuccess.delete200(responseStatusChecker);
     });
 
     it("should work for delete202", async () => {
-      await client.httpSuccess.delete202(check202);
+      await client.httpSuccess.delete202(responseStatusChecker202);
     });
 
     it("should work for delete204", async () => {
-      await client.httpSuccess.delete204(check204);
+      await client.httpSuccess.delete204(responseStatusChecker204);
     });
 
     it("should work for get200", async () => {
-      await client.httpSuccess.get200(check200);
+      await client.httpSuccess.get200(responseStatusChecker);
     });
 
     it("should work for head200", async () => {
-      await client.httpSuccess.head200(check200);
+      await client.httpSuccess.head200(responseStatusChecker);
     });
 
     it("should work for head204", async () => {
-      await client.httpSuccess.head204(check204);
+      await client.httpSuccess.head204(responseStatusChecker204);
     });
 
     it("should work for head404", async () => {
-      await client.httpSuccess.head404(check404);
+      await client.httpSuccess.head404(responseStatusChecker404);
     });
 
     it("should work for patch200", async () => {
-      await client.httpSuccess.patch200(check200);
+      await client.httpSuccess.patch200(responseStatusChecker);
     });
 
     it("should work for patch202", async () => {
-      await client.httpSuccess.patch202(check202);
+      await client.httpSuccess.patch202(responseStatusChecker202);
     });
 
     it("should work for patch204", async () => {
-      await client.httpSuccess.patch204(check204);
+      await client.httpSuccess.patch204(responseStatusChecker204);
     });
 
     it("should work for post200", async () => {
-      await client.httpSuccess.post200(check200);
+      await client.httpSuccess.post200(responseStatusChecker);
     });
 
     it("should work for post201", async () => {
-      await client.httpSuccess.post201(check201);
+      await client.httpSuccess.post201(responseStatusChecker201);
     });
 
     it("should work for post202", async () => {
-      await client.httpSuccess.post202(check202);
+      await client.httpSuccess.post202(responseStatusChecker202);
     });
 
     it("should work for post204", async () => {
-      await client.httpSuccess.post204(check204);
+      await client.httpSuccess.post204(responseStatusChecker204);
     });
 
     it("should work for put200", async () => {
-      await client.httpSuccess.put200(check200);
+      await client.httpSuccess.put200(responseStatusChecker);
     });
 
     it("should work for put201", async () => {
-      await client.httpSuccess.put201(check201);
+      await client.httpSuccess.put201(responseStatusChecker201);
     });
 
     it("should work for put202", async () => {
-      await client.httpSuccess.put202(check202);
+      await client.httpSuccess.put202(responseStatusChecker202);
     });
 
     it("should work for put204", async () => {
-      await client.httpSuccess.put204(check204);
+      await client.httpSuccess.put204(responseStatusChecker204);
     });
 
     it("should work for put204", async () => {
-      await client.httpSuccess.delete204(check204);
+      await client.httpSuccess.delete204(responseStatusChecker204);
     });
   });
 
@@ -403,39 +393,39 @@ describe("Http infrastructure Client", () => {
 
   describe("Failure scenarios", () => {
     it("delete307 should return 200", async () => {
-      await client.httpRedirects.delete307(check200);
+      await client.httpRedirects.delete307(responseStatusChecker);
     });
 
     it("get300 should return 200", async () => {
-      await client.httpRedirects.get300(check200);
+      await client.httpRedirects.get300(responseStatusChecker);
     });
 
     it("get301 should return 200", async () => {
-      await client.httpRedirects.get301(check200);
+      await client.httpRedirects.get301(responseStatusChecker);
     });
 
     it("get302 should return 200", async () => {
-      await client.httpRedirects.get302(check200);
+      await client.httpRedirects.get302(responseStatusChecker);
     });
 
     it("get307 should return 200", async () => {
-      await client.httpRedirects.get307(check200);
+      await client.httpRedirects.get307(responseStatusChecker);
     });
 
     it("head300 should return 200", async () => {
-      await client.httpRedirects.head300(check200);
+      await client.httpRedirects.head300(responseStatusChecker);
     });
 
     it("head301 should return 200", async () => {
-      await client.httpRedirects.head301(check200);
+      await client.httpRedirects.head301(responseStatusChecker);
     });
 
     it("head302 should return 200", async () => {
-      await client.httpRedirects.head302(check200);
+      await client.httpRedirects.head302(responseStatusChecker);
     });
 
     it("head307 should return 200", async () => {
-      await client.httpRedirects.head307(check200);
+      await client.httpRedirects.head307(responseStatusChecker);
     });
 
     it("patch302 should return 302", async function() {
@@ -445,23 +435,23 @@ describe("Http infrastructure Client", () => {
         this.skip();
       }
 
-      await client.httpRedirects.patch302(check302);
+      await client.httpRedirects.patch302(responseStatusChecker302);
     });
 
     it("patch307 should return 200", async () => {
-      await client.httpRedirects.patch307(check200);
+      await client.httpRedirects.patch307(responseStatusChecker);
     });
 
     it("post303 should return 200", async () => {
-      await client.httpRedirects.post303(check200);
+      await client.httpRedirects.post303(responseStatusChecker);
     });
 
     it("post307 should return 200", async () => {
-      await client.httpRedirects.post307(check200);
+      await client.httpRedirects.post307(responseStatusChecker);
     });
 
     it("put307 should return 200", async () => {
-      await client.httpRedirects.put307(check200);
+      await client.httpRedirects.put307(responseStatusChecker);
     });
 
     it("put301 should return 301", async function() {
@@ -470,46 +460,46 @@ describe("Http infrastructure Client", () => {
       if (!isNode) {
         this.skip();
       }
-      await client.httpRedirects.put301(check301);
+      await client.httpRedirects.put301(responseStatusChecker301);
     });
   });
 
   describe("Retry scenarios", () => {
     it("delete503 should retry and return 200", async () => {
-      await client.httpRetry.delete503(check200);
+      await client.httpRetry.delete503(responseStatusChecker);
     });
 
     it("get502 should retry and return 200", async () => {
-      await client.httpRetry.get502(check200);
+      await client.httpRetry.get502(responseStatusChecker);
     });
 
     it("head408 should retry and return 200", async () => {
-      await client.httpRetry.head408(check200);
+      await client.httpRetry.head408(responseStatusChecker);
     });
 
     // TODO: Investigate options
     it.skip("options502 should retry and return 200", async () => {
-      await client.httpRetry.options502(check200);
+      await client.httpRetry.options502(responseStatusChecker);
     });
 
     it("patch500 should retry and return 200", async () => {
-      await client.httpRetry.patch500(check200);
+      await client.httpRetry.patch500(responseStatusChecker);
     });
 
     it("patch504 should retry and return 200", async () => {
-      await client.httpRetry.patch504(check200);
+      await client.httpRetry.patch504(responseStatusChecker);
     });
 
     it("post503 should retry and return 200", async () => {
-      await client.httpRetry.post503(check200);
+      await client.httpRetry.post503(responseStatusChecker);
     });
 
     it("put500 should retry and return 200", async () => {
-      await client.httpRetry.put500(check200);
+      await client.httpRetry.put500(responseStatusChecker);
     });
 
     it("put504 should retry and return 200", async () => {
-      await client.httpRetry.put504(check200);
+      await client.httpRetry.put504(responseStatusChecker);
     });
   });
 
@@ -601,7 +591,7 @@ describe("Http infrastructure Client", () => {
 
     it("get200Model204NoModelDefaultError204Valid should return 200", async () => {
       await client.multipleResponses.get200Model204NoModelDefaultError204Valid(
-        check204
+        responseStatusChecker204
       );
     });
 
@@ -620,22 +610,24 @@ describe("Http infrastructure Client", () => {
     });
 
     it("get200ModelA200None return 200", async () => {
-      await client.multipleResponses.get200ModelA200None(check200);
+      await client.multipleResponses.get200ModelA200None(responseStatusChecker);
     });
 
     it("get200ModelA200Valid should return 200", async () => {
-      await client.multipleResponses.get200ModelA200Valid(check200);
+      await client.multipleResponses.get200ModelA200Valid(
+        responseStatusChecker
+      );
     });
 
     it("get200ModelA201ModelC404ModelDDefaultError200Valid should return 200", async () => {
       await client.multipleResponses.get200ModelA201ModelC404ModelDDefaultError200Valid(
-        check200
+        responseStatusChecker
       );
     });
 
     it("get200ModelA201ModelC404ModelDDefaultError201Valid should return 201", async () => {
       await client.multipleResponses.get200ModelA201ModelC404ModelDDefaultError201Valid(
-        check201
+        responseStatusChecker201
       );
     });
 
@@ -650,19 +642,19 @@ describe("Http infrastructure Client", () => {
 
     it("get200ModelA201ModelC404ModelDDefaultError404Valid should throw 404", async () => {
       await client.multipleResponses.get200ModelA201ModelC404ModelDDefaultError404Valid(
-        check404
+        responseStatusChecker404
       );
     });
 
     it("get202None204NoneDefaultError202None should return 202", async () => {
       await client.multipleResponses.get202None204NoneDefaultError202None(
-        check202
+        responseStatusChecker202
       );
     });
 
     it("get202None204NoneDefaultError204None should return 204", async () => {
       await client.multipleResponses.get202None204NoneDefaultError204None(
-        check204
+        responseStatusChecker204
       );
     });
 
@@ -685,12 +677,15 @@ describe("Http infrastructure Client", () => {
     });
 
     it("getDefaultModelA200None should return 200", async () => {
-      await client.multipleResponses.getDefaultModelA200None(check200);
+      await client.multipleResponses.getDefaultModelA200None(
+        responseStatusChecker
+      );
     });
 
     it("getDefaultModelA200Valid should return 200", async () => {
-      const result = await client.multipleResponses.getDefaultModelA200Valid();
-      assert.equal(result.statusCode, "200");
+      await client.multipleResponses.getDefaultModelA200Valid(
+        responseStatusChecker
+      );
     });
 
     it("getDefaultModelA400None should throw 400", async () => {
@@ -712,11 +707,15 @@ describe("Http infrastructure Client", () => {
     });
 
     it("getDefaultNone200Invalid should return 200", async () => {
-      await client.multipleResponses.getDefaultNone200Invalid(check200);
+      await client.multipleResponses.getDefaultNone200Invalid(
+        responseStatusChecker
+      );
     });
 
     it("getDefaultNone200None should return 200", async () => {
-      await client.multipleResponses.getDefaultNone200None(check200);
+      await client.multipleResponses.getDefaultNone200None(
+        responseStatusChecker
+      );
     });
 
     it("getDefaultNone400Invalid should return 200", async () => {
@@ -757,13 +756,13 @@ describe("Http infrastructure Client", () => {
 
     it("should handle get202None204NoneDefaultNone202Invalid", async () => {
       await client.multipleResponses.get202None204NoneDefaultNone202Invalid(
-        check202
+        responseStatusChecker202
       );
     });
 
     it("should handle get202None204NoneDefaultNone204None", async () => {
       await client.multipleResponses.get202None204NoneDefaultNone204None(
-        check204
+        responseStatusChecker204
       );
     });
 

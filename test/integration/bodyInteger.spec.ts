@@ -1,33 +1,28 @@
-import { FullOperationResponse } from "@azure/core-client";
 import { expect } from "chai";
 import { BodyIntegerClient } from "./generated/bodyInteger/src";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("Integration tests for BodyInteger", () => {
   let client: BodyIntegerClient;
-  const defaultOptions = {
-    onResponse: (rawResponse: FullOperationResponse) => {
-      expect(rawResponse.status).to.equal(200);
-    }
-  };
 
   beforeEach(() => {
     client = new BodyIntegerClient();
   });
 
   it("should put max value for 32 bit Integers", async () => {
-    await client.int.putMax32(Math.pow(2, 32 - 1) - 1, defaultOptions);
+    await client.int.putMax32(Math.pow(2, 32 - 1) - 1, responseStatusChecker);
   });
 
   it("should put max value for 64 bit Integers", async () => {
-    await client.int.putMax64(9223372036854776000, defaultOptions);
+    await client.int.putMax64(9223372036854776000, responseStatusChecker);
   });
 
   it("should put min value for 32 bit Integers", async () => {
-    await client.int.putMin32(-Math.pow(2, 32 - 1), defaultOptions);
+    await client.int.putMin32(-Math.pow(2, 32 - 1), responseStatusChecker);
   });
 
   it("should put min value for 64 bit Integers", async () => {
-    await client.int.putMin64(-9223372036854776000, defaultOptions);
+    await client.int.putMin64(-9223372036854776000, responseStatusChecker);
   });
 
   it("should get null integer value", async () => {
@@ -68,7 +63,7 @@ describe("Integration tests for BodyInteger", () => {
 
   it("should put UnixTime date correctly", async () => {
     var testDate = new Date("2016-04-13T00:00:00.000Z");
-    await client.int.putUnixTimeDate(testDate, defaultOptions);
+    await client.int.putUnixTimeDate(testDate, responseStatusChecker);
   });
 
   it("should put UnixTime date correctly", async () => {

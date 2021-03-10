@@ -18,7 +18,7 @@ describe("Integration tests for BodyString", () => {
       await client.string.putNull();
     });
 
-    it("should support valid empty string value", async function() {
+    it.only("should support valid empty string value", async function() {
       await client.string.putEmpty();
       const result = await client.string.getEmpty();
       deepStrictEqual(result, { body: "" });
@@ -97,7 +97,6 @@ describe("Integration tests for BodyString", () => {
 
     it("should putEnumReferencedConstant", async function() {
       await client.enum.putReferencedConstant({
-        field1: "",
         colorConstant: "green-color"
       });
     });

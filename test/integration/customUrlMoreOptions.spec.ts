@@ -2,7 +2,7 @@ import {
   CustomUrlMoreOptionsClient,
   CustomUrlMoreOptionsClientOptionalParams
 } from "./generated/customUrlMoreOptions/src";
-import { assert } from "chai";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("Custom URL More Options", () => {
   let client: CustomUrlMoreOptionsClient;
@@ -17,17 +17,10 @@ describe("Custom URL More Options", () => {
 
   describe("Paths", () => {
     it("getEmpty", async () => {
-      let result = await client.paths.getEmpty(
-        "testVault",
-        "testSecret",
-        "key1",
-        {
-          keyVersion: "v1",
-          onResponse: rawResponse => {
-            assert.equal(rawResponse.status, 200);
-          }
-        }
-      );
+      await client.paths.getEmpty("testVault", "testSecret", "key1", {
+        ...responseStatusChecker,
+        keyVersion: "v1"
+      });
     });
   });
 });

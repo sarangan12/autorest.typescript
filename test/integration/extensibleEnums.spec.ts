@@ -1,24 +1,22 @@
-import { FullOperationResponse } from "@azure/core-client";
 import { assert } from "chai";
 import {
   ExtensibleEnumsClient,
   PetGetByPetIdResponse
 } from "./generated/extensibleEnums/src";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("Integration tests for extensible enums", () => {
   let client: ExtensibleEnumsClient;
-  const defaultOptions = {
-    onResponse: (rawResponse: FullOperationResponse) => {
-      assert.equal(rawResponse.status, 200);
-    }
-  };
 
   beforeEach(() => {
     client = new ExtensibleEnumsClient();
   });
 
   it("sends an unexpected enum value successfully", async () => {
-    const response = await client.pet.getByPetId("casper", defaultOptions);
+    const response = await client.pet.getByPetId(
+      "casper",
+      responseStatusChecker
+    );
     const expected: Partial<PetGetByPetIdResponse> = {
       daysOfWeek: "Weekend",
       intEnum: "2",
@@ -28,7 +26,10 @@ describe("Integration tests for extensible enums", () => {
   });
 
   it("sends an expected enum value successfully", async () => {
-    const response = await client.pet.getByPetId("tommy", defaultOptions);
+    const response = await client.pet.getByPetId(
+      "tommy",
+      responseStatusChecker
+    );
     const expected: Partial<PetGetByPetIdResponse> = {
       daysOfWeek: "Monday",
       intEnum: "1",
@@ -38,7 +39,10 @@ describe("Integration tests for extensible enums", () => {
   });
 
   it("sends an allowed enum value successfully", async () => {
-    const response = await client.pet.getByPetId("scooby", defaultOptions);
+    const response = await client.pet.getByPetId(
+      "scooby",
+      responseStatusChecker
+    );
     const expected: Partial<PetGetByPetIdResponse> = {
       daysOfWeek: "Thursday",
       intEnum: "2.1",
@@ -55,6 +59,7 @@ describe("Integration tests for extensible enums", () => {
     };
 
     const response = await client.pet.addPet({
+      ...responseStatusChecker,
       petParam: {
         name: "Retriever",
         intEnum: "3",

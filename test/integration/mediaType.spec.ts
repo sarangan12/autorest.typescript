@@ -1,16 +1,11 @@
-import { FullOperationResponse } from "@azure/core-client";
-import { assert, expect } from "chai";
+import { expect } from "chai";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
 import { MediaTypesClient } from "./generated/mediaTypes/src";
 import { MediaTypesWithTracingClient } from "./generated/mediaTypesWithTracing/src";
 
 [MediaTypesClient, MediaTypesWithTracingClient].forEach(MediaTypes => {
   describe(`Integration tests for ${MediaTypes.name}`, () => {
     let client: MediaTypesClient | MediaTypesWithTracingClient;
-    const defaultOptions = {
-      onResponse: (rawResponse: FullOperationResponse) => {
-        assert.equal(rawResponse.status, 200);
-      }
-    };
 
     beforeEach(() => {
       client = new MediaTypes();
@@ -32,7 +27,7 @@ import { MediaTypesWithTracingClient } from "./generated/mediaTypesWithTracing/s
       it("works with binary content type", async () => {
         const response = await client.analyzeBody("application/pdf", {
           input: "PDF",
-          ...defaultOptions
+          ...responseStatusChecker
         });
 
         expect(response.body).to.equal(
@@ -44,7 +39,7 @@ import { MediaTypesWithTracingClient } from "./generated/mediaTypesWithTracing/s
       it("works with json content type", async () => {
         const response = await client.analyzeBody("application/json", {
           input: { source: "foo" },
-          ...defaultOptions
+          ...responseStatusChecker
         });
 
         expect(response.body).to.equal(
@@ -62,7 +57,7 @@ import { MediaTypesWithTracingClient } from "./generated/mediaTypesWithTracing/s
           requestOptions: {
             customHeaders: { "content-type": "text/plain; encoding=UTF-8" }
           },
-          ...defaultOptions
+          ...responseStatusChecker
         });
 
         expect(response.body).to.equal(

@@ -30,7 +30,7 @@ export class AzureSpecialPropertiesClient extends AzureSpecialPropertiesClientCo
    * @param options The parameter options
    */
   constructor(
-    credentials: coreAuth.TokenCredential | coreHttp.ServiceClientCredentials,
+    credentials: coreAuth.TokenCredential,
     subscriptionId: string,
     options?: AzureSpecialPropertiesClientOptionalParams
   ) {

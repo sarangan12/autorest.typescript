@@ -1,13 +1,9 @@
 import { NonStringEnumClient } from "./generated/nonStringEnum/src";
 import { assert } from "chai";
-import { FullOperationResponse } from "@azure/core-client";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
+
 describe("Swagger that needs no mapper", () => {
   let client: NonStringEnumClient;
-  const defaultOptions = {
-    onResponse: (rawResponse: FullOperationResponse) => {
-      assert.equal(rawResponse.status, 200);
-    }
-  };
 
   beforeEach(() => {
     client = new NonStringEnumClient();
@@ -24,10 +20,16 @@ describe("Swagger that needs no mapper", () => {
   });
 
   it("should handle float with put", async () => {
-    await client.float.put({ input: 200.4, ...defaultOptions });
+    const result = await client.float.put({
+      ...responseStatusChecker,
+      input: 200.4
+    });
   });
 
   it("should handle int with put", async () => {
-    await client.int.put({ input: 200, ...defaultOptions });
+    const result = await client.int.put({
+      ...responseStatusChecker,
+      input: 200
+    });
   });
 });
