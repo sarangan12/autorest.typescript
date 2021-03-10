@@ -21,9 +21,13 @@ describe("Custom URL More Options", () => {
         "testVault",
         "testSecret",
         "key1",
-        { keyVersion: "v1" }
+        {
+          keyVersion: "v1",
+          onResponse: rawResponse => {
+            assert.equal(rawResponse.status, 200);
+          }
+        }
       );
-      assert.equal(result._response.status, 200);
     });
   });
 });

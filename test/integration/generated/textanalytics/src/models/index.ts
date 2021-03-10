@@ -7,7 +7,7 @@
  */
 
 import * as coreClient from "@azure/core-client";
-import * as coreHttps from "@azure/core-https";
+import * as coreHttps from "@azure/core-rest-pipeline";
 
 /** Contains a set of input documents to be analyzed by the service. */
 export interface MultiLanguageBatchInput {

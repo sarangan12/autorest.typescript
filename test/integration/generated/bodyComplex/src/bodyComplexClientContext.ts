@@ -30,7 +30,7 @@ export class BodyComplexClientContext extends coreClient.ServiceClient {
     const optionsWithDefaults = {
       ...defaults,
       ...options,
-      baseUri: options.endpoint || "http://localhost:3000"
+      baseUri: options.endpoint || "https://localhost:3000"
     };
 
     super(optionsWithDefaults);

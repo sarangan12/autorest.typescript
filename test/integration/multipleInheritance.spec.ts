@@ -9,19 +9,19 @@ describe("MultipleInheritance", () => {
   });
 
   it("should get a pet", async () => {
-    const { _response, ...result } = await client.getPet();
+    const result = await client.getPet();
     assert.deepEqual(result, {
       name: "Peanut"
     });
   });
 
   it("should put a pet", async () => {
-    const { _response, ...result } = await client.putPet({ name: "Butter" });
+    const result = await client.putPet({ name: "Butter" });
     assert.deepEqual(result.body, "Pet was correct!");
   });
 
   it("should get a Horse", async () => {
-    const { _response, ...result } = await client.getHorse();
+    const result = await client.getHorse();
     assert.deepEqual(result, {
       name: "Fred",
       isAShowHorse: true
@@ -29,7 +29,7 @@ describe("MultipleInheritance", () => {
   });
 
   it("should put a Horse", async () => {
-    const { _response, ...result } = await client.putHorse({
+    const result = await client.putHorse({
       name: "General",
       isAShowHorse: false
     });
@@ -37,7 +37,7 @@ describe("MultipleInheritance", () => {
   });
 
   it("should get a Feline", async () => {
-    const { _response, ...result } = await client.getFeline();
+    const result = await client.getFeline();
     assert.deepEqual(result, {
       meows: true,
       hisses: true
@@ -45,7 +45,7 @@ describe("MultipleInheritance", () => {
   });
 
   it("should put a Feline", async () => {
-    const { _response, ...result } = await client.putFeline({
+    const result = await client.putFeline({
       meows: false,
       hisses: true
     });
@@ -53,7 +53,7 @@ describe("MultipleInheritance", () => {
   });
 
   it("should get a cat", async () => {
-    const { _response, ...result } = await client.getCat();
+    const result = await client.getCat();
     assert.deepEqual(result, {
       name: "Whiskers",
       meows: true,
@@ -63,7 +63,7 @@ describe("MultipleInheritance", () => {
   });
 
   it("should put a Cat", async () => {
-    const { _response, ...result } = await client.putCat({
+    const result = await client.putCat({
       name: "Boots",
       likesMilk: false,
       meows: true,
@@ -73,7 +73,7 @@ describe("MultipleInheritance", () => {
   });
 
   it("should get a kitten(", async () => {
-    const { _response, ...result } = await client.getKitten();
+    const result = await client.getKitten();
     assert.deepEqual(result, {
       name: "Gatito",
       meows: true,
@@ -84,7 +84,7 @@ describe("MultipleInheritance", () => {
   });
 
   it("should put a kitten(", async () => {
-    const { _response, ...result } = await client.putKitten({
+    const result = await client.putKitten({
       name: "Kitty",
       likesMilk: false,
       meows: true,

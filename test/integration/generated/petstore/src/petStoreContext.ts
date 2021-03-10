@@ -21,7 +21,7 @@ export class PetStoreContext extends coreClient.ServiceClient {
     const optionsWithDefaults = {
       ...defaults,
       ...options,
-      baseUri: options.endpoint || "http://petstore.swagger.io/v2"
+      baseUri: options.endpoint || "https://petstore.swagger.io/v2"
     };
 
     super(optionsWithDefaults);

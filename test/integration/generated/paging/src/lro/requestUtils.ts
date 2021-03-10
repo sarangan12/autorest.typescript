@@ -6,7 +6,7 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { PipelineResponse } from "@azure/core-https";
+import { HttpOperationResponse } from "@azure/core-http";
 import { terminalStates } from "./constants";
 import { LROResponseInfo } from "./models";
 
@@ -18,7 +18,7 @@ export function shouldDeserializeLRO(finalStateVia?: string) {
   let initialOperationInfo: LROResponseInfo | undefined;
   let isInitialRequest = true;
 
-  return (response: PipelineResponse) => {
+  return (response: HttpOperationResponse) => {
     if (response.status < 200 || response.status >= 300) {
       return true;
     }
@@ -55,25 +55,12 @@ export function shouldDeserializeLRO(finalStateVia?: string) {
   };
 }
 
-function convertStatusCodeToString(status: number): string {
-  if (status < 300) {
-    return "succeeded";
-  }
-
-  if (status >= 500) {
-    return "failed";
-  }
-
-  return "cancelled";
-}
-
 function isAsyncOperationFinalResponse(
-  response: PipelineResponse,
+  response: HttpOperationResponse,
   initialOperationInfo: LROResponseInfo,
   finalStateVia?: string
 ): boolean {
-  const status: string =
-    convertStatusCodeToString(response.status) || "Succeeded";
+  const status: string = response.parsedBody?.status || "Succeeded";
   if (!terminalStates.includes(status.toLowerCase())) {
     return false;
   }
@@ -100,14 +87,13 @@ function isAsyncOperationFinalResponse(
   return false;
 }
 
-function isLocationFinalResponse(response: PipelineResponse): boolean {
+function isLocationFinalResponse(response: HttpOperationResponse): boolean {
   return response.status !== 202;
 }
 
-function isBodyPollingFinalResponse(response: PipelineResponse): boolean {
+function isBodyPollingFinalResponse(response: HttpOperationResponse): boolean {
   const provisioningState: string =
-    JSON.parse(response.bodyAsText || "").properties?.provisioningState ||
-    "Succeeded";
+    response.parsedBody?.properties?.provisioningState || "Succeeded";
 
   if (terminalStates.includes(provisioningState.toLowerCase())) {
     return true;
@@ -116,9 +102,9 @@ function isBodyPollingFinalResponse(response: PipelineResponse): boolean {
   return false;
 }
 
-export function getLROData(result: PipelineResponse): LROResponseInfo {
+export function getLROData(result: HttpOperationResponse): LROResponseInfo {
   const statusCode = result.status;
-  const { status, properties } = JSON.parse(result.bodyAsText || "") || {};
+  const { status, properties } = result.parsedBody || {};
   return {
     statusCode,
     azureAsyncOperation: result.headers.get("azure-asyncoperation"),

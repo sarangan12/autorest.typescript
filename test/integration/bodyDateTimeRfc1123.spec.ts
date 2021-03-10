@@ -1,8 +1,14 @@
 import { BodyDateTimeRfc1123Client } from "./generated/bodyDateTimeRfc1123/src";
 import { expect } from "chai";
 import { isNil } from "lodash";
+import { FullOperationResponse } from "@azure/core-client";
 describe("BodyDateTimeRfc1123Client", function() {
   let testClient: BodyDateTimeRfc1123Client;
+  const defaultOptions = {
+    onResponse: (rawResponse: FullOperationResponse) => {
+      expect(rawResponse.status).to.equal(200);
+    }
+  };
 
   beforeEach(() => {
     testClient = new BodyDateTimeRfc1123Client();
@@ -69,15 +75,15 @@ describe("BodyDateTimeRfc1123Client", function() {
 
   it("should put UTC min dateTimeRfc1123", async () => {
     const result = await testClient.datetimerfc1123.putUtcMinDateTime(
-      new Date("Mon, 01 Jan 0001 00:00:00 GMT")
+      new Date("Mon, 01 Jan 0001 00:00:00 GMT"),
+      defaultOptions
     );
-    expect(result._response.status).to.equal(200);
   });
 
   it("should put UTC max dateTimeRfc1123", async () => {
     const result = await testClient.datetimerfc1123.putUtcMaxDateTime(
-      new Date("Fri, 31 Dec 9999 23:59:59 GMT")
+      new Date("Fri, 31 Dec 9999 23:59:59 GMT"),
+      defaultOptions
     );
-    expect(result._response.status).to.equal(200);
   });
 });

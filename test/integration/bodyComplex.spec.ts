@@ -15,6 +15,7 @@ import {
 } from "./generated/bodyComplex/src";
 import { RequestPolicyFactory } from "@azure/core-http";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
+import { PipelinePolicy } from "@azure/core-rest-pipeline";
 
 const clientOptions = {
   endpoint: "http://localhost:3000"
@@ -754,33 +755,33 @@ const clientOptions = {
 });
 
 describe("Validate pipelines", () => {
-  let customPolicy: RequestPolicyFactory;
+  let customPolicy: PipelinePolicy;
   let calledCustomPolicy: boolean;
 
   beforeEach(() => {
     calledCustomPolicy = false;
     customPolicy = {
-      create: next => ({
-        sendRequest: req => {
-          calledCustomPolicy = true;
-          return next.sendRequest(req);
-        }
-      })
+      sendRequest: (req, next) => {
+        calledCustomPolicy = true;
+        return next(req);
+      },
+      name: "test"
     };
   });
 
   it("should execute custom pipeline when passed in a factory array", async () => {
     const client = new BodyComplexClient({
-      endpoint: "http://localhost:3000",
-      requestPolicyFactories: [customPolicy]
+      endpoint: "http://localhost:3000"
     });
-    const result = await client.basic.getValid();
-
-    // Valiedate Operation
-    // Verify that the operation works as expected
-    // since the custom pipeline was passed as an array
-    // and deserialize was not included in the array the result
-    // will be in _response.parsedBody
+    client.pipeline.addPolicy(customPolicy);
+    const result = await client.basic.getValid({
+      onResponse: rawResponse => {
+        // Verify that a default policy was executed
+        assert.isTrue(
+          rawResponse.request.headers.has("x-ms-client-request-id")
+        );
+      }
+    });
 
     assert.deepEqual(result.id, 2);
     assert.deepEqual(result.name, "abc");
@@ -788,32 +789,5 @@ describe("Validate pipelines", () => {
 
     // Verify that a custom policy was executed
     assert.isTrue(calledCustomPolicy);
-
-    // Verify that a default policy was executed
-    assert.isDefined(
-      result._response.request.headers.contains("x-ms-client-request-id")
-    );
-  });
-
-  it("should execute custom pipeline when passed in a factory function", async () => {
-    const client = new BodyComplexClient({
-      endpoint: "http://localhost:3000",
-      requestPolicyFactories: defaultPolicies => [
-        customPolicy,
-        ...defaultPolicies
-      ]
-    });
-    const { _response, ...result } = await client.basic.getValid();
-
-    // Valiedate Operation
-    assert.deepStrictEqual(result, { id: 2, name: "abc", color: "YELLOW" });
-
-    // Verify that a custom policy was executed
-    assert.isTrue(calledCustomPolicy);
-
-    // Verify that a default policy was executed
-    assert.isDefined(
-      _response.request.headers.contains("x-ms-client-request-id")
-    );
   });
 });

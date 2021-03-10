@@ -1,5 +1,5 @@
 import * as coreClient from "@azure/core-client";
-import * as coreHttps from "@azure/core-https";
+import * as coreHttps from "@azure/core-rest-pipeline";
 
 /** Known values of {@link Enum0} that the service accepts. */
 export const enum KnownEnum0 {

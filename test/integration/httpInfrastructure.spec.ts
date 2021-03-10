@@ -1,136 +1,138 @@
 import { HttpInfrastructureClient } from "./generated/httpInfrastructure/src";
 import { assert } from "chai";
 import {
-  RequestPolicyFactory,
+  PipelinePolicy,
   redirectPolicy,
   exponentialRetryPolicy,
-  deserializationPolicy,
-  isNode,
   RestError
-} from "@azure/core-http";
+} from "@azure/core-rest-pipeline";
+import {
+  deserializationPolicy,
+  FullOperationResponse
+} from "@azure/core-client";
+import { isNode } from "@azure/core-util";
 describe("Http infrastructure Client", () => {
   let client: HttpInfrastructureClient;
+  function checkStatus(code: number) {
+    return (rawResponse: FullOperationResponse) => {
+      assert.equal(rawResponse.status, code);
+    };
+  }
+  function buildOptions(code: number) {
+    return {
+      onResponse: checkStatus(code)
+    };
+  }
+  const check200 = buildOptions(200);
+  const check201 = buildOptions(201);
+  const check202 = buildOptions(202);
+  const check204 = buildOptions(204);
+  const check301 = buildOptions(301);
+  const check302 = buildOptions(302);
+  const check404 = buildOptions(404);
 
   // Prevents caching redirects
-  const preventCachingPolicy: RequestPolicyFactory = {
-    create: next => ({
-      sendRequest: req => {
-        if (!req.query) {
-          req.query = {};
-        }
-        req.query._ = new Date().toISOString();
-        return next.sendRequest(req);
+  const preventCachingPolicy: PipelinePolicy = {
+    sendRequest: (req, next) => {
+      if (req.url.includes("?")) {
+        req.url += `&&_=${new Date().toISOString()}`;
+      } else {
+        req.url += `?_=${new Date().toISOString()}`;
       }
-    })
+      return next(req);
+    },
+    name: "preventCachingPolicy"
   };
 
   beforeEach(() => {
-    const options = {
-      requestPolicyFactories: [
-        preventCachingPolicy,
-        redirectPolicy(),
-        exponentialRetryPolicy(3, 0, 0),
-        deserializationPolicy()
-      ]
-    };
-
-    client = new HttpInfrastructureClient(options);
+    client = new HttpInfrastructureClient();
+    client.pipeline.addPolicy(preventCachingPolicy);
+    client.pipeline.addPolicy(redirectPolicy());
+    client.pipeline.addPolicy(
+      exponentialRetryPolicy({
+        maxRetries: 3,
+        maxRetryDelayInMs: 0,
+        retryDelayInMs: 0
+      })
+    );
+    client.pipeline.addPolicy(deserializationPolicy());
   });
 
   describe("Success scenarios", () => {
     it("should work for all delete200", async () => {
-      const result = await client.httpSuccess.delete200();
-      assert.equal(result._response.status, 200);
+      await client.httpSuccess.delete200(check200);
     });
 
     it("should work for delete202", async () => {
-      const result = await client.httpSuccess.delete202();
-      assert.equal(result._response.status, 202);
+      await client.httpSuccess.delete202(check202);
     });
 
     it("should work for delete204", async () => {
-      const result = await client.httpSuccess.delete204();
-      assert.equal(result._response.status, 204);
+      await client.httpSuccess.delete204(check204);
     });
 
     it("should work for get200", async () => {
-      const result = await client.httpSuccess.get200();
-      assert.equal(result._response.status, 200);
+      await client.httpSuccess.get200(check200);
     });
 
     it("should work for head200", async () => {
-      const result = await client.httpSuccess.head200();
-      assert.equal(result._response.status, 200);
+      await client.httpSuccess.head200(check200);
     });
 
     it("should work for head204", async () => {
-      const result = await client.httpSuccess.head204();
-      assert.equal(result._response.status, 204);
+      await client.httpSuccess.head204(check204);
     });
 
     it("should work for head404", async () => {
-      const result = await client.httpSuccess.head404();
-      assert.equal(result._response.status, 404);
+      await client.httpSuccess.head404(check404);
     });
 
     it("should work for patch200", async () => {
-      const result = await client.httpSuccess.patch200();
-      assert.equal(result._response.status, 200);
+      await client.httpSuccess.patch200(check200);
     });
 
     it("should work for patch202", async () => {
-      const result = await client.httpSuccess.patch202();
-      assert.equal(result._response.status, 202);
+      await client.httpSuccess.patch202(check202);
     });
 
     it("should work for patch204", async () => {
-      const result = await client.httpSuccess.patch204();
-      assert.equal(result._response.status, 204);
+      await client.httpSuccess.patch204(check204);
     });
 
     it("should work for post200", async () => {
-      const result = await client.httpSuccess.post200();
-      assert.equal(result._response.status, 200);
+      await client.httpSuccess.post200(check200);
     });
 
     it("should work for post201", async () => {
-      const result = await client.httpSuccess.post201();
-      assert.equal(result._response.status, 201);
+      await client.httpSuccess.post201(check201);
     });
 
     it("should work for post202", async () => {
-      const result = await client.httpSuccess.post202();
-      assert.equal(result._response.status, 202);
+      await client.httpSuccess.post202(check202);
     });
 
     it("should work for post204", async () => {
-      const result = await client.httpSuccess.post204();
-      assert.equal(result._response.status, 204);
+      await client.httpSuccess.post204(check204);
     });
 
     it("should work for put200", async () => {
-      const result = await client.httpSuccess.put200();
-      assert.equal(result._response.status, 200);
+      await client.httpSuccess.put200(check200);
     });
 
     it("should work for put201", async () => {
-      const result = await client.httpSuccess.put201();
-      assert.equal(result._response.status, 201);
+      await client.httpSuccess.put201(check201);
     });
 
     it("should work for put202", async () => {
-      const result = await client.httpSuccess.put202();
-      assert.equal(result._response.status, 202);
+      await client.httpSuccess.put202(check202);
     });
 
     it("should work for put204", async () => {
-      const result = await client.httpSuccess.put204();
-      assert.equal(result._response.status, 204);
+      await client.httpSuccess.put204(check204);
     });
 
     it("should work for put204", async () => {
-      const result = await client.httpSuccess.delete204();
-      assert.equal(result._response.status, 204);
+      await client.httpSuccess.delete204(check204);
     });
   });
 
@@ -401,48 +403,39 @@ describe("Http infrastructure Client", () => {
 
   describe("Failure scenarios", () => {
     it("delete307 should return 200", async () => {
-      const result = await client.httpRedirects.delete307();
-      assert.equal(result._response.status, 200);
+      await client.httpRedirects.delete307(check200);
     });
 
     it("get300 should return 200", async () => {
-      const result = await client.httpRedirects.get300();
-      assert.equal(result._response.status, 200);
+      await client.httpRedirects.get300(check200);
     });
 
     it("get301 should return 200", async () => {
-      const result = await client.httpRedirects.get301();
-      assert.equal(result._response.status, 200);
+      await client.httpRedirects.get301(check200);
     });
 
     it("get302 should return 200", async () => {
-      const result = await client.httpRedirects.get302();
-      assert.equal(result._response.status, 200);
+      await client.httpRedirects.get302(check200);
     });
 
     it("get307 should return 200", async () => {
-      const result = await client.httpRedirects.get307();
-      assert.equal(result._response.status, 200);
+      await client.httpRedirects.get307(check200);
     });
 
     it("head300 should return 200", async () => {
-      const result = await client.httpRedirects.head300();
-      assert.equal(result._response.status, 200);
+      await client.httpRedirects.head300(check200);
     });
 
     it("head301 should return 200", async () => {
-      const result = await client.httpRedirects.head301();
-      assert.equal(result._response.status, 200);
+      await client.httpRedirects.head301(check200);
     });
 
     it("head302 should return 200", async () => {
-      const result = await client.httpRedirects.head302();
-      assert.equal(result._response.status, 200);
+      await client.httpRedirects.head302(check200);
     });
 
     it("head307 should return 200", async () => {
-      const result = await client.httpRedirects.head307();
-      assert.equal(result._response.status, 200);
+      await client.httpRedirects.head307(check200);
     });
 
     it("patch302 should return 302", async function() {
@@ -452,28 +445,23 @@ describe("Http infrastructure Client", () => {
         this.skip();
       }
 
-      const result = await client.httpRedirects.patch302();
-      assert.equal(result._response.status, 302);
+      await client.httpRedirects.patch302(check302);
     });
 
     it("patch307 should return 200", async () => {
-      const result = await client.httpRedirects.patch307();
-      assert.equal(result._response.status, 200);
+      await client.httpRedirects.patch307(check200);
     });
 
     it("post303 should return 200", async () => {
-      const result = await client.httpRedirects.post303();
-      assert.equal(result._response.status, 200);
+      await client.httpRedirects.post303(check200);
     });
 
     it("post307 should return 200", async () => {
-      const result = await client.httpRedirects.post307();
-      assert.equal(result._response.status, 200);
+      await client.httpRedirects.post307(check200);
     });
 
     it("put307 should return 200", async () => {
-      const result = await client.httpRedirects.put307();
-      assert.equal(result._response.status, 200);
+      await client.httpRedirects.put307(check200);
     });
 
     it("put301 should return 301", async function() {
@@ -482,56 +470,46 @@ describe("Http infrastructure Client", () => {
       if (!isNode) {
         this.skip();
       }
-      const result = await client.httpRedirects.put301();
-      assert.equal(result._response.status, 301);
+      await client.httpRedirects.put301(check301);
     });
   });
 
   describe("Retry scenarios", () => {
     it("delete503 should retry and return 200", async () => {
-      const result = await client.httpRetry.delete503();
-      assert.equal(result._response.status, 200);
+      await client.httpRetry.delete503(check200);
     });
 
     it("get502 should retry and return 200", async () => {
-      const result = await client.httpRetry.get502();
-      assert.equal(result._response.status, 200);
+      await client.httpRetry.get502(check200);
     });
 
     it("head408 should retry and return 200", async () => {
-      const result = await client.httpRetry.head408();
-      assert.equal(result._response.status, 200);
+      await client.httpRetry.head408(check200);
     });
 
     // TODO: Investigate options
     it.skip("options502 should retry and return 200", async () => {
-      const result = await client.httpRetry.options502();
-      assert.equal(result._response.status, 200);
+      await client.httpRetry.options502(check200);
     });
 
     it("patch500 should retry and return 200", async () => {
-      const result = await client.httpRetry.patch500();
-      assert.equal(result._response.status, 200);
+      await client.httpRetry.patch500(check200);
     });
 
     it("patch504 should retry and return 200", async () => {
-      const result = await client.httpRetry.patch504();
-      assert.equal(result._response.status, 200);
+      await client.httpRetry.patch504(check200);
     });
 
     it("post503 should retry and return 200", async () => {
-      const result = await client.httpRetry.post503();
-      assert.equal(result._response.status, 200);
+      await client.httpRetry.post503(check200);
     });
 
     it("put500 should retry and return 200", async () => {
-      const result = await client.httpRetry.put500();
-      assert.equal(result._response.status, 200);
+      await client.httpRetry.put500(check200);
     });
 
     it("put504 should retry and return 200", async () => {
-      const result = await client.httpRetry.put504();
-      assert.equal(result._response.status, 200);
+      await client.httpRetry.put504(check200);
     });
   });
 
@@ -622,8 +600,9 @@ describe("Http infrastructure Client", () => {
     });
 
     it("get200Model204NoModelDefaultError204Valid should return 200", async () => {
-      const result = await client.multipleResponses.get200Model204NoModelDefaultError204Valid();
-      assert.deepEqual(result._response.status, 204);
+      await client.multipleResponses.get200Model204NoModelDefaultError204Valid(
+        check204
+      );
     });
 
     it("get200Model204NoModelDefaultError400Valid should throw", async () => {
@@ -641,23 +620,23 @@ describe("Http infrastructure Client", () => {
     });
 
     it("get200ModelA200None return 200", async () => {
-      const result = await client.multipleResponses.get200ModelA200None();
-      assert.deepEqual(result._response.status, 200);
+      await client.multipleResponses.get200ModelA200None(check200);
     });
 
     it("get200ModelA200Valid should return 200", async () => {
-      const result = await client.multipleResponses.get200ModelA200Valid();
-      assert.deepEqual(result._response.status, 200);
+      await client.multipleResponses.get200ModelA200Valid(check200);
     });
 
     it("get200ModelA201ModelC404ModelDDefaultError200Valid should return 200", async () => {
-      const result = await client.multipleResponses.get200ModelA201ModelC404ModelDDefaultError200Valid();
-      assert.deepEqual(result._response.status, 200);
+      await client.multipleResponses.get200ModelA201ModelC404ModelDDefaultError200Valid(
+        check200
+      );
     });
 
     it("get200ModelA201ModelC404ModelDDefaultError201Valid should return 201", async () => {
-      const result = await client.multipleResponses.get200ModelA201ModelC404ModelDDefaultError201Valid();
-      assert.deepEqual(result._response.status, 201);
+      await client.multipleResponses.get200ModelA201ModelC404ModelDDefaultError201Valid(
+        check201
+      );
     });
 
     it("get200ModelA201ModelC404ModelDDefaultError201Valid should throw 400", async () => {
@@ -670,18 +649,21 @@ describe("Http infrastructure Client", () => {
     });
 
     it("get200ModelA201ModelC404ModelDDefaultError404Valid should throw 404", async () => {
-      const result = await client.multipleResponses.get200ModelA201ModelC404ModelDDefaultError404Valid();
-      assert.equal(result._response.status, 404);
+      await client.multipleResponses.get200ModelA201ModelC404ModelDDefaultError404Valid(
+        check404
+      );
     });
 
     it("get202None204NoneDefaultError202None should return 202", async () => {
-      const result = await client.multipleResponses.get202None204NoneDefaultError202None();
-      assert.equal(result._response.status, 202);
+      await client.multipleResponses.get202None204NoneDefaultError202None(
+        check202
+      );
     });
 
     it("get202None204NoneDefaultError204None should return 204", async () => {
-      const result = await client.multipleResponses.get202None204NoneDefaultError204None();
-      assert.equal(result._response.status, 204);
+      await client.multipleResponses.get202None204NoneDefaultError204None(
+        check204
+      );
     });
 
     it("get202None204NoneDefaultNone400Invalid should throw 400", async () => {
@@ -703,8 +685,7 @@ describe("Http infrastructure Client", () => {
     });
 
     it("getDefaultModelA200None should return 200", async () => {
-      const result = await client.multipleResponses.getDefaultModelA200None();
-      assert.equal(result._response.status, 200);
+      await client.multipleResponses.getDefaultModelA200None(check200);
     });
 
     it("getDefaultModelA200Valid should return 200", async () => {
@@ -731,13 +712,11 @@ describe("Http infrastructure Client", () => {
     });
 
     it("getDefaultNone200Invalid should return 200", async () => {
-      const result = await client.multipleResponses.getDefaultNone200Invalid();
-      assert.equal(result.statusCode, "200");
+      await client.multipleResponses.getDefaultNone200Invalid(check200);
     });
 
     it("getDefaultNone200None should return 200", async () => {
-      const result = await client.multipleResponses.getDefaultNone200None();
-      assert.equal(result._response.status, 200);
+      await client.multipleResponses.getDefaultNone200None(check200);
     });
 
     it("getDefaultNone400Invalid should return 200", async () => {
@@ -777,13 +756,15 @@ describe("Http infrastructure Client", () => {
     });
 
     it("should handle get202None204NoneDefaultNone202Invalid", async () => {
-      const result = await client.multipleResponses.get202None204NoneDefaultNone202Invalid();
-      assert.strictEqual(result._response.status, 202);
+      await client.multipleResponses.get202None204NoneDefaultNone202Invalid(
+        check202
+      );
     });
 
     it("should handle get202None204NoneDefaultNone204None", async () => {
-      const result = await client.multipleResponses.get202None204NoneDefaultNone204None();
-      assert.strictEqual(result._response.status, 204);
+      await client.multipleResponses.get202None204NoneDefaultNone204None(
+        check204
+      );
     });
 
     it("should handle get200ModelA202Valid", async () => {

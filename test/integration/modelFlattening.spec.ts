@@ -1,3 +1,4 @@
+import { FullOperationResponse } from "@azure/core-client";
 import { assert } from "chai";
 import { response } from "express";
 import { ModelFlatteningClient } from "./generated/modelFlattening/src";
@@ -10,6 +11,11 @@ import {
 
 describe("ModelFlatteningClient", () => {
   let client: ModelFlatteningClient;
+  const defaultOptions = {
+    onResponse: (rawResponse: FullOperationResponse) => {
+      assert.equal(rawResponse.status, 200);
+    }
+  };
 
   beforeEach(() => {
     client = new ModelFlatteningClient();
@@ -64,8 +70,7 @@ describe("ModelFlatteningClient", () => {
       }
     ];
 
-    const result = await client.putArray({ resourceArray });
-    assert.equal(result._response.status, 200);
+    await client.putArray({ resourceArray, ...defaultOptions });
   });
 
   it("should get dictionary", async () => {
@@ -115,9 +120,10 @@ describe("ModelFlatteningClient", () => {
       }
     };
 
-    const result = await client.putDictionary({ resourceDictionary });
-
-    assert.equal(result._response.status, 200);
+    const result = await client.putDictionary({
+      resourceDictionary,
+      ...defaultOptions
+    });
   });
 
   it("should get complex type", async () => {
@@ -226,10 +232,9 @@ describe("ModelFlatteningClient", () => {
     };
 
     const result = await client.putResourceCollection({
-      resourceComplexObject
+      resourceComplexObject,
+      ...defaultOptions
     });
-
-    assert.equal(result._response.status, 200);
   });
 
   it("should put a simple product", async () => {
@@ -269,9 +274,7 @@ describe("ModelFlatteningClient", () => {
       odataValue: "http://foo",
       name: "groupproduct"
     };
-    const { _response, ...result } = await client.putSimpleProductWithGrouping(
-      paramGroup
-    );
+    const result = await client.putSimpleProductWithGrouping(paramGroup);
 
     assert.deepEqual(result, {
       capacity: "Large",

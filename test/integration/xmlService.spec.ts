@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { should } from "chai";
+import { assert, should } from "chai";
 import { AbortController, AbortError } from "@azure/abort-controller";
 import {
   XmlServiceClient,
@@ -11,6 +11,7 @@ import {
   StorageServiceProperties,
   SignedIdentifier
 } from "./generated/xmlservice/src";
+import { FullOperationResponse } from "@azure/core-client";
 should();
 const testClient = new XmlServiceClient({
   endpoint: "http://localhost:3000"
@@ -21,6 +22,11 @@ function getAbortController() {
 }
 
 describe("typescript", function() {
+  const defaultOptions = {
+    onResponse: (rawResponse: FullOperationResponse) => {
+      assert.equal(rawResponse.status, 200);
+    }
+  };
   describe("XML client", function() {
     it("should handle getXMsText", async () => {
       const result = await testClient.xml.getXMsText();
@@ -29,8 +35,7 @@ describe("typescript", function() {
     });
 
     it("should handle jsonInput", async () => {
-      const result = await testClient.xml.jsonInput({ id: 42 });
-      result._response.status.should.be.equals(200);
+      await testClient.xml.jsonInput({ id: 42 }, defaultOptions);
     });
 
     it("should handle getXMsText", async () => {

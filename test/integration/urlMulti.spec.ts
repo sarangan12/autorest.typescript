@@ -1,25 +1,28 @@
+import { FullOperationResponse } from "@azure/core-client";
 import { assert } from "chai";
 import { UrlMultiClient } from "./generated/urlMulti/src";
 
 describe("URLMultiCollectionFormat", () => {
   let client: UrlMultiClient;
+  const defaultOptions = {
+    onResponse: (rawResponse: FullOperationResponse) => {
+      assert.equal(rawResponse.status, 200);
+    }
+  };
 
   beforeEach(() => {
     client = new UrlMultiClient();
   });
 
   it("should handle arrayStringMultiEmpty", async () => {
-    const result = await client.queries.arrayStringMultiEmpty({
-      arrayQuery: []
+    await client.queries.arrayStringMultiEmpty({
+      arrayQuery: [],
+      ...defaultOptions
     });
-
-    assert.strictEqual(result._response.status, 200);
   });
 
   it("should handle arrayStringMultiNull", async () => {
-    const result = await client.queries.arrayStringMultiNull();
-
-    assert.strictEqual(result._response.status, 200);
+    await client.queries.arrayStringMultiNull(defaultOptions);
   });
 
   it("should handle arrayStringMultiValid", async () => {
@@ -29,9 +32,8 @@ describe("URLMultiCollectionFormat", () => {
         "begin!*'();:@ &=+$,/?#[]end",
         null as any,
         ""
-      ]
+      ],
+      ...defaultOptions
     });
-
-    assert.strictEqual(result._response.status, 200);
   });
 });

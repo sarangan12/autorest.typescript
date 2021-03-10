@@ -1,7 +1,14 @@
 import { BodyBooleanClient } from "./generated/bodyBoolean/src";
-import { expect } from "chai";
+import { assert, expect } from "chai";
+import { FullOperationResponse } from "@azure/core-client";
 describe("Bool Client", function() {
   let testClient: BodyBooleanClient;
+  const goodResponseCheck = (rawResponse: FullOperationResponse) => {
+    assert.equal(rawResponse.status, 200);
+  };
+  const defaultOptions = {
+    onResponse: goodResponseCheck
+  };
 
   beforeEach(() => {
     testClient = new BodyBooleanClient();
@@ -18,13 +25,11 @@ describe("Bool Client", function() {
   });
 
   it("should put true value", async () => {
-    const result = await testClient.bool.putTrue();
-    expect(result._response.status).to.equal(200);
+    await testClient.bool.putTrue(defaultOptions);
   });
 
   it("should put false value", async () => {
-    const result = await testClient.bool.putFalse();
-    expect(result._response.status).to.equal(200);
+    await testClient.bool.putFalse(defaultOptions);
   });
 
   it("should get null boolean value", async () => {

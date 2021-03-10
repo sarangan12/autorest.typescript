@@ -190,7 +190,7 @@ const testSwaggers: { [name: string]: SwaggerConfig } = {
     clientName: "CustomUrlPagingClient",
     packageName: "custom-url-paging",
     licenseHeader: true,
-    useCoreV2: true
+    useCoreV2: false
   },
   header: {
     swaggerOrConfig: "header.json",
@@ -300,7 +300,7 @@ const testSwaggers: { [name: string]: SwaggerConfig } = {
       namespace: "Microsoft.Media.Types",
       packagePrefix: "Azure.Media.Types"
     },
-    useCoreV2: true
+    useCoreV2: false
   },
   pagingNoIterators: {
     swaggerOrConfig: "paging.json",

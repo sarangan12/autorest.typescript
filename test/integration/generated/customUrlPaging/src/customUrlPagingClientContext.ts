@@ -6,10 +6,13 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreClient from "@azure/core-client";
+import * as coreHttp from "@azure/core-http";
 import { CustomUrlPagingClientOptionalParams } from "./models";
 
-export class CustomUrlPagingClientContext extends coreClient.ServiceClient {
+const packageName = "custom-url-paging";
+const packageVersion = "1.0.0-preview1";
+
+export class CustomUrlPagingClientContext extends coreHttp.ServiceClient {
   host: string;
 
   /**
@@ -22,17 +25,15 @@ export class CustomUrlPagingClientContext extends coreClient.ServiceClient {
       options = {};
     }
 
-    const defaults: CustomUrlPagingClientOptionalParams = {
-      requestContentType: "application/json; charset=utf-8"
-    };
+    if (!options.userAgent) {
+      const defaultUserAgent = coreHttp.getDefaultUserAgentValue();
+      options.userAgent = `${packageName}/${packageVersion} ${defaultUserAgent}`;
+    }
 
-    const optionsWithDefaults = {
-      ...defaults,
-      ...options,
-      baseUri: options.endpoint || "http://{accountName}{host}"
-    };
+    super(undefined, options);
 
-    super(optionsWithDefaults);
+    this.requestContentType = "application/json; charset=utf-8";
+    this.baseUri = options.endpoint || "https://{accountName}{host}";
 
     // Assigning values to Constant parameters
     this.host = options.host || "host";

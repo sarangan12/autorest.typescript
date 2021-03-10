@@ -33,7 +33,10 @@ describe("BodyDateClient", function() {
 
   it("should properly put positive value for Duration", async () => {
     var duration = "P123DT22H14M12.011S";
-    const result = await testClient.duration.putPositiveDuration(duration);
-    expect(result._response.status).to.equal(200);
+    const result = await testClient.duration.putPositiveDuration(duration, {
+      onResponse: rawResponse => {
+        expect(rawResponse.status).to.equal(200);
+      }
+    });
   });
 });

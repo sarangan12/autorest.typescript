@@ -29,7 +29,7 @@ export class CustomUrlClientContext extends coreClient.ServiceClient {
     const optionsWithDefaults = {
       ...defaults,
       ...options,
-      baseUri: options.endpoint || "http://{accountName}{host}"
+      baseUri: options.endpoint || "https://{accountName}{host}"
     };
 
     super(optionsWithDefaults);

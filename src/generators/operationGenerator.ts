@@ -1156,7 +1156,7 @@ function addImports(
     });
     operationGroupFile.addImportDeclaration({
       namespaceImport: "coreHttps",
-      moduleSpecifier: "@azure/core-https"
+      moduleSpecifier: "@azure/core-rest-pipeline"
     });
   }
 

@@ -7,6 +7,7 @@
  */
 
 import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-rest-pipeline";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { SubscriptionIdApiVersionClientContext } from "../subscriptionIdApiVersionClientContext";

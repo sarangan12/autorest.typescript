@@ -103,6 +103,7 @@ describe("typescript", function() {
         response2.value!.should.be.deep.equal("null");
 
         const response3 = await testClient.header.responseString("empty");
+        console.log(`${JSON.stringify(response3)}`);
         response3.value!.should.be.deep.equal("");
       });
 
