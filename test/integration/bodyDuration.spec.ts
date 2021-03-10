@@ -1,6 +1,7 @@
 import { BodyDurationClient } from "./generated/bodyDuration/src";
 import { expect } from "chai";
 import { fail } from "assert";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("BodyDateClient", function() {
   let testClient: BodyDurationClient;
@@ -33,7 +34,9 @@ describe("BodyDateClient", function() {
 
   it("should properly put positive value for Duration", async () => {
     var duration = "P123DT22H14M12.011S";
-    const result = await testClient.duration.putPositiveDuration(duration);
-    expect(result._response.status).to.equal(200);
+    await testClient.duration.putPositiveDuration(
+      duration,
+      responseStatusChecker
+    );
   });
 });

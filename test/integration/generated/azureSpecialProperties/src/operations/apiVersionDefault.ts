@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { AzureSpecialPropertiesClientContext } from "../azureSpecialPropertiesClientContext";
@@ -27,16 +28,11 @@ export class ApiVersionDefault {
    * GET method with api-version modeled in global settings.
    * @param options The options parameters.
    */
-  getMethodGlobalValid(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  getMethodGlobalValid(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getMethodGlobalValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -44,53 +40,40 @@ export class ApiVersionDefault {
    * @param options The options parameters.
    */
   getMethodGlobalNotProvidedValid(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getMethodGlobalNotProvidedValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
    * GET method with api-version modeled in global settings.
    * @param options The options parameters.
    */
-  getPathGlobalValid(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  getPathGlobalValid(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getPathGlobalValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
    * GET method with api-version modeled in global settings.
    * @param options The options parameters.
    */
-  getSwaggerGlobalValid(
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+  getSwaggerGlobalValid(options?: coreClient.OperationOptions): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { options },
       getSwaggerGlobalValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const getMethodGlobalValidOperationSpec: coreHttp.OperationSpec = {
+const getMethodGlobalValidOperationSpec: coreClient.OperationSpec = {
   path:
     "/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview",
   httpMethod: "GET",
@@ -105,7 +88,7 @@ const getMethodGlobalValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getMethodGlobalNotProvidedValidOperationSpec: coreHttp.OperationSpec = {
+const getMethodGlobalNotProvidedValidOperationSpec: coreClient.OperationSpec = {
   path:
     "/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview",
   httpMethod: "GET",
@@ -120,7 +103,7 @@ const getMethodGlobalNotProvidedValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getPathGlobalValidOperationSpec: coreHttp.OperationSpec = {
+const getPathGlobalValidOperationSpec: coreClient.OperationSpec = {
   path:
     "/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview",
   httpMethod: "GET",
@@ -135,7 +118,7 @@ const getPathGlobalValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const getSwaggerGlobalValidOperationSpec: coreHttp.OperationSpec = {
+const getSwaggerGlobalValidOperationSpec: coreClient.OperationSpec = {
   path:
     "/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview",
   httpMethod: "GET",

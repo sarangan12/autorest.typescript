@@ -1,11 +1,5 @@
-import {
-  ValidationClient,
-  Product,
-  ConstantProduct,
-  ChildProduct
-} from "./generated/validation/src";
+import { ValidationClient, Product } from "./generated/validation/src";
 import { assert } from "chai";
-import * as fs from "fs";
 
 const constantBody: Product = {
   child: { constProperty: "constant" },

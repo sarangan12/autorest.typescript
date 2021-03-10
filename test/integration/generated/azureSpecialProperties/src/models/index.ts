@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 
 export interface ErrorModel {
   status?: number;
@@ -45,21 +46,21 @@ export interface HeaderCustomNamedRequestIdParamGroupingParameters {
 
 /** Optional parameters. */
 export interface ApiVersionLocalGetMethodLocalNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** This should appear as a method parameter, use value null, this should result in no serialized parameter */
   apiVersion?: string;
 }
 
 /** Optional parameters. */
 export interface SkipUrlEncodingGetMethodQueryNullOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** Unencoded query parameter with value null */
   q1?: string;
 }
 
 /** Optional parameters. */
 export interface OdataGetWithFilterOptionalParams
-  extends coreHttp.OperationOptions {
+  extends coreClient.OperationOptions {
   /** The filter parameter with value '$filter=id gt 5 and name eq 'foo''. */
   filter?: string;
   /** The top parameter with value 10. */
@@ -69,35 +70,17 @@ export interface OdataGetWithFilterOptionalParams
 }
 
 /** Contains response data for the customNamedRequestId operation. */
-export type HeaderCustomNamedRequestIdResponse = HeaderCustomNamedRequestIdHeaders & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The parsed HTTP response headers. */
-    parsedHeaders: HeaderCustomNamedRequestIdHeaders;
-  };
-};
+export type HeaderCustomNamedRequestIdResponse = HeaderCustomNamedRequestIdHeaders;
 
 /** Contains response data for the customNamedRequestIdParamGrouping operation. */
-export type HeaderCustomNamedRequestIdParamGroupingResponse = HeaderCustomNamedRequestIdParamGroupingHeaders & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The parsed HTTP response headers. */
-    parsedHeaders: HeaderCustomNamedRequestIdParamGroupingHeaders;
-  };
-};
+export type HeaderCustomNamedRequestIdParamGroupingResponse = HeaderCustomNamedRequestIdParamGroupingHeaders;
 
 /** Contains response data for the customNamedRequestIdHead operation. */
-export type HeaderCustomNamedRequestIdHeadResponse = HeaderCustomNamedRequestIdHeadHeaders & {
-  /** The underlying HTTP response. */
-  _response: coreHttp.HttpResponse & {
-    /** The parsed HTTP response headers. */
-    parsedHeaders: HeaderCustomNamedRequestIdHeadHeaders;
-  };
-};
+export type HeaderCustomNamedRequestIdHeadResponse = HeaderCustomNamedRequestIdHeadHeaders;
 
 /** Optional parameters. */
 export interface AzureSpecialPropertiesClientOptionalParams
-  extends coreHttp.ServiceClientOptions {
+  extends coreClient.ServiceClientOptions {
   /** server parameter */
   $host?: string;
   /** Api Version */

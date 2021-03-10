@@ -1,5 +1,5 @@
 import { CustomUrlClient } from "./generated/customUrl/src";
-import * as assert from "assert";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("Custom Endpoint", () => {
   let client: CustomUrlClient;
@@ -10,7 +10,6 @@ describe("Custom Endpoint", () => {
   });
 
   it("should return 200", async () => {
-    const response = await client.paths.getEmpty("local");
-    assert.equal(response._response.status, 200);
+    await client.paths.getEmpty("local", responseStatusChecker);
   });
 });

@@ -6,7 +6,8 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-https";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { AzureSpecialPropertiesClientContext } from "../azureSpecialPropertiesClientContext";
@@ -31,16 +32,12 @@ export class SubscriptionInMethod {
    */
   postMethodLocalValid(
     subscriptionId: string,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      subscriptionId,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { subscriptionId, options },
       postMethodLocalValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -52,16 +49,12 @@ export class SubscriptionInMethod {
    */
   postMethodLocalNull(
     subscriptionId: string,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      subscriptionId,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { subscriptionId, options },
       postMethodLocalNullOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -72,16 +65,12 @@ export class SubscriptionInMethod {
    */
   postPathLocalValid(
     subscriptionId: string,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      subscriptionId,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { subscriptionId, options },
       postPathLocalValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 
   /**
@@ -93,22 +82,18 @@ export class SubscriptionInMethod {
    */
   postSwaggerLocalValid(
     subscriptionId: string,
-    options?: coreHttp.OperationOptions
-  ): Promise<coreHttp.RestResponse> {
-    const operationArguments: coreHttp.OperationArguments = {
-      subscriptionId,
-      options: coreHttp.operationOptionsToRequestOptionsBase(options || {})
-    };
+    options?: coreClient.OperationOptions
+  ): Promise<void> {
     return this.client.sendOperationRequest(
-      operationArguments,
+      { subscriptionId, options },
       postSwaggerLocalValidOperationSpec
-    ) as Promise<coreHttp.RestResponse>;
+    );
   }
 }
 // Operation Specifications
-const serializer = new coreHttp.Serializer(Mappers, /* isXml */ false);
+const serializer = coreClient.createSerializer(Mappers, /* isXml */ false);
 
-const postMethodLocalValidOperationSpec: coreHttp.OperationSpec = {
+const postMethodLocalValidOperationSpec: coreClient.OperationSpec = {
   path:
     "/azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}",
   httpMethod: "POST",
@@ -122,7 +107,7 @@ const postMethodLocalValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const postMethodLocalNullOperationSpec: coreHttp.OperationSpec = {
+const postMethodLocalNullOperationSpec: coreClient.OperationSpec = {
   path:
     "/azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}",
   httpMethod: "POST",
@@ -136,7 +121,7 @@ const postMethodLocalNullOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const postPathLocalValidOperationSpec: coreHttp.OperationSpec = {
+const postPathLocalValidOperationSpec: coreClient.OperationSpec = {
   path:
     "/azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}",
   httpMethod: "POST",
@@ -150,7 +135,7 @@ const postPathLocalValidOperationSpec: coreHttp.OperationSpec = {
   headerParameters: [Parameters.accept],
   serializer
 };
-const postSwaggerLocalValidOperationSpec: coreHttp.OperationSpec = {
+const postSwaggerLocalValidOperationSpec: coreClient.OperationSpec = {
   path:
     "/azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}",
   httpMethod: "POST",

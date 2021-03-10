@@ -1,5 +1,6 @@
 import { RequiredOptionalClient } from "./generated/requiredOptional/src";
 import { assert } from "chai";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("Swagger that needs no mapper", () => {
   let client: RequiredOptionalClient;
@@ -9,23 +10,19 @@ describe("Swagger that needs no mapper", () => {
 
   describe("Implicit Optional", () => {
     it("should handle putOptionalQuery", async () => {
-      const result = await client.implicit.putOptionalQuery();
-      assert.equal(result._response.status, 200);
+      await client.implicit.putOptionalQuery(responseStatusChecker);
     });
 
     it("should handle putOptionalHeader", async () => {
-      const result = await client.implicit.putOptionalHeader();
-      assert.equal(result._response.status, 200);
+      await client.implicit.putOptionalHeader(responseStatusChecker);
     });
 
     it("should handle putOptionalBody", async () => {
-      const result = await client.implicit.putOptionalBody();
-      assert.equal(result._response.status, 200);
+      await client.implicit.putOptionalBody(responseStatusChecker);
     });
 
     it("should handle getOptionalGlobalQuery", async () => {
-      const result = await client.implicit.getOptionalGlobalQuery();
-      assert.equal(result._response.status, 200);
+      await client.implicit.getOptionalGlobalQuery(responseStatusChecker);
     });
 
     it("should handle getRequiredPath", async () => {
@@ -60,58 +57,47 @@ describe("Swagger that needs no mapper", () => {
 
   describe("Explicit Optional", () => {
     it("should handle postOptionalArrayHeader", async () => {
-      const result = await client.explicit.postOptionalArrayHeader();
-      assert.equal(result._response.status, 200);
+      await client.explicit.postOptionalArrayHeader(responseStatusChecker);
     });
 
     it("should handle postOptionalArrayParameter", async () => {
-      const result = await client.explicit.postOptionalArrayParameter();
-      assert.equal(result._response.status, 200);
+      await client.explicit.postOptionalArrayParameter(responseStatusChecker);
     });
 
     it("should handle postOptionalArrayProperty", async () => {
-      const result = await client.explicit.postOptionalArrayProperty();
-      assert.equal(result._response.status, 200);
+      await client.explicit.postOptionalArrayProperty(responseStatusChecker);
     });
 
     it("should handle postOptionalClassParameter", async () => {
-      const result = await client.explicit.postOptionalClassParameter();
-      assert.equal(result._response.status, 200);
+      await client.explicit.postOptionalClassParameter(responseStatusChecker);
     });
 
     it("should handle postOptionalClassProperty", async () => {
-      const result = await client.explicit.postOptionalClassProperty();
-      assert.equal(result._response.status, 200);
+      await client.explicit.postOptionalClassProperty(responseStatusChecker);
     });
 
     it("should handle postOptionalIntegerHeader", async () => {
-      const result = await client.explicit.postOptionalIntegerHeader();
-      assert.equal(result._response.status, 200);
+      await client.explicit.postOptionalIntegerHeader(responseStatusChecker);
     });
 
     it("should handle postOptionalIntegerParameter", async () => {
-      const result = await client.explicit.postOptionalIntegerParameter();
-      assert.equal(result._response.status, 200);
+      await client.explicit.postOptionalIntegerParameter(responseStatusChecker);
     });
 
     it("should handle postOptionalIntegerProperty", async () => {
-      const result = await client.explicit.postOptionalIntegerProperty();
-      assert.equal(result._response.status, 200);
+      await client.explicit.postOptionalIntegerProperty(responseStatusChecker);
     });
 
     it("should handle postOptionalStringHeader", async () => {
-      const result = await client.explicit.postOptionalStringHeader();
-      assert.equal(result._response.status, 200);
+      await client.explicit.postOptionalStringHeader(responseStatusChecker);
     });
 
     it("should handle postOptionalStringParameter", async () => {
-      const result = await client.explicit.postOptionalStringParameter();
-      assert.equal(result._response.status, 200);
+      await client.explicit.postOptionalStringParameter(responseStatusChecker);
     });
 
     it("should handle postOptionalStringProperty", async () => {
-      const result = await client.explicit.postOptionalStringProperty();
-      assert.equal(result._response.status, 200);
+      await client.explicit.postOptionalStringProperty(responseStatusChecker);
     });
 
     it("should handle postRequiredArrayHeader", async () => {

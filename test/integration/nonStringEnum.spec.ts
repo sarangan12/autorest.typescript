@@ -1,5 +1,7 @@
 import { NonStringEnumClient } from "./generated/nonStringEnum/src";
 import { assert } from "chai";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
+
 describe("Swagger that needs no mapper", () => {
   let client: NonStringEnumClient;
   beforeEach(() => {
@@ -17,12 +19,16 @@ describe("Swagger that needs no mapper", () => {
   });
 
   it("should handle float with put", async () => {
-    const result = await client.float.put({ input: 200.4 });
-    assert.equal(result._response.status, 200);
+    const result = await client.float.put({
+      ...responseStatusChecker,
+      input: 200.4
+    });
   });
 
   it("should handle int with put", async () => {
-    const result = await client.int.put({ input: 200 });
-    assert.equal(result._response.status, 200);
+    const result = await client.int.put({
+      ...responseStatusChecker,
+      input: 200
+    });
   });
 });

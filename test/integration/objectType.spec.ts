@@ -1,5 +1,6 @@
 import { assert } from "chai";
 import { ObjectTypeClient } from "./generated/objectType/src";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("ObjectType", () => {
   let client: ObjectTypeClient;
@@ -16,8 +17,7 @@ describe("ObjectType", () => {
   });
 
   it("should put an object", async () => {
-    const result = await client.put({ foo: "bar" });
-    assert.strictEqual(result._response.status, 200);
+    await client.put({ foo: "bar" }, responseStatusChecker);
   });
 
   it("should throw puttin and invalid object", async () => {

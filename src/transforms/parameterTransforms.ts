@@ -62,7 +62,7 @@ const buildCredentialsParameter = (useCoreV2: boolean): ParameterDetails => ({
   typeDetails: {
     typeName: !useCoreV2
       ? "coreHttp.TokenCredential | coreHttp.ServiceClientCredentials"
-      : "coreAuth.TokenCredential | coreHttp.ServiceClientCredentials",
+      : "coreAuth.TokenCredential",
     kind: PropertyKind.Primitive,
     usedModels: []
   },

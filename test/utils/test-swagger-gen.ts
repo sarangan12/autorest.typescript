@@ -53,7 +53,8 @@ const testSwaggers: { [name: string]: SwaggerConfig } = {
     licenseHeader: true,
     addCredentials: true,
     credentialScopes:
-      "https://microsoft.com/.default,http://microsoft.com/.default"
+      "https://microsoft.com/.default,http://microsoft.com/.default",
+    useCoreV2: true
   },
   bodyArray: {
     swaggerOrConfig: "body-array.json",
