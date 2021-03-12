@@ -6,7 +6,7 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { createSpanFunction } from "@azure/core-client";
+import { createSpanFunction } from "@azure/core-http";
 
 export const createSpan = createSpanFunction({
   namespace: "Microsoft.Media.Types",
