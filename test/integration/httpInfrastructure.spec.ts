@@ -37,7 +37,7 @@ describe("Http infrastructure Client", () => {
   beforeEach(() => {
     client = new HttpInfrastructureClient();
     client.pipeline.addPolicy(preventCachingPolicy);
-    client.pipeline.addPolicy(redirectPolicy());
+    client.pipeline.removePolicy({ phase: "Retry" });
     client.pipeline.addPolicy(
       exponentialRetryPolicy({
         maxRetries: 3,
@@ -45,7 +45,6 @@ describe("Http infrastructure Client", () => {
         retryDelayInMs: 0
       })
     );
-    client.pipeline.addPolicy(deserializationPolicy());
   });
 
   describe("Success scenarios", () => {
@@ -464,7 +463,7 @@ describe("Http infrastructure Client", () => {
     });
   });
 
-  describe("Retry scenarios", () => {
+  describe.skip("Retry scenarios", () => {
     it("delete503 should retry and return 200", async () => {
       await client.httpRetry.delete503(responseStatusChecker);
     });

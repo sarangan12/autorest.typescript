@@ -12,10 +12,36 @@ import {
   SignedIdentifier
 } from "./generated/xmlservice/src";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
+import {
+  deserializationPolicy,
+  deserializationPolicyName,
+  serializationPolicy,
+  serializationPolicyName
+} from "@azure/core-client";
+import { stringifyXML, parseXML } from "@azure/core-xml";
+
 should();
 const testClient = new XmlServiceClient({
   endpoint: "http://localhost:3000"
 });
+testClient.pipeline.removePolicy({ name: serializationPolicyName });
+testClient.pipeline.removePolicy({ name: deserializationPolicyName });
+testClient.pipeline.addPolicy(
+  serializationPolicy({
+    stringifyXML
+  }),
+  {
+    phase: "Serialize"
+  }
+);
+testClient.pipeline.addPolicy(
+  deserializationPolicy({
+    parseXML
+  }),
+  {
+    phase: "Deserialize"
+  }
+);
 
 function getAbortController() {
   return new AbortController();
@@ -38,7 +64,7 @@ describe("typescript", function() {
       result.id?.should.be.equals(42);
     });
 
-    it("should be able to abort a simple XML get", async function() {
+    it.only("should be able to abort a simple XML get", async function() {
       const controller = getAbortController();
       const slideshowPromise = testClient.xml.getSimple({
         abortSignal: controller.signal

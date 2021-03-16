@@ -64,8 +64,7 @@ describe("Integration tests for extensible enums", () => {
         name: "Retriever",
         intEnum: "3",
         daysOfWeek: "Sunday"
-      },
-      ...defaultOptions
+      }
     });
     assert.deepEqual(response, expected);
   });

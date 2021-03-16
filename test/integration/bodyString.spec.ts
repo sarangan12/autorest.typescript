@@ -18,7 +18,7 @@ describe("Integration tests for BodyString", () => {
       await client.string.putNull();
     });
 
-    it.only("should support valid empty string value", async function() {
+    it("should support valid empty string value", async function() {
       await client.string.putEmpty();
       const result = await client.string.getEmpty();
       deepStrictEqual(result, { body: "" });
