@@ -305,8 +305,7 @@ const testSwaggers: { [name: string]: SwaggerConfig } = {
     tracing: {
       namespace: "Microsoft.Media.Types",
       packagePrefix: "Azure.Media.Types"
-    },
-    useCoreV2: true
+    }
   },
   pagingNoIterators: {
     swaggerOrConfig: "paging.json",

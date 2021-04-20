@@ -104,7 +104,7 @@ export async function generateTypeScriptLibrary(
   generateParameters(clientDetails, project, useCoreV2);
   generateIndexFile(clientDetails, project);
   await generateLROFiles(clientDetails, project);
-  generateTracingFile(clientDetails, project);
+  generateTracingFile(clientDetails, project, useCoreV2);
 
   const licenseHeader = `
 /*
