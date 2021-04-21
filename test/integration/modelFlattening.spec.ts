@@ -7,12 +7,14 @@ import {
   SimpleProduct
 } from "./generated/modelFlattening/src/models";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("ModelFlatteningClient", () => {
   let client: ModelFlatteningClient;
 
   beforeEach(() => {
     client = new ModelFlatteningClient();
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   it("should get array", async () => {

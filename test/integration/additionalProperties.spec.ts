@@ -15,6 +15,7 @@ import {
   PetsCreateAPInPropertiesWithAPStringResponse
 } from "./generated/additionalProperties/src";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 /**
  * Returns an interface that omits the _response field.
@@ -28,6 +29,7 @@ describe("AdditionalPropertiesClient", () => {
 
   beforeEach(() => {
     client = new AdditionalPropertiesClient();
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   describe("#createAPTrue", () => {

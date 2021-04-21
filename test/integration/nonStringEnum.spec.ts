@@ -1,12 +1,14 @@
 import { NonStringEnumClient } from "./generated/nonStringEnum/src";
 import { assert } from "chai";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Swagger that needs no mapper", () => {
   let client: NonStringEnumClient;
 
   beforeEach(() => {
     client = new NonStringEnumClient();
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   it("should handle float with get", async () => {

@@ -2,6 +2,7 @@ import * as coreHttp from "@azure/core-http";
 import { should, assert } from "chai";
 import { isEqual } from "lodash";
 import { HeaderClient } from "./generated/header/src";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 should();
 
@@ -11,6 +12,7 @@ describe("typescript", function() {
       let testClient: HeaderClient;
       beforeEach(() => {
         testClient = new HeaderClient();
+        testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
       });
 
       it("should override existing headers (nodejs only)", async function() {

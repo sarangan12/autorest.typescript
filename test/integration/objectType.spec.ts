@@ -1,12 +1,14 @@
 import { assert } from "chai";
 import { ObjectTypeClient } from "./generated/objectType/src";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("ObjectType", () => {
   let client: ObjectTypeClient;
 
   beforeEach(() => {
     client = new ObjectTypeClient();
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   it("should get an object", async () => {

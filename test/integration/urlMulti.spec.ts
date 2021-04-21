@@ -1,11 +1,13 @@
 import { UrlMultiClient } from "./generated/urlMulti/src";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("URLMultiCollectionFormat", () => {
   let client: UrlMultiClient;
 
   beforeEach(() => {
     client = new UrlMultiClient();
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   it("should handle arrayStringMultiEmpty", async () => {

@@ -4,6 +4,7 @@ import {
   Product
 } from "./generated/customUrlPaging/src";
 import { assert } from "chai";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Custom URL + Paging", () => {
   let client: CustomUrlPagingClient;
@@ -13,6 +14,7 @@ describe("Custom URL + Paging", () => {
       host: "host:3000"
     };
     client = new CustomUrlPagingClient(clientOptions);
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   describe("Paging", () => {

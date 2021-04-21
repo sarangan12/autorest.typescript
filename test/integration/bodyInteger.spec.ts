@@ -1,12 +1,14 @@
 import { expect } from "chai";
 import { BodyIntegerClient } from "./generated/bodyInteger/src";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Integration tests for BodyInteger", () => {
   let client: BodyIntegerClient;
 
   beforeEach(() => {
     client = new BodyIntegerClient();
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   it("should put max value for 32 bit Integers", async () => {

@@ -13,9 +13,9 @@ import {
   GoblinSharkColor,
   DotSalmon
 } from "./generated/bodyComplex/src";
-import { RequestPolicyFactory } from "@azure/core-http";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
 import { PipelinePolicy } from "@azure/core-rest-pipeline";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 const clientOptions = {
   endpoint: "http://localhost:3000"
@@ -28,6 +28,7 @@ const clientOptions = {
         let testClient: BodyComplexClient | BodyComplexWithTracing;
         beforeEach(() => {
           testClient = new Client(clientOptions);
+          testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
         });
         it("should get and put valid basic type properties", async function() {
           const result = await testClient.basic.getValid();
@@ -73,6 +74,7 @@ const clientOptions = {
         let testClient: BodyComplexClient | BodyComplexWithTracing;
         beforeEach(() => {
           testClient = new BodyComplexClient(clientOptions);
+          testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
         });
 
         it("should handle getComplexPolymorphismDotSyntax", async () => {
@@ -259,6 +261,7 @@ const clientOptions = {
         let testClient: BodyComplexClient | BodyComplexWithTracing;
         beforeEach(() => {
           testClient = new BodyComplexClient(clientOptions);
+          testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
         });
         it("should get valid array type properties", async () => {
           const testArray: string[] = [
@@ -295,6 +298,7 @@ const clientOptions = {
         let testClient: BodyComplexClient | BodyComplexWithTracing;
         beforeEach(() => {
           testClient = new BodyComplexClient(clientOptions);
+          testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
         });
 
         it("should get and put valid dictionary type properties", async () => {
@@ -348,6 +352,7 @@ const clientOptions = {
 
         beforeEach(() => {
           testClient = new BodyComplexClient(clientOptions);
+          testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
         });
 
         it("should get valid basic type properties", async () => {
@@ -362,6 +367,7 @@ const clientOptions = {
         let testClient: BodyComplexClient | BodyComplexWithTracing;
         beforeEach(() => {
           testClient = new BodyComplexClient(clientOptions);
+          testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
         });
         it("should get and put complex types with readonly properties", async () => {
           const result = await testClient.readonlyproperty.getValid();
@@ -408,6 +414,7 @@ const clientOptions = {
         let testClient: BodyComplexClient | BodyComplexWithTracing;
         beforeEach(() => {
           testClient = new BodyComplexClient(clientOptions);
+          testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
         });
 
         it("should handle getComplexPolymorphismDotSyntax", async () => {
@@ -714,6 +721,7 @@ const clientOptions = {
         let testClient: BodyComplexClient | BodyComplexWithTracing;
         beforeEach(() => {
           testClient = new BodyComplexClient(clientOptions);
+          testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
         });
         it("should get and put valid basic type properties", async function() {
           const result = await testClient.polymorphicrecursive.getValid();
@@ -770,10 +778,9 @@ describe("Validate pipelines", () => {
   });
 
   it("should execute custom pipeline when passed in a factory array", async () => {
-    const client = new BodyComplexClient({
-      endpoint: "http://localhost:3000"
-    });
+    const client = new BodyComplexClient();
     client.pipeline.addPolicy(customPolicy);
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
     const result = await client.basic.getValid({
       onResponse: rawResponse => {
         // Verify that a default policy was executed

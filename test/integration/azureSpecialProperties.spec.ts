@@ -12,6 +12,7 @@ import {
   createHttpHeaders,
   setClientRequestIdPolicyName
 } from "@azure/core-rest-pipeline";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("auth validation", () => {
   it("should add authorization header", async () => {
@@ -34,6 +35,7 @@ describe("auth validation", () => {
       mockCredential,
       "1234-5678-9012-3456"
     );
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
 
     await client.apiVersionDefault.getMethodGlobalValid(responseStatusChecker);
 
@@ -68,6 +70,7 @@ describe("AzureSpecialProperties", () => {
       dummySubscriptionId,
       clientOptions
     );
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   describe("apiVersionDefault", () => {
@@ -235,12 +238,12 @@ describe("AzureSpecialProperties", () => {
 
     it("should overwrite x-ms-client-request-id, get", async function() {
       const options: OperationOptions = {
-        ...responseStatusChecker,
         requestOptions: {
           customHeaders: {
             "x-ms-client-request-id": validClientId
           }
-        }
+        },
+        ...responseStatusChecker
       };
       let result = await client.xMsClientRequestId.get(options);
       // assert.equal(result._response!.headers.get("x-ms-request-id"), "123");
@@ -255,6 +258,7 @@ describe("AzureSpecialProperties", () => {
           //generateClientRequestIdHeader: false
         }
       );
+      client.pipeline.addPolicy(allowInsecureConnectionPolicy());
       client.pipeline.removePolicy({ name: setClientRequestIdPolicyName });
 
       let _response: FullOperationResponse;
@@ -299,6 +303,7 @@ describe("AzureSpecialProperties", () => {
           // generateClientRequestIdHeader: false
         }
       );
+      client.pipeline.addPolicy(allowInsecureConnectionPolicy());
       client.pipeline.removePolicy({ name: setClientRequestIdPolicyName });
       let _response: FullOperationResponse;
       const result = await client.header.customNamedRequestId(
@@ -327,6 +332,7 @@ describe("AzureSpecialProperties", () => {
           //generateClientRequestIdHeader: false
         }
       );
+      testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
       testClient.pipeline.removePolicy({ name: setClientRequestIdPolicyName });
       let _response: FullOperationResponse;
       const result = await testClient.header.customNamedRequestIdParamGrouping(
@@ -385,6 +391,7 @@ describe("AzureSpecialProperties", () => {
           endpoint: "http://usethisone.com"
         }
       );
+      client.pipeline.addPolicy(allowInsecureConnectionPolicy());
       const response = await client.apiVersionDefault.getMethodGlobalValid({
         onResponse: r => {
           _response = r;

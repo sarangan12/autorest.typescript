@@ -4,7 +4,10 @@ import {
   PipelinePolicy,
   redirectPolicy,
   exponentialRetryPolicy,
-  RestError
+  RestError,
+  PipelineRequest,
+  SendRequest,
+  PipelineResponse
 } from "@azure/core-rest-pipeline";
 import { deserializationPolicy } from "@azure/core-client";
 import { isNode } from "@azure/core-util";
@@ -18,6 +21,7 @@ import {
   responseStatusChecker302,
   responseStatusChecker404
 } from "../utils/responseStatusChecker";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 function preventCachingPolicy(): PipelinePolicy {
   return {
@@ -58,6 +62,7 @@ describe("Http infrastructure Client", () => {
         retryDelayInMs: 0
       })
     );
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   describe("Success scenarios", () => {

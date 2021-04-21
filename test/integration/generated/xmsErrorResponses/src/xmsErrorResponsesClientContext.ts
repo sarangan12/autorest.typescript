@@ -29,7 +29,7 @@ export class XmsErrorResponsesClientContext extends coreClient.ServiceClient {
     const optionsWithDefaults = {
       ...defaults,
       ...options,
-      baseUri: options.endpoint || "https://localhost"
+      baseUri: options.endpoint || "http://localhost"
     };
 
     super(optionsWithDefaults);

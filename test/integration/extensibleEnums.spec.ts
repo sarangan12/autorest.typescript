@@ -4,12 +4,14 @@ import {
   PetGetByPetIdResponse
 } from "./generated/extensibleEnums/src";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Integration tests for extensible enums", () => {
   let client: ExtensibleEnumsClient;
 
   beforeEach(() => {
     client = new ExtensibleEnumsClient();
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   it("sends an unexpected enum value successfully", async () => {

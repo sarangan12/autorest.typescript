@@ -7,6 +7,7 @@ import {
   countBytesFromStream
 } from "../utils/stream-helpers";
 import { BodyFileClient } from "./generated/bodyFile/src";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 async function readFile(path: string): Promise<Buffer> {
   return new Promise((resolve, reject) => {
@@ -24,6 +25,7 @@ describe("BodyFile Client", () => {
 
   beforeEach("create client", () => {
     client = new BodyFileClient();
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   if (isNode) {

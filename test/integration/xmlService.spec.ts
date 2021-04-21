@@ -19,11 +19,13 @@ import {
   serializationPolicyName
 } from "@azure/core-client";
 import { stringifyXML, parseXML } from "@azure/core-xml";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 should();
 const testClient = new XmlServiceClient({
   endpoint: "http://localhost:3000"
 });
+testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
 testClient.pipeline.removePolicy({ name: serializationPolicyName });
 testClient.pipeline.removePolicy({ name: deserializationPolicyName });
 testClient.pipeline.addPolicy(

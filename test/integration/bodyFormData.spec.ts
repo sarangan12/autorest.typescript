@@ -5,12 +5,15 @@ import {
 } from "./generated/bodyFormData/src";
 import { assert } from "chai";
 import * as fs from "fs";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Integration tests for BodyFormData", () => {
   let client: BodyFormDataClient;
 
   it("should correctly accept file via form", async () => {
     client = new BodyFormDataClient();
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
+
     const fileName: string = `sample.png`;
     const filePath: string = `${__dirname}/../res/${fileName}`;
     const fileContent = fs.readFileSync(filePath);
@@ -28,6 +31,7 @@ describe("Integration tests for BodyFormData", () => {
 
   it.skip("should correctly accept file via body", async function() {
     client = new BodyFormDataClient();
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
     const fileName: string = `sample.png`;
     const filePath: string = `${__dirname}/../res/${fileName}`;
     const fileContent = fs.readFileSync(filePath);
@@ -44,6 +48,7 @@ describe("Integration tests for BodyFormData", () => {
 
   it("should report upload/download progress", async function() {
     client = new BodyFormDataClient();
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
     const content = new Uint8Array(1024 * 1024 * 1);
     let uploadNotified = false;
     let downloadNotified = false;

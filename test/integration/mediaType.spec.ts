@@ -2,6 +2,7 @@ import { expect } from "chai";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
 import { MediaTypesClient } from "./generated/mediaTypes/src";
 import { MediaTypesWithTracingClient } from "./generated/mediaTypesWithTracing/src";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 [MediaTypesClient, MediaTypesWithTracingClient].forEach(MediaTypes => {
   describe(`Integration tests for ${MediaTypes.name}`, () => {
@@ -9,6 +10,7 @@ import { MediaTypesWithTracingClient } from "./generated/mediaTypesWithTracing/s
 
     beforeEach(() => {
       client = new MediaTypes();
+      client.pipeline.addPolicy(allowInsecureConnectionPolicy());
       client.pipeline.addPolicy({
         sendRequest(httpRequest, next) {
           const contentType = httpRequest.headers.get("Content-Type");
@@ -52,6 +54,7 @@ import { MediaTypesWithTracingClient } from "./generated/mediaTypesWithTracing/s
     describe("#contentTypeWithEncoding", () => {
       it("works with text/plain", async () => {
         client = new MediaTypes();
+        client.pipeline.addPolicy(allowInsecureConnectionPolicy());
         const response = await client.contentTypeWithEncoding({
           input: "test",
           requestOptions: {

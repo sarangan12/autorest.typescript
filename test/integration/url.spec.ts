@@ -1,6 +1,7 @@
 import * as assert from "assert";
 import { UrlClient, UriColor } from "./generated/url/src";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Integration tests for Url", () => {
   let client: UrlClient;
@@ -11,6 +12,7 @@ describe("Integration tests for Url", () => {
       endpoint: "http://localhost:3000"
     };
     client = new UrlClient("globalStringPath", clientOptions);
+    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   describe("paths", () => {

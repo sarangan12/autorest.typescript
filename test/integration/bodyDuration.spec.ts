@@ -2,12 +2,14 @@ import { BodyDurationClient } from "./generated/bodyDuration/src";
 import { expect } from "chai";
 import { fail } from "assert";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("BodyDateClient", function() {
   let testClient: BodyDurationClient;
 
   beforeEach(() => {
     testClient = new BodyDurationClient();
+    testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   it("should properly handle null value for Duration", async () => {

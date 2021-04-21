@@ -1,12 +1,14 @@
 import { BodyDateClient } from "./generated/bodyDate/src";
 import { expect } from "chai";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
+import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("BodyDateClient", function() {
   let testClient: BodyDateClient;
 
   beforeEach(() => {
     testClient = new BodyDateClient();
+    testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   it("should get min date", async () => {
