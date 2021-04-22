@@ -7,9 +7,10 @@ import {
   RestError,
   PipelineRequest,
   SendRequest,
-  PipelineResponse
+  PipelineResponse,
+  proxyPolicy,
+  proxyPolicyName
 } from "@azure/core-rest-pipeline";
-import { deserializationPolicy } from "@azure/core-client";
 import { isNode } from "@azure/core-util";
 
 import {
@@ -22,18 +23,7 @@ import {
   responseStatusChecker404
 } from "../utils/responseStatusChecker";
 import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
-
-function preventCachingPolicy(): PipelinePolicy {
-  return {
-    name: "preventCachingPolicy",
-    async sendRequest(
-      request: PipelineRequest,
-      next: SendRequest
-    ): Promise<PipelineResponse> {
-      return next(request);
-    }
-  };
-}
+import { HttpClientWithCookieSupport } from "./testPolicies/HttpClientWithCookieSupport";
 
 describe("Http infrastructure Client", () => {
   let client: HttpInfrastructureClient;
@@ -52,7 +42,9 @@ describe("Http infrastructure Client", () => {
   };
 
   beforeEach(() => {
-    client = new HttpInfrastructureClient();
+    client = new HttpInfrastructureClient({
+      httpClient: new HttpClientWithCookieSupport()
+    });
     client.pipeline.addPolicy(preventCachingPolicy);
     client.pipeline.removePolicy({ phase: "Retry" });
     client.pipeline.addPolicy(
@@ -63,6 +55,10 @@ describe("Http infrastructure Client", () => {
       })
     );
     client.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    // client.pipeline.removePolicy({ name: proxyPolicyName });
+    // client.pipeline.addPolicy(
+    //   proxyPolicy({ host: "http://127.0.0.1", port: 8888 })
+    // );
   });
 
   describe("Success scenarios", () => {
@@ -484,7 +480,7 @@ describe("Http infrastructure Client", () => {
   describe("Retry scenarios", () => {
     it("delete503 should retry and return 200", async () => {
       await client.httpRetry.delete503(responseStatusChecker);
-    });
+    }).timeout(150000);
 
     it("get502 should retry and return 200", async () => {
       await client.httpRetry.get502(responseStatusChecker);
