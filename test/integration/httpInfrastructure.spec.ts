@@ -22,7 +22,7 @@ import {
   responseStatusChecker302,
   responseStatusChecker404
 } from "../utils/responseStatusChecker";
-import { HttpClientWithCookieSupport } from "./testPolicies/HttpClientWithCookieSupport";
+import { HttpClientWithCookieSupport } from "./testUtils/HttpClientWithCookieSupport";
 
 describe("Http infrastructure Client", () => {
   let client: HttpInfrastructureClient;
