@@ -19,13 +19,12 @@ import {
   serializationPolicyName
 } from "@azure/core-client";
 import { stringifyXML, parseXML } from "@azure/core-xml";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 should();
 const testClient = new XmlServiceClient({
-  endpoint: "http://localhost:3000"
+  endpoint: "http://localhost:3000",
+  allowInsecureConnection: true
 });
-testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
 testClient.pipeline.removePolicy({ name: serializationPolicyName });
 testClient.pipeline.removePolicy({ name: deserializationPolicyName });
 testClient.pipeline.addPolicy(
@@ -66,7 +65,7 @@ describe("typescript", function() {
       result.id?.should.be.equals(42);
     });
 
-    it.only("should be able to abort a simple XML get", async function() {
+    it("should be able to abort a simple XML get", async function() {
       const controller = getAbortController();
       const slideshowPromise = testClient.xml.getSimple({
         abortSignal: controller.signal

@@ -1,14 +1,12 @@
 import { BodyBooleanQuirksClient } from "./generated/bodyBooleanQuirks/src";
 import { expect } from "chai";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Bool Quirks Client", function() {
   let testClient: BodyBooleanQuirksClient;
 
   beforeEach(() => {
-    testClient = new BodyBooleanQuirksClient();
-    testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    testClient = new BodyBooleanQuirksClient({ allowInsecureConnection: true });
   });
 
   it("should get true value", async () => {

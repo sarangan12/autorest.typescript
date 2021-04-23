@@ -1,13 +1,11 @@
 import { equal, fail, ok, deepStrictEqual } from "assert";
 import { BodyStringClient, Colors } from "./generated/bodyString/src";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Integration tests for BodyString", () => {
   let client: BodyStringClient;
 
   beforeEach(() => {
-    client = new BodyStringClient();
-    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    client = new BodyStringClient({ allowInsecureConnection: true });
   });
 
   describe("Acceptance tests", () => {

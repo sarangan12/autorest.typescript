@@ -12,7 +12,6 @@ import {
   createHttpHeaders,
   setClientRequestIdPolicyName
 } from "@azure/core-rest-pipeline";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("auth validation", () => {
   it("should add authorization header", async () => {
@@ -33,9 +32,9 @@ describe("auth validation", () => {
 
     const client = new AzureSpecialPropertiesClient(
       mockCredential,
-      "1234-5678-9012-3456"
+      "1234-5678-9012-3456",
+      { allowInsecureConnection: true }
     );
-    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
 
     await client.apiVersionDefault.getMethodGlobalValid(responseStatusChecker);
 
@@ -58,6 +57,7 @@ describe("AzureSpecialProperties", () => {
 
     clientOptions = {
       // generateClientRequestIdHeader: true
+      allowInsecureConnection: true
     };
 
     dummyCredentials = (new BasicAuthenticationCredentials(
@@ -70,7 +70,6 @@ describe("AzureSpecialProperties", () => {
       dummySubscriptionId,
       clientOptions
     );
-    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   describe("apiVersionDefault", () => {
@@ -258,7 +257,6 @@ describe("AzureSpecialProperties", () => {
           //generateClientRequestIdHeader: false
         }
       );
-      client.pipeline.addPolicy(allowInsecureConnectionPolicy());
       client.pipeline.removePolicy({ name: setClientRequestIdPolicyName });
 
       let _response: FullOperationResponse;
@@ -303,7 +301,6 @@ describe("AzureSpecialProperties", () => {
           // generateClientRequestIdHeader: false
         }
       );
-      client.pipeline.addPolicy(allowInsecureConnectionPolicy());
       client.pipeline.removePolicy({ name: setClientRequestIdPolicyName });
       let _response: FullOperationResponse;
       const result = await client.header.customNamedRequestId(
@@ -332,7 +329,6 @@ describe("AzureSpecialProperties", () => {
           //generateClientRequestIdHeader: false
         }
       );
-      testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
       testClient.pipeline.removePolicy({ name: setClientRequestIdPolicyName });
       let _response: FullOperationResponse;
       const result = await testClient.header.customNamedRequestIdParamGrouping(
@@ -391,7 +387,6 @@ describe("AzureSpecialProperties", () => {
           endpoint: "http://usethisone.com"
         }
       );
-      client.pipeline.addPolicy(allowInsecureConnectionPolicy());
       const response = await client.apiVersionDefault.getMethodGlobalValid({
         onResponse: r => {
           _response = r;

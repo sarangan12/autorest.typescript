@@ -4,17 +4,16 @@ import {
   Product
 } from "./generated/customUrlPaging/src";
 import { assert } from "chai";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Custom URL + Paging", () => {
   let client: CustomUrlPagingClient;
 
   beforeEach(() => {
     const clientOptions: CustomUrlPagingClientOptionalParams = {
-      host: "host:3000"
+      host: "host:3000",
+      allowInsecureConnection: true
     };
     client = new CustomUrlPagingClient(clientOptions);
-    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   describe("Paging", () => {

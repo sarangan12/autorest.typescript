@@ -1,15 +1,15 @@
 import { AppConfigurationClient } from "./generated/appconfigurationexport/src";
 import * as fs from "fs";
 import { assert } from "chai";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Check Internal Header", () => {
   let client: AppConfigurationClient;
 
   beforeEach(() => {
     const endpoint: string = "sampleEndPoint";
-    client = new AppConfigurationClient(endpoint);
-    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    client = new AppConfigurationClient(endpoint, {
+      allowInsecureConnection: true
+    });
     assert.notEqual(client, null);
   });
 

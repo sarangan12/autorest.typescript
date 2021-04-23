@@ -9,7 +9,6 @@ import {
   XmsErrorResponsesClientOptionalParams
 } from "./generated/xmsErrorResponses/src";
 import { parseXML } from "@azure/core-xml";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Integration tests for XmsErrorResponsesClient", () => {
   let client: XmsErrorResponsesClient;
@@ -18,7 +17,8 @@ describe("Integration tests for XmsErrorResponsesClient", () => {
     let generatedClientOptions: XmsErrorResponsesClientOptionalParams = {};
     const clientOptions = {
       endpoint: "http://localhost:3000",
-      $host: "http://localhost:3000"
+      $host: "http://localhost:3000",
+      allowInsecureConnection: true
     };
     generatedClientOptions = {
       ...clientOptions,
@@ -30,7 +30,6 @@ describe("Integration tests for XmsErrorResponsesClient", () => {
     };
 
     client = new XmsErrorResponsesClient(generatedClientOptions);
-    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   it("should get an animal not found error", async () => {

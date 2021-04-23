@@ -1,6 +1,5 @@
 import { AzureParameterGroupingClient } from "./generated/azureParameterGrouping/src";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("AzureParameterGrouping", () => {
   let client: AzureParameterGroupingClient;
@@ -10,8 +9,9 @@ describe("AzureParameterGrouping", () => {
   const path = "path";
 
   beforeEach(() => {
-    client = new AzureParameterGroupingClient();
-    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    client = new AzureParameterGroupingClient({
+      allowInsecureConnection: true
+    });
   });
 
   it("should post optional", async () => {

@@ -1,14 +1,14 @@
 import { RequiredOptionalClient } from "./generated/requiredOptional/src";
 import { assert } from "chai";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Swagger that needs no mapper", () => {
   let client: RequiredOptionalClient;
 
   beforeEach(() => {
-    client = new RequiredOptionalClient("one", "two");
-    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    client = new RequiredOptionalClient("one", "two", {
+      allowInsecureConnection: true
+    });
   });
 
   describe("Implicit Optional", () => {
@@ -39,8 +39,9 @@ describe("Swagger that needs no mapper", () => {
 
     it("should handle getRequiredGlobalPath", async () => {
       try {
-        client = new RequiredOptionalClient(null as any, null as any);
-        client.pipeline.addPolicy(allowInsecureConnectionPolicy());
+        client = new RequiredOptionalClient(null as any, null as any, {
+          allowInsecureConnection: true
+        });
         await client.implicit.getRequiredGlobalPath();
         assert.fail("Expected client to throw");
       } catch (error) {
@@ -49,8 +50,9 @@ describe("Swagger that needs no mapper", () => {
     });
 
     it("should handle getRequiredGlobalQuery", async () => {
-      client = new RequiredOptionalClient(null as any, null as any);
-      client.pipeline.addPolicy(allowInsecureConnectionPolicy());
+      client = new RequiredOptionalClient(null as any, null as any, {
+        allowInsecureConnection: true
+      });
       try {
         await client.implicit.getRequiredGlobalQuery();
         assert.fail("Expected client to throw");

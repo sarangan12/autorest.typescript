@@ -16,14 +16,12 @@ import {
   DictionaryGetFloatInvalidStringResponse
 } from "./generated/bodyDictionary/src";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("BodyDictionary", () => {
   let client: BodyDictionaryClient;
 
   beforeEach(() => {
-    client = new BodyDictionaryClient();
-    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    client = new BodyDictionaryClient({ allowInsecureConnection: true });
   });
 
   it("should getArrayItemEmpty", async () => {

@@ -1,16 +1,15 @@
 import { ReportClient as AzureReportClient } from "./generated/azureReport/src/reportClient";
 import { ReportClient } from "./generated/report/src/reportClient";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Integration tests for Report", () => {
   let reportClient: ReportClient;
   let azureReportClient: AzureReportClient;
 
   beforeEach(() => {
-    reportClient = new ReportClient();
-    reportClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
-    azureReportClient = new AzureReportClient();
-    azureReportClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    reportClient = new ReportClient({ allowInsecureConnection: true });
+    azureReportClient = new AzureReportClient({
+      allowInsecureConnection: true
+    });
   });
 
   describe("#Test Coverage", () => {

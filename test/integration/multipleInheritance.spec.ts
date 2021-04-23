@@ -1,14 +1,12 @@
 import { MultipleInheritanceClient } from "./generated/multipleInheritance/src";
 import { assert } from "chai";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("MultipleInheritance", () => {
   let client: MultipleInheritanceClient;
 
   beforeEach(() => {
-    client = new MultipleInheritanceClient();
-    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    client = new MultipleInheritanceClient({ allowInsecureConnection: true });
   });
 
   it("should get a pet", async () => {

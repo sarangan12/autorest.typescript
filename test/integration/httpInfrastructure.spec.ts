@@ -22,7 +22,6 @@ import {
   responseStatusChecker302,
   responseStatusChecker404
 } from "../utils/responseStatusChecker";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 import { HttpClientWithCookieSupport } from "./testPolicies/HttpClientWithCookieSupport";
 
 describe("Http infrastructure Client", () => {
@@ -43,7 +42,8 @@ describe("Http infrastructure Client", () => {
 
   beforeEach(() => {
     client = new HttpInfrastructureClient({
-      httpClient: new HttpClientWithCookieSupport()
+      httpClient: new HttpClientWithCookieSupport(),
+      allowInsecureConnection: true
     });
     client.pipeline.addPolicy(preventCachingPolicy);
     client.pipeline.removePolicy({ phase: "Retry" });
@@ -54,7 +54,6 @@ describe("Http infrastructure Client", () => {
         retryDelayInMs: 0
       })
     );
-    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
     // client.pipeline.removePolicy({ name: proxyPolicyName });
     // client.pipeline.addPolicy(
     //   proxyPolicy({ host: "http://127.0.0.1", port: 8888 })

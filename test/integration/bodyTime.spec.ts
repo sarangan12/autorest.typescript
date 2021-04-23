@@ -1,7 +1,6 @@
 import { assert } from "chai";
 import { BodyTimeClient, TimeGetResponse } from "./generated/bodyTime/src";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 /**
  * Returns an interface that omits the _response field.
@@ -14,8 +13,7 @@ describe("BodyTimeClient", () => {
   let client: BodyTimeClient;
 
   beforeEach(() => {
-    client = new BodyTimeClient();
-    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    client = new BodyTimeClient({ allowInsecureConnection: true });
   });
 
   describe("#get", () => {

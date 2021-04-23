@@ -2,14 +2,14 @@ import { BodyDateTimeRfc1123Client } from "./generated/bodyDateTimeRfc1123/src";
 import { expect } from "chai";
 import { isNil } from "lodash";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("BodyDateTimeRfc1123Client", function() {
   let testClient: BodyDateTimeRfc1123Client;
 
   beforeEach(() => {
-    testClient = new BodyDateTimeRfc1123Client();
-    testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    testClient = new BodyDateTimeRfc1123Client({
+      allowInsecureConnection: true
+    });
   });
 
   it("should properly handle null value for DateTimeRfc1123", async () => {

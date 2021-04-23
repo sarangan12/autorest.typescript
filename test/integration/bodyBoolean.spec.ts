@@ -1,14 +1,12 @@
 import { BodyBooleanClient } from "./generated/bodyBoolean/src";
 import { expect } from "chai";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Bool Client", function() {
   let testClient: BodyBooleanClient;
 
   beforeEach(() => {
-    testClient = new BodyBooleanClient();
-    testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    testClient = new BodyBooleanClient({ allowInsecureConnection: true });
   });
 
   it("should get true value", async () => {

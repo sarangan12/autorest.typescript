@@ -1,14 +1,12 @@
 import { BodyDateTimeClient } from "./generated/bodyDateTime/src";
 import { expect } from "chai";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("BodyDateTime Client", function() {
   let testClient: BodyDateTimeClient;
 
   beforeEach(() => {
-    testClient = new BodyDateTimeClient();
-    testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    testClient = new BodyDateTimeClient({ allowInsecureConnection: true });
   });
 
   it("should get null datetime", async () => {

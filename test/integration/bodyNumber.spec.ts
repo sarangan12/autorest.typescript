@@ -1,14 +1,12 @@
 import { expect } from "chai";
 import { BodyNumberClient } from "./generated/bodyNumber/src";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Integration tests for BodyInteger", () => {
   let testClient: BodyNumberClient;
 
   beforeEach(() => {
-    testClient = new BodyNumberClient();
-    testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    testClient = new BodyNumberClient({ allowInsecureConnection: true });
   });
 
   it("should put big float", async () => {

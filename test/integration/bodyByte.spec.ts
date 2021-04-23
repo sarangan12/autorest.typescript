@@ -2,7 +2,6 @@ import { BodyByteClient } from "./generated/bodyByte/src";
 import { expect } from "chai";
 import { isNode } from "@azure/core-http";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Body Byte Client", function() {
   let testClient: BodyByteClient;
@@ -20,8 +19,7 @@ describe("Body Byte Client", function() {
   ]);
 
   beforeEach(() => {
-    testClient = new BodyByteClient();
-    testClient.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    testClient = new BodyByteClient({ allowInsecureConnection: true });
   });
 
   it("should get null value", async () => {

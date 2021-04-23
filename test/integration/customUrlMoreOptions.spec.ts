@@ -3,7 +3,6 @@ import {
   CustomUrlMoreOptionsClientOptionalParams
 } from "./generated/customUrlMoreOptions/src";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Custom URL More Options", () => {
   let client: CustomUrlMoreOptionsClient;
@@ -11,10 +10,10 @@ describe("Custom URL More Options", () => {
   beforeEach(() => {
     const clientOptions: CustomUrlMoreOptionsClientOptionalParams = {
       endpoint: "http://localhost:3000",
-      dnsSuffix: ""
+      dnsSuffix: "",
+      allowInsecureConnection: true
     };
     client = new CustomUrlMoreOptionsClient("test12", clientOptions);
-    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
   });
 
   describe("Paths", () => {

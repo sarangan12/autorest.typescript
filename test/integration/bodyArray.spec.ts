@@ -1,14 +1,12 @@
 import { expect, assert } from "chai";
 import { BodyArrayClient } from "./generated/bodyArray/src";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
-import { allowInsecureConnectionPolicy } from "./testPolicies/allowInsecureConnectionPolicy";
 
 describe("Integration tests for BodyArrayClient", () => {
   let client: BodyArrayClient;
 
   beforeEach(() => {
-    client = new BodyArrayClient();
-    client.pipeline.addPolicy(allowInsecureConnectionPolicy());
+    client = new BodyArrayClient({ allowInsecureConnection: true });
   });
 
   describe("test empty", () => {
