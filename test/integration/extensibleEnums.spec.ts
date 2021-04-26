@@ -9,7 +9,7 @@ describe("Integration tests for extensible enums", () => {
   let client: ExtensibleEnumsClient;
 
   beforeEach(() => {
-    client = new ExtensibleEnumsClient();
+    client = new ExtensibleEnumsClient({ allowInsecureConnection: true });
   });
 
   it("sends an unexpected enum value successfully", async () => {

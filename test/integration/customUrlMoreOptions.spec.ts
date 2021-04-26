@@ -2,7 +2,6 @@ import {
   CustomUrlMoreOptionsClient,
   CustomUrlMoreOptionsClientOptionalParams
 } from "./generated/customUrlMoreOptions/src";
-import { assert } from "chai";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("Custom URL More Options", () => {
@@ -11,7 +10,8 @@ describe("Custom URL More Options", () => {
   beforeEach(() => {
     const clientOptions: CustomUrlMoreOptionsClientOptionalParams = {
       endpoint: "http://localhost:3000",
-      dnsSuffix: ""
+      dnsSuffix: "",
+      allowInsecureConnection: true
     };
     client = new CustomUrlMoreOptionsClient("test12", clientOptions);
   });

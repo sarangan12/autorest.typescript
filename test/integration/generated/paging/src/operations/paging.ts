@@ -8,8 +8,10 @@
 
 import { CanonicalCode } from "@opentelemetry/api";
 import { createSpan } from "../tracing";
+import "@azure/core-paging";
 import { PagedAsyncIterableIterator } from "@azure/core-paging";
-import * as coreHttp from "@azure/core-http";
+import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-rest-pipeline";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { PagingClientContext } from "../pagingClientContext";
@@ -61,6 +63,7 @@ import {
   PagingGetPagingModelWithItemNameWithXMSClientNameNextResponse
 } from "../models";
 
+/// <reference lib="esnext.asynciterable" />
 /** Class representing a Paging. */
 export class Paging {
   private readonly client: PagingClientContext;
@@ -1580,7 +1583,7 @@ export class Paging {
   ): Promise<LROPoller<PagingGetMultiplePagesLROResponse>> {
     const { span, updatedOptions } = createSpan(
       "PagingClient-_getMultiplePagesLRO",
-      this.getOperationOptions(options, "undefined")
+      options || {}
     );
     const operationArguments: coreHttp.OperationArguments = {
       options: updatedOptions

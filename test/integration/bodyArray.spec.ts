@@ -6,7 +6,7 @@ describe("Integration tests for BodyArrayClient", () => {
   let client: BodyArrayClient;
 
   beforeEach(() => {
-    client = new BodyArrayClient();
+    client = new BodyArrayClient({ allowInsecureConnection: true });
   });
 
   describe("test empty", () => {

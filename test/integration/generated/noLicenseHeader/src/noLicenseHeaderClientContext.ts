@@ -1,7 +1,10 @@
-import * as coreClient from "@azure/core-client";
+import * as coreHttp from "@azure/core-http";
 import { Enum0, NoLicenseHeaderClientOptionalParams } from "./models";
 
-export class NoLicenseHeaderClientContext extends coreClient.ServiceClient {
+const packageName = "nolicense-header";
+const packageVersion = "1.0.0-preview1";
+
+export class NoLicenseHeaderClientContext extends coreHttp.ServiceClient {
   $host: string;
   apiVersion: Enum0;
 
@@ -28,17 +31,15 @@ export class NoLicenseHeaderClientContext extends coreClient.ServiceClient {
       options = {};
     }
 
-    const defaults: NoLicenseHeaderClientOptionalParams = {
-      requestContentType: "application/json; charset=utf-8"
-    };
+    if (!options.userAgent) {
+      const defaultUserAgent = coreHttp.getDefaultUserAgentValue();
+      options.userAgent = `${packageName}/${packageVersion} ${defaultUserAgent}`;
+    }
 
-    const optionsWithDefaults = {
-      ...defaults,
-      ...options,
-      baseUri: options.endpoint || "{$host}"
-    };
+    super(undefined, options);
 
-    super(optionsWithDefaults);
+    this.requestContentType = "application/json; charset=utf-8";
+    this.baseUri = options.endpoint || "{$host}";
     // Parameter assignments
     this.$host = $host;
     this.apiVersion = apiVersion;

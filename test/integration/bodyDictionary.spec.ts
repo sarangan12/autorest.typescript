@@ -21,7 +21,7 @@ describe("BodyDictionary", () => {
   let client: BodyDictionaryClient;
 
   beforeEach(() => {
-    client = new BodyDictionaryClient();
+    client = new BodyDictionaryClient({ allowInsecureConnection: true });
   });
 
   it("should getArrayItemEmpty", async () => {

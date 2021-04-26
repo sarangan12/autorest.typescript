@@ -1,22 +1,17 @@
 import { HttpInfrastructureClient } from "./generated/httpInfrastructure/src";
 import { assert } from "chai";
 import {
+  PipelinePolicy,
   redirectPolicy,
   exponentialRetryPolicy,
   RestError,
-  PipelinePolicy,
   PipelineRequest,
   SendRequest,
   PipelineResponse,
-  createPipelineFromOptions
-} from "@azure/core-https";
-
-import { isNode } from "@azure/core-http";
-
-import {
-  createClientPipeline,
-  deserializationPolicy
-} from "@azure/core-client";
+  proxyPolicy,
+  proxyPolicyName
+} from "@azure/core-rest-pipeline";
+import { isNode } from "@azure/core-util";
 
 import {
   responseStatusChecker,
@@ -27,66 +22,42 @@ import {
   responseStatusChecker302,
   responseStatusChecker404
 } from "../utils/responseStatusChecker";
-
-function preventCachingPolicy(): PipelinePolicy {
-  return {
-    name: "preventCachingPolicy",
-    async sendRequest(
-      request: PipelineRequest,
-      next: SendRequest
-    ): Promise<PipelineResponse> {
-      return next(request);
-    }
-  };
-}
+import { HttpClientWithCookieSupport } from "./testUtils/HttpClientWithCookieSupport";
 
 describe("Http infrastructure Client", () => {
   let client: HttpInfrastructureClient;
 
   // Prevents caching redirects
-  // const preventCachingPolicy: RequestPolicyFactory = {
-  //   create: next => ({
-  //     sendRequest: req => {
-  //       if (!req.query) {
-  //         req.query = {};
-  //       }
-  //       req.query._ = new Date().toISOString();
-  //       return next.sendRequest(req);
-  //     }
-  //   })
-  // };
+  const preventCachingPolicy: PipelinePolicy = {
+    sendRequest: (req, next) => {
+      if (req.url.includes("?")) {
+        req.url += `&&_=${new Date().toISOString()}`;
+      } else {
+        req.url += `?_=${new Date().toISOString()}`;
+      }
+      return next(req);
+    },
+    name: "preventCachingPolicy"
+  };
 
   beforeEach(() => {
-    // const options = {
-    //   requestPolicyFactories: [
-    //     preventCachingPolicy,
-    //     redirectPolicy(),
-    //     exponentialRetryPolicy(3, 0, 0),
-    //     deserializationPolicy()
-    //   ]
-    // };
-
-    const pipeline = createPipelineFromOptions({});
-
-    pipeline.removePolicy({
-      name: "exponentialRetryPolicy",
-      phase: "Retry"
+    client = new HttpInfrastructureClient({
+      httpClient: new HttpClientWithCookieSupport(),
+      allowInsecureConnection: true
     });
-
-    pipeline.addPolicy(
+    client.pipeline.addPolicy(preventCachingPolicy);
+    client.pipeline.removePolicy({ phase: "Retry" });
+    client.pipeline.addPolicy(
       exponentialRetryPolicy({
         maxRetries: 3,
-        retryDelayInMs: 0,
-        maxRetryDelayInMs: 0
-      }),
-      { phase: "Retry" }
+        maxRetryDelayInMs: 0,
+        retryDelayInMs: 0
+      })
     );
-    pipeline.addPolicy(deserializationPolicy());
-    pipeline.addPolicy(preventCachingPolicy());
-
-    client = new HttpInfrastructureClient({
-      pipeline
-    });
+    // client.pipeline.removePolicy({ name: proxyPolicyName });
+    // client.pipeline.addPolicy(
+    //   proxyPolicy({ host: "http://127.0.0.1", port: 8888 })
+    // );
   });
 
   describe("Success scenarios", () => {
@@ -506,9 +477,9 @@ describe("Http infrastructure Client", () => {
   });
 
   describe("Retry scenarios", () => {
-    it.only("delete503 should retry and return 200", async () => {
+    it("delete503 should retry and return 200", async () => {
       await client.httpRetry.delete503(responseStatusChecker);
-    });
+    }).timeout(150000);
 
     it("get502 should retry and return 200", async () => {
       await client.httpRetry.get502(responseStatusChecker);

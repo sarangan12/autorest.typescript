@@ -12,7 +12,7 @@ describe("ModelFlatteningClient", () => {
   let client: ModelFlatteningClient;
 
   beforeEach(() => {
-    client = new ModelFlatteningClient();
+    client = new ModelFlatteningClient({ allowInsecureConnection: true });
   });
 
   it("should get array", async () => {

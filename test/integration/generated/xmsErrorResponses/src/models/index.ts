@@ -7,7 +7,7 @@
  */
 
 import * as coreClient from "@azure/core-client";
-import * as coreHttps from "@azure/core-https";
+import * as coreHttps from "@azure/core-rest-pipeline";
 
 export type NotFoundErrorBaseUnion =
   | NotFoundErrorBase
@@ -71,6 +71,13 @@ export type PetGetPetByIdResponse = Pet;
 
 /** Contains response data for the doSomething operation. */
 export type PetDoSomethingResponse = PetAction;
+
+/** Optional parameters. */
+export interface PetHasModelsParamOptionalParams
+  extends coreClient.OperationOptions {
+  /** Make sure model deserialization doesn't conflict with this param name, which has input name 'models'. Use client default value in call */
+  models?: string;
+}
 
 /** Optional parameters. */
 export interface XmsErrorResponsesClientOptionalParams

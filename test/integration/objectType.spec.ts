@@ -6,7 +6,7 @@ describe("ObjectType", () => {
   let client: ObjectTypeClient;
 
   beforeEach(() => {
-    client = new ObjectTypeClient();
+    client = new ObjectTypeClient({ allowInsecureConnection: true });
   });
 
   it("should get an object", async () => {

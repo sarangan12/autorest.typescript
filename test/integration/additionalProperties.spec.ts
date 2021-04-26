@@ -27,7 +27,7 @@ describe("AdditionalPropertiesClient", () => {
   let client: AdditionalPropertiesClient;
 
   beforeEach(() => {
-    client = new AdditionalPropertiesClient();
+    client = new AdditionalPropertiesClient({ allowInsecureConnection: true });
   });
 
   describe("#createAPTrue", () => {

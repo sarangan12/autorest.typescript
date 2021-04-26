@@ -48,14 +48,14 @@ export class LroParametrizedEndpointsClientContext extends coreHttp.ServiceClien
       const optionsPolicies = options.requestPolicyFactories([lroPolicy()]) || [
         lroPolicy()
       ];
-      options.requestPolicyFactories = (defaultFactories) => [
+      options.requestPolicyFactories = defaultFactories => [
         ...optionsPolicies,
         ...defaultFactories
       ];
     } else {
       // In case no request policy factories were provided, we'll just need to create a function that will add
       // the lroPolicy to the default pipelines added by core-http
-      options.requestPolicyFactories = (defaultFactories) => [
+      options.requestPolicyFactories = defaultFactories => [
         lroPolicy(),
         ...defaultFactories
       ];
@@ -64,7 +64,6 @@ export class LroParametrizedEndpointsClientContext extends coreHttp.ServiceClien
     super(undefined, options);
 
     this.requestContentType = "application/json; charset=utf-8";
-
     this.baseUri = options.endpoint || "http://{accountName}{host}";
 
     // Assigning values to Constant parameters

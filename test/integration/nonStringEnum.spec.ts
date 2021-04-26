@@ -4,8 +4,9 @@ import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("Swagger that needs no mapper", () => {
   let client: NonStringEnumClient;
+
   beforeEach(() => {
-    client = new NonStringEnumClient();
+    client = new NonStringEnumClient({ allowInsecureConnection: true });
   });
 
   it("should handle float with get", async () => {

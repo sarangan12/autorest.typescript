@@ -7,7 +7,11 @@ import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 import { RestError, BasicAuthenticationCredentials } from "@azure/core-http";
 import { TokenCredential } from "@azure/core-auth";
-import { OperationOptions } from "@azure/core-client";
+import { FullOperationResponse, OperationOptions } from "@azure/core-client";
+import {
+  createHttpHeaders,
+  setClientRequestIdPolicyName
+} from "@azure/core-rest-pipeline";
 
 describe("auth validation", () => {
   it("should add authorization header", async () => {
@@ -28,7 +32,8 @@ describe("auth validation", () => {
 
     const client = new AzureSpecialPropertiesClient(
       mockCredential,
-      "1234-5678-9012-3456"
+      "1234-5678-9012-3456",
+      { allowInsecureConnection: true }
     );
 
     await client.apiVersionDefault.getMethodGlobalValid(responseStatusChecker);
@@ -52,9 +57,13 @@ describe("AzureSpecialProperties", () => {
 
     clientOptions = {
       // generateClientRequestIdHeader: true
+      allowInsecureConnection: true
     };
 
-    dummyCredentials = new BasicAuthenticationCredentials("", "");
+    dummyCredentials = (new BasicAuthenticationCredentials(
+      "",
+      ""
+    ) as unknown) as TokenCredential;
 
     client = new AzureSpecialPropertiesClient(
       dummyCredentials,
@@ -216,24 +225,27 @@ describe("AzureSpecialProperties", () => {
     const validClientId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
 
     it("should overwrite x-ms-client-request-id, paramGet", async function() {
-      await client.xMsClientRequestId.paramGet(
-        validClientId,
-        responseStatusChecker
-      );
-      assert.equal(result._response.headers.get("x-ms-request-id"), "123");
+      let _response: FullOperationResponse;
+      await client.xMsClientRequestId.paramGet(validClientId, {
+        ...responseStatusChecker,
+        onResponse: r => {
+          _response = r;
+        }
+      });
+      assert.equal(_response!.headers.get("x-ms-request-id"), "123");
     });
 
     it("should overwrite x-ms-client-request-id, get", async function() {
       const options: OperationOptions = {
-        ...responseStatusChecker,
         requestOptions: {
           customHeaders: {
             "x-ms-client-request-id": validClientId
           }
-        }
+        },
+        ...responseStatusChecker
       };
       let result = await client.xMsClientRequestId.get(options);
-      // assert.equal(result._response.headers.get("x-ms-request-id"), "123");
+      // assert.equal(result._response!.headers.get("x-ms-request-id"), "123");
     });
 
     it("should not overwrite x-ms-client-request-id", async () => {
@@ -242,12 +254,19 @@ describe("AzureSpecialProperties", () => {
         dummySubscriptionId,
         {
           ...clientOptions
-          generateClientRequestIdHeader: false
+          //generateClientRequestIdHeader: false
         }
       );
+      client.pipeline.removePolicy({ name: setClientRequestIdPolicyName });
 
-      const result = await client.xMsClientRequestId.get(responseStatusChecker);
-      assert.equal(result._response.headers.get("x-ms-request-id"), "123");
+      let _response: FullOperationResponse;
+      const result = await client.xMsClientRequestId.get({
+        ...responseStatusChecker,
+        onResponse: r => {
+          _response = r;
+        }
+      });
+      assert.equal(_response!.headers.get("x-ms-request-id"), "123");
     });
 
     it("should have x-ms-request-id in the err object", async () => {
@@ -282,13 +301,20 @@ describe("AzureSpecialProperties", () => {
           // generateClientRequestIdHeader: false
         }
       );
+      client.pipeline.removePolicy({ name: setClientRequestIdPolicyName });
+      let _response: FullOperationResponse;
       const result = await client.header.customNamedRequestId(
         "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0",
-        responseStatusChecker
+        {
+          ...responseStatusChecker,
+          onResponse: r => {
+            _response = r;
+          }
+        }
       );
 
       assert.isUndefined(
-        result._response.request.headers.get("x-ms-client-request-id")
+        _response!.request.headers.get("x-ms-client-request-id")
       );
 
       assert.equal(result.fooRequestId, "123");
@@ -300,17 +326,24 @@ describe("AzureSpecialProperties", () => {
         dummySubscriptionId,
         {
           ...clientOptions
-          generateClientRequestIdHeader: false
+          //generateClientRequestIdHeader: false
         }
       );
+      testClient.pipeline.removePolicy({ name: setClientRequestIdPolicyName });
+      let _response: FullOperationResponse;
       const result = await testClient.header.customNamedRequestIdParamGrouping(
         {
           fooClientRequestId: "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"
         },
-        responseStatusChecker
+        {
+          ...responseStatusChecker,
+          onResponse: r => {
+            _response = r;
+          }
+        }
       );
       assert.isUndefined(
-        result._response.request.headers.get("x-ms-client-request-id")
+        _response!.request.headers.get("x-ms-client-request-id")
       );
       assert.equal(result.fooRequestId, "123");
     });
@@ -338,6 +371,7 @@ describe("AzureSpecialProperties", () => {
 
   describe("credentials.environment property", function() {
     it("should be overridden by a user-specified base URL", async () => {
+      let _response: FullOperationResponse;
       const client = new AzureSpecialPropertiesClient(
         dummyCredentials,
         dummySubscriptionId,
@@ -346,17 +380,19 @@ describe("AzureSpecialProperties", () => {
             sendRequest: req =>
               Promise.resolve({
                 status: 200,
-                headers: new HttpHeaders(),
+                headers: createHttpHeaders(),
                 request: req
               })
           },
           endpoint: "http://usethisone.com"
         }
       );
-      const response = await client.apiVersionDefault.getMethodGlobalValid();
-      assert.isTrue(
-        response._response.request.url.startsWith("http://usethisone.com")
-      );
+      const response = await client.apiVersionDefault.getMethodGlobalValid({
+        onResponse: r => {
+          _response = r;
+        }
+      });
+      assert.isTrue(_response!.request.url.startsWith("http://usethisone.com"));
     });
   });
 });

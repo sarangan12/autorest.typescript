@@ -9,7 +9,9 @@ describe("AzureParameterGrouping", () => {
   const path = "path";
 
   beforeEach(() => {
-    client = new AzureParameterGroupingClient();
+    client = new AzureParameterGroupingClient({
+      allowInsecureConnection: true
+    });
   });
 
   it("should post optional", async () => {

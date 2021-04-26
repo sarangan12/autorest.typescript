@@ -6,7 +6,7 @@ describe("BodyDateClient", function() {
   let testClient: BodyDateClient;
 
   beforeEach(() => {
-    testClient = new BodyDateClient();
+    testClient = new BodyDateClient({ allowInsecureConnection: true });
   });
 
   it("should get min date", async () => {

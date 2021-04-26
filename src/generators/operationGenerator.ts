@@ -43,6 +43,7 @@ import { Mapper, ParameterPath } from "@azure/core-http";
 import { generateOperationJSDoc } from "./utils/docsUtils";
 import { addTracingOperationImports } from "./utils/tracingUtils";
 import {
+  addPagingEsNextRef,
   addPagingImports,
   preparePageableOperations,
   writeAsyncIterators
@@ -674,6 +675,26 @@ function addOperationOverloads(
   }
 }
 
+/**
+ * Convert OperationOptions to RequestBaseOptions
+ * @param options the name of the options parameter.
+ * @param isLRO whether the operation is an LRO.
+ */
+function compileOperationOptionsToRequestOptionsBase(
+  options: string,
+  isLRO: boolean,
+  finalStateVia: string,
+  useCoreV2: boolean
+): string {
+  // In LRO we have a couple extra properties to add that's why we use
+  // the private getOperationOptions function instead of the one in core-http
+  return isLRO
+    ? `this.getOperationOptions(${options}, "${finalStateVia}")`
+    : useCoreV2
+    ? `${options} || {}`
+    : `coreHttp.operationOptionsToRequestOptionsBase(${options} || {})`;
+}
+
 function writeNoOverloadsOperationBody(
   operation: OperationDetails,
   responseName: string,
@@ -688,24 +709,34 @@ function writeNoOverloadsOperationBody(
 
   const operationSpecName = `${operation.name}OperationSpec`;
 
-  // Convert OperationOptions to RequestBaseOptions
-  // In LRO we have a couple extra properties to add that's why we use
-  // the private getOperationOptions function instead of the one in core-http
-  const toOptionsBase = operation.isLRO
-    ? `this.getOperationOptions(options, "${finalStateVia}")`
-    : !useCoreV2
-    ? `coreHttp.operationOptionsToRequestOptionsBase(options || {})`
-    : `options || {}`;
-
-  let options = toOptionsBase;
+  const vanillaOptionsName = "options";
+  let options = vanillaOptionsName;
 
   if (clientDetails.tracing) {
     const operationName = operationMethod.getName();
-    operationMethod.addStatements([
-      getTracingSpanStatement(clientDetails, operationName, toOptionsBase)
-    ]);
+    const {
+      outputOptionsVarName: updatedOptionsName,
+      statement: tracingStatement
+    } = getTracingSpanStatement(
+      clientDetails,
+      operationName,
+      `${options} || {}`
+    );
+    operationMethod.addStatements([tracingStatement]);
     // Options from createSpan should be used as operation options, updating
-    options = "updatedOptions";
+    options = compileOperationOptionsToRequestOptionsBase(
+      updatedOptionsName,
+      operation.isLRO,
+      finalStateVia,
+      useCoreV2
+    );
+  } else {
+    options = compileOperationOptionsToRequestOptionsBase(
+      vanillaOptionsName,
+      operation.isLRO,
+      finalStateVia,
+      useCoreV2
+    );
   }
 
   const sendParams = parameterDeclarations
@@ -762,12 +793,22 @@ function writeNoOverloadsOperationBody(
   }
 }
 
+// a statement that returns an options bag variable
+interface OptionsStatement {
+  statement: string;
+  outputOptionsVarName: string;
+}
+
 function getTracingSpanStatement(
   clientDetails: ClientDetails,
   operationName: string,
   options: string
-) {
-  return `const { span, updatedOptions } = createSpan("${clientDetails.className}-${operationName}", ${options});`;
+): OptionsStatement {
+  const outputOptionsVarName = "updatedOptions";
+  return {
+    statement: `const { span, ${outputOptionsVarName} } = createSpan("${clientDetails.className}-${operationName}", ${options});`,
+    outputOptionsVarName: outputOptionsVarName
+  };
 }
 
 function writeSendOperationRequest(
@@ -906,6 +947,9 @@ function writeMultiMediaTypeOperationBody(
     );
   }
 
+  const optionsVarName = "options";
+  operationMethod.addStatements([`let ${optionsVarName};`]);
+
   // Since contentType is always added as a synthetic parameter by modelerfour, it should always
   // be in the same position for all overloads.
   let contentTypePosition: number = -1;
@@ -935,6 +979,10 @@ function writeMultiMediaTypeOperationBody(
       .map((param, index) => `${param.name}: args[${index}]`)
       .join(",");
 
+    const optionsIndex = overloadParameters.findIndex(
+      param => param.name === "options"
+    );
+
     // Get conditional to handle the current oveload
     const conditional = contentTypeValues
       .map(type => `args[${contentTypePosition}] === "${type}"`)
@@ -943,7 +991,8 @@ function writeMultiMediaTypeOperationBody(
     // Get the string for current overload assignments of operation spec and arguments
     const assignments = [
       `operationSpec = ${operation.name}$${mediaType}OperationSpec`,
-      `operationArguments = {${params}};`
+      `operationArguments = {${params}};`,
+      `${optionsVarName} = args[${optionsIndex}];`
     ].join("\n");
 
     const elseif = i === 0 ? "if" : "else if";
@@ -963,19 +1012,32 @@ function writeMultiMediaTypeOperationBody(
   }`
   ]);
 
-  const toOptionsBase = !useCoreV2
-    ? `coreHttp.operationOptionsToRequestOptionsBase(operationArguments.options || {})`
-    : `operationArguments.options || {}`;
+  const finalStateVia =
+    operation.lroOptions && operation.lroOptions["final-state-via"];
 
   if (clientDetails.tracing) {
     const operationName = operationMethod.getName();
+    const {
+      outputOptionsVarName,
+      statement: tracingStatement
+    } = getTracingSpanStatement(clientDetails, operationName, optionsVarName);
     operationMethod.addStatements([
-      getTracingSpanStatement(clientDetails, operationName, toOptionsBase),
-      `operationArguments.options = updatedOptions;`
+      tracingStatement,
+      `operationArguments.options = ${compileOperationOptionsToRequestOptionsBase(
+        outputOptionsVarName,
+        operation.isLRO,
+        finalStateVia,
+        useCoreV2
+      )};`
     ]);
   } else {
     operationMethod.addStatements([
-      `operationArguments.options = ${toOptionsBase};`
+      `operationArguments.options = ${compileOperationOptionsToRequestOptionsBase(
+        optionsVarName,
+        operation.isLRO,
+        finalStateVia,
+        useCoreV2
+      )};`
     ]);
   }
 
@@ -990,9 +1052,6 @@ function writeMultiMediaTypeOperationBody(
       useCoreV2
     );
   } else {
-    const finalStateVia =
-      operation.lroOptions && operation.lroOptions["final-state-via"];
-
     writeLROOperationBody(
       "operationArguments",
       responseName,
@@ -1135,8 +1194,12 @@ function addImports(
   clientDetails: ClientDetails,
   useCoreV2: boolean
 ) {
-  const { className, sourceFileName, mappers } = clientDetails;
-
+  const { className, mappers } = clientDetails;
+  addPagingEsNextRef(
+    operationGroupDetails.operations,
+    clientDetails,
+    operationGroupFile
+  );
   addTracingOperationImports(clientDetails, operationGroupFile);
   addPagingImports(
     operationGroupDetails.operations,
@@ -1156,7 +1219,7 @@ function addImports(
     });
     operationGroupFile.addImportDeclaration({
       namespaceImport: "coreHttps",
-      moduleSpecifier: "@azure/core-https"
+      moduleSpecifier: "@azure/core-rest-pipeline"
     });
   }
 

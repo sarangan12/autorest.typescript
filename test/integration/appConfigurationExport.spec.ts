@@ -7,7 +7,9 @@ describe("Check Internal Header", () => {
 
   beforeEach(() => {
     const endpoint: string = "sampleEndPoint";
-    client = new AppConfigurationClient(endpoint);
+    client = new AppConfigurationClient(endpoint, {
+      allowInsecureConnection: true
+    });
     assert.notEqual(client, null);
   });
 

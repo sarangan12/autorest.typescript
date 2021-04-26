@@ -1,4 +1,3 @@
-import { assert } from "chai";
 import { UrlMultiClient } from "./generated/urlMulti/src";
 import { responseStatusChecker } from "../utils/responseStatusChecker";
 
@@ -6,7 +5,7 @@ describe("URLMultiCollectionFormat", () => {
   let client: UrlMultiClient;
 
   beforeEach(() => {
-    client = new UrlMultiClient();
+    client = new UrlMultiClient({ allowInsecureConnection: true });
   });
 
   it("should handle arrayStringMultiEmpty", async () => {

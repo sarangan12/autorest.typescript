@@ -6,7 +6,7 @@ describe("MultipleInheritance", () => {
   let client: MultipleInheritanceClient;
 
   beforeEach(() => {
-    client = new MultipleInheritanceClient();
+    client = new MultipleInheritanceClient({ allowInsecureConnection: true });
   });
 
   it("should get a pet", async () => {

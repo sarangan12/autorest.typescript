@@ -13,7 +13,7 @@ describe("BodyTimeClient", () => {
   let client: BodyTimeClient;
 
   beforeEach(() => {
-    client = new BodyTimeClient();
+    client = new BodyTimeClient({ allowInsecureConnection: true });
   });
 
   describe("#get", () => {

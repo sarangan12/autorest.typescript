@@ -7,10 +7,15 @@
  */
 
 import * as coreClient from "@azure/core-client";
+import * as coreHttps from "@azure/core-rest-pipeline";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { XmsErrorResponsesClientContext } from "../xmsErrorResponsesClientContext";
-import { PetGetPetByIdResponse, PetDoSomethingResponse } from "../models";
+import {
+  PetGetPetByIdResponse,
+  PetDoSomethingResponse,
+  PetHasModelsParamOptionalParams
+} from "../models";
 
 /** Class representing a Pet. */
 export class Pet {
@@ -51,6 +56,18 @@ export class Pet {
     return this.client.sendOperationRequest(
       { whatAction, options },
       doSomethingOperationSpec
+    );
+  }
+
+  /**
+   * Ensure you can correctly deserialize the returned PetActionError and deserialization doesn't
+   * conflict with the input param name 'models'
+   * @param options The options parameters.
+   */
+  hasModelsParam(options?: PetHasModelsParamOptionalParams): Promise<void> {
+    return this.client.sendOperationRequest(
+      { options },
+      hasModelsParamOperationSpec
     );
   }
 }
@@ -99,6 +116,24 @@ const doSomethingOperationSpec: coreClient.OperationSpec = {
     }
   },
   urlParameters: [Parameters.$host, Parameters.whatAction],
+  headerParameters: [Parameters.accept],
+  serializer
+};
+const hasModelsParamOperationSpec: coreClient.OperationSpec = {
+  path: "/errorStatusCodes/Pets/hasModelsParam",
+  httpMethod: "POST",
+  responses: {
+    200: {},
+    500: {
+      bodyMapper: Mappers.PetActionError,
+      isError: true
+    },
+    default: {
+      bodyMapper: Mappers.PetActionError
+    }
+  },
+  queryParameters: [Parameters.models],
+  urlParameters: [Parameters.$host],
   headerParameters: [Parameters.accept],
   serializer
 };

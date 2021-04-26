@@ -4,8 +4,11 @@ import { responseStatusChecker } from "../utils/responseStatusChecker";
 
 describe("Swagger that needs no mapper", () => {
   let client: RequiredOptionalClient;
+
   beforeEach(() => {
-    client = new RequiredOptionalClient("one", "two");
+    client = new RequiredOptionalClient("one", "two", {
+      allowInsecureConnection: true
+    });
   });
 
   describe("Implicit Optional", () => {
@@ -36,7 +39,9 @@ describe("Swagger that needs no mapper", () => {
 
     it("should handle getRequiredGlobalPath", async () => {
       try {
-        client = new RequiredOptionalClient(null as any, null as any);
+        client = new RequiredOptionalClient(null as any, null as any, {
+          allowInsecureConnection: true
+        });
         await client.implicit.getRequiredGlobalPath();
         assert.fail("Expected client to throw");
       } catch (error) {
@@ -45,7 +50,9 @@ describe("Swagger that needs no mapper", () => {
     });
 
     it("should handle getRequiredGlobalQuery", async () => {
-      client = new RequiredOptionalClient(null as any, null as any);
+      client = new RequiredOptionalClient(null as any, null as any, {
+        allowInsecureConnection: true
+      });
       try {
         await client.implicit.getRequiredGlobalQuery();
         assert.fail("Expected client to throw");

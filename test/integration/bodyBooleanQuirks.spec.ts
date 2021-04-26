@@ -6,7 +6,7 @@ describe("Bool Quirks Client", function() {
   let testClient: BodyBooleanQuirksClient;
 
   beforeEach(() => {
-    testClient = new BodyBooleanQuirksClient();
+    testClient = new BodyBooleanQuirksClient({ allowInsecureConnection: true });
   });
 
   it("should get true value", async () => {

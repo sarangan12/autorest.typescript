@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { should } from "chai";
+import { assert, should } from "chai";
 import { AbortController, AbortError } from "@azure/abort-controller";
 import {
   XmlServiceClient,
@@ -11,10 +11,38 @@ import {
   StorageServiceProperties,
   SignedIdentifier
 } from "./generated/xmlservice/src";
+import { responseStatusChecker } from "../utils/responseStatusChecker";
+import {
+  deserializationPolicy,
+  deserializationPolicyName,
+  serializationPolicy,
+  serializationPolicyName
+} from "@azure/core-client";
+import { stringifyXML, parseXML } from "@azure/core-xml";
+
 should();
 const testClient = new XmlServiceClient({
-  endpoint: "http://localhost:3000"
+  endpoint: "http://localhost:3000",
+  allowInsecureConnection: true
 });
+testClient.pipeline.removePolicy({ name: serializationPolicyName });
+testClient.pipeline.removePolicy({ name: deserializationPolicyName });
+testClient.pipeline.addPolicy(
+  serializationPolicy({
+    stringifyXML
+  }),
+  {
+    phase: "Serialize"
+  }
+);
+testClient.pipeline.addPolicy(
+  deserializationPolicy({
+    parseXML
+  }),
+  {
+    phase: "Deserialize"
+  }
+);
 
 function getAbortController() {
   return new AbortController();
@@ -29,8 +57,7 @@ describe("typescript", function() {
     });
 
     it("should handle jsonInput", async () => {
-      const result = await testClient.xml.jsonInput({ id: 42 });
-      result._response.status.should.be.equals(200);
+      await testClient.xml.jsonInput({ id: 42 }, responseStatusChecker);
     });
 
     it("should handle getXMsText", async () => {

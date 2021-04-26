@@ -7,7 +7,7 @@ describe("BodyDateClient", function() {
   let testClient: BodyDurationClient;
 
   beforeEach(() => {
-    testClient = new BodyDurationClient();
+    testClient = new BodyDurationClient({ allowInsecureConnection: true });
   });
 
   it("should properly handle null value for Duration", async () => {

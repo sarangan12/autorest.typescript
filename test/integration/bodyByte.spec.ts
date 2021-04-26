@@ -19,7 +19,7 @@ describe("Body Byte Client", function() {
   ]);
 
   beforeEach(() => {
-    testClient = new BodyByteClient();
+    testClient = new BodyByteClient({ allowInsecureConnection: true });
   });
 
   it("should get null value", async () => {

@@ -17,7 +17,8 @@ describe("Integration tests for XmsErrorResponsesClient", () => {
     let generatedClientOptions: XmsErrorResponsesClientOptionalParams = {};
     const clientOptions = {
       endpoint: "http://localhost:3000",
-      $host: "http://localhost:3000"
+      $host: "http://localhost:3000",
+      allowInsecureConnection: true
     };
     generatedClientOptions = {
       ...clientOptions,

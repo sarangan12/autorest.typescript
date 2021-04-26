@@ -66,7 +66,7 @@ export function generateModels(
     });
     modelsIndexFile.addImportDeclaration({
       namespaceImport: "coreHttps",
-      moduleSpecifier: "@azure/core-https"
+      moduleSpecifier: "@azure/core-rest-pipeline"
     });
   }
 

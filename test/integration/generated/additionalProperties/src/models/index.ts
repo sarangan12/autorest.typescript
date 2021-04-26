@@ -7,7 +7,7 @@
  */
 
 import * as coreClient from "@azure/core-client";
-import * as coreHttps from "@azure/core-https";
+import * as coreHttps from "@azure/core-rest-pipeline";
 
 export interface PetAPTrue {
   /** Describes unknown properties. The value of an unknown property can be of "any" type. */

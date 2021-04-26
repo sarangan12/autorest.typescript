@@ -7,7 +7,7 @@
  */
 
 import * as coreClient from "@azure/core-client";
-import * as coreHttps from "@azure/core-https";
+import * as coreHttps from "@azure/core-rest-pipeline";
 
 /** Contains response data for the apiV1ValueGet operation. */
 export type RegexConstraintApiV1ValueGetResponse = {

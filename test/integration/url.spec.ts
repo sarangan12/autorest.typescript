@@ -8,7 +8,8 @@ describe("Integration tests for Url", () => {
   beforeEach(() => {
     const clientOptions = {
       noRetryPolicy: true,
-      endpoint: "http://localhost:3000"
+      endpoint: "http://localhost:3000",
+      allowInsecureConnection: true
     };
     client = new UrlClient("globalStringPath", clientOptions);
   });

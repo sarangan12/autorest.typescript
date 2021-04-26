@@ -1,5 +1,5 @@
 import * as coreClient from "@azure/core-client";
-import * as coreHttps from "@azure/core-https";
+import * as coreHttps from "@azure/core-rest-pipeline";
 
 /** A group of properties representing a pet. */
 export interface Pet {

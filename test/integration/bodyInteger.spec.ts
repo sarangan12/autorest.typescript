@@ -6,7 +6,7 @@ describe("Integration tests for BodyInteger", () => {
   let client: BodyIntegerClient;
 
   beforeEach(() => {
-    client = new BodyIntegerClient();
+    client = new BodyIntegerClient({ allowInsecureConnection: true });
   });
 
   it("should put max value for 32 bit Integers", async () => {

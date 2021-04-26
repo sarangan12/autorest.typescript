@@ -6,7 +6,7 @@ describe("BodyDateTime Client", function() {
   let testClient: BodyDateTimeClient;
 
   beforeEach(() => {
-    testClient = new BodyDateTimeClient();
+    testClient = new BodyDateTimeClient({ allowInsecureConnection: true });
   });
 
   it("should get null datetime", async () => {

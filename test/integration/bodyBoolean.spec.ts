@@ -6,7 +6,7 @@ describe("Bool Client", function() {
   let testClient: BodyBooleanClient;
 
   beforeEach(() => {
-    testClient = new BodyBooleanClient();
+    testClient = new BodyBooleanClient({ allowInsecureConnection: true });
   });
 
   it("should get true value", async () => {

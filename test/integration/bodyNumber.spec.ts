@@ -6,7 +6,7 @@ describe("Integration tests for BodyInteger", () => {
   let testClient: BodyNumberClient;
 
   beforeEach(() => {
-    testClient = new BodyNumberClient();
+    testClient = new BodyNumberClient({ allowInsecureConnection: true });
   });
 
   it("should put big float", async () => {

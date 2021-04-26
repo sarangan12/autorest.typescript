@@ -10,7 +10,7 @@ describe("typescript", function() {
     describe("Basic Header Operations", function() {
       let testClient: HeaderClient;
       beforeEach(() => {
-        testClient = new HeaderClient();
+        testClient = new HeaderClient({ allowInsecureConnection: true });
       });
 
       it("should override existing headers (nodejs only)", async function() {

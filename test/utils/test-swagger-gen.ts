@@ -1,5 +1,7 @@
-import { exec } from "child_process";
+import { spawn } from "child_process";
+import * as dirTree from "directory-tree";
 import { TracingInfo } from "../../src/models/clientDetails";
+import { onExit } from "./childProcessOnExit";
 
 interface SwaggerConfig {
   swaggerOrConfig: string;
@@ -211,13 +213,15 @@ const testSwaggers: { [name: string]: SwaggerConfig } = {
     swaggerOrConfig: "lro.json",
     clientName: "LROClient",
     packageName: "lro",
-    licenseHeader: true
+    licenseHeader: true,
+    useCoreV2: false
   },
   lroParametrizedEndpoints: {
     swaggerOrConfig: "lro-parameterized-endpoints.json",
     clientName: "LroParametrizedEndpointsClient",
     packageName: "lro-parameterized-endpoints",
-    licenseHeader: true
+    licenseHeader: true,
+    useCoreV2: false
   },
   mediaTypes: {
     swaggerOrConfig: "media_types.json",
@@ -248,7 +252,8 @@ const testSwaggers: { [name: string]: SwaggerConfig } = {
     swaggerOrConfig: "test/integration/swaggers/media-types-v3-lro.json",
     clientName: "MediaTypesV3LROClient",
     packageName: "media-types-v3-lro-client",
-    licenseHeader: true
+    licenseHeader: true,
+    useCoreV2: false
   },
   modelFlattening: {
     swaggerOrConfig: "model-flattening.json",
@@ -307,7 +312,8 @@ const testSwaggers: { [name: string]: SwaggerConfig } = {
     clientName: "PagingNoIteratorsClient",
     packageName: "paging-no-iterators",
     licenseHeader: true,
-    disableAsyncIterators: true
+    disableAsyncIterators: true,
+    useCoreV2: true
   },
   requiredOptional: {
     swaggerOrConfig: "required-optional.json",
@@ -368,8 +374,7 @@ const testSwaggers: { [name: string]: SwaggerConfig } = {
   noLicenseHeader: {
     swaggerOrConfig: "test/integration/swaggers/license-header.json",
     clientName: "NoLicenseHeaderClient",
-    packageName: "nolicense-header",
-    useCoreV2: true
+    packageName: "nolicense-header"
   },
   licenseHeader: {
     swaggerOrConfig: "test/integration/swaggers/license-header.json",
@@ -504,17 +509,23 @@ const generateSwaggers = async (
 
     let swaggerPath = swaggerOrConfig;
 
-    const tracingInfo = tracing
-      ? `--tracing-info.namespace=${tracing.namespace} --tracing-info.packagePrefix=${tracing.packagePrefix}`
-      : "";
+    let autorestCommand = "autorest";
+    const commandArguments: string[] = [`--typescript`];
 
-    const credentialScopesInfo = credentialScopes
-      ? `--credential-scopes=${credentialScopes}`
-      : "";
+    if (tracing) {
+      commandArguments.push(
+        `--tracing-info.namespace=${tracing.namespace}`,
+        `--tracing-info.packagePrefix="${tracing.packagePrefix}"`
+      );
+    }
 
-    const disableIterators = disableAsyncIterators
-      ? "--disable-async-iterators=true"
-      : "";
+    if (credentialScopes) {
+      commandArguments.push(`--credential-scopes=${credentialScopes}`);
+    }
+
+    if (disableAsyncIterators) {
+      commandArguments.push("--disable-async-iterators=true");
+    }
 
     if (swaggerOrConfig.split("/").length === 1) {
       // When given a filename look for it in test server, otherwise use the path
@@ -526,26 +537,33 @@ const generateSwaggers = async (
       inputFileCommand = `--input-file=${inputFileCommand}`;
     }
 
-    let autorestCommand: string = `autorest --clear-output-folder=true ${tracingInfo} ${disableIterators} ${credentialScopesInfo} --license-header=${!!licenseHeader} --add-credentials=${!!addCredentials} --typescript --output-folder=./test/integration/generated/${name} --use=. --title=${clientName} --package-name=${packageName} --package-version=${package_version} --hide-clients=${!!hideClients} --use-core-v2=${!!useCoreV2} ${inputFileCommand}`;
-
+    commandArguments.push(
+      inputFileCommand,
+      "--clear-output-folder=true",
+      `--license-header=${!!licenseHeader}`,
+      `--add-credentials=${!!addCredentials}`,
+      `--output-folder=./test/integration/generated/${name}`,
+      `--title=${clientName}`,
+      `--use=.`,
+      `--package-name=${packageName}`,
+      `--package-version=${package_version}`,
+      `--hide-clients=${!!hideClients}`,
+      `--use-core-v2=${!!useCoreV2}`
+    );
     if (isDebugging) {
-      autorestCommand = `${autorestCommand} --typescript.debugger`;
+      commandArguments.push(`--typescript.debugger`);
     }
-
-    const generationTask = () => {
-      return new Promise<void>((resolve, reject) => {
-        exec(autorestCommand, (error, stdout, stderr) => {
-          if (error) {
-            reject(`Failed to generate ${name} with error: \n ${error}`);
-            return;
-          }
-          console.log(`=== Start ${name} ===`);
-          console.log(stdout);
-          stderr && console.error(stderr);
-          console.log(`=== End ${name} ===`);
-          resolve();
-        });
+    const generationTask = async () => {
+      console.log(`=== Start ${name} ===`);
+      const childProcess = spawn(autorestCommand, commandArguments, {
+        stdio: [process.stdin, process.stdout, process.stderr]
       });
+
+      console.log(`${autorestCommand} ${commandArguments.join(" ")}`);
+
+      const result = await onExit(childProcess);
+      console.log(`=== End ${name} ===`);
+      return result;
     };
 
     try {
@@ -594,27 +612,24 @@ const buildAutorest = () => {
     );
     return Promise.resolve();
   }
-
-  return new Promise<void>((resolve, reject) => {
-    console.log("Building Autorest.Typescript");
-    exec("npm run build", (error, stdout, stderror) => {
-      if (error) {
-        reject(
-          `Failed to build autorest.typescript \n ${JSON.stringify(error)}`
-        );
-        return;
-      }
-
-      console.log(stdout);
-      stderror && console.error(stderror);
-      resolve();
-    });
+  const childProcess = spawn("npm run build", {
+    stdio: [process.stdin, process.stdout, process.stderr]
   });
+
+  return onExit(childProcess);
+};
+
+const logAutorestInfo = async () => {
+  const childProcess = spawn("autorest", ["--info"], {
+    stdio: [process.stdin, process.stdout, process.stderr]
+  });
+  await onExit(childProcess);
 };
 
 const run = async () => {
   const isDebugging = process.argv.indexOf("--debug") !== -1;
   buildWhitelist();
+  await logAutorestInfo();
   await buildAutorest();
   await generateSwaggers(whiteList, isDebugging);
 };

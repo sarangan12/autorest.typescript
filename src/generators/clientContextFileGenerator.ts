@@ -391,7 +391,10 @@ function getEndpointStatement({ endpoint }: EndpointDetails) {
 }
 
 function getEndpointV2({ endpoint }: EndpointDetails) {
-  return `options.endpoint ${endpoint ? ` || "${endpoint}"` : ""}`;
+  const updatedEndpoint = endpoint?.replace("http://", "https://");
+  return `options.endpoint ${
+    updatedEndpoint ? ` || "${updatedEndpoint}"` : ""
+  }`;
 }
 
 function getConstantClientParamAssignments(

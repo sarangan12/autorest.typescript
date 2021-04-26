@@ -7,7 +7,9 @@ describe("BodyDateTimeRfc1123Client", function() {
   let testClient: BodyDateTimeRfc1123Client;
 
   beforeEach(() => {
-    testClient = new BodyDateTimeRfc1123Client();
+    testClient = new BodyDateTimeRfc1123Client({
+      allowInsecureConnection: true
+    });
   });
 
   it("should properly handle null value for DateTimeRfc1123", async () => {

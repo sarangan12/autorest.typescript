@@ -46,7 +46,7 @@ export interface BaseResult extends RestResponse {
   /**
    * The underlying HTTP response containing both raw and deserialized response data.
    */
-  _response: LROOperationResponse;
+  //_response: LROOperationResponse;
 }
 
 export interface LROOperationStep<TResult extends BaseResult> {
