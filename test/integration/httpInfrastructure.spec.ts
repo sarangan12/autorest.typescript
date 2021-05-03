@@ -133,7 +133,7 @@ describe("Http infrastructure Client", () => {
       await client.httpSuccess.put204(responseStatusChecker204);
     });
 
-    it("should work for put204", async () => {
+    it("should work for delete204", async () => {
       await client.httpSuccess.delete204(responseStatusChecker204);
     });
   });

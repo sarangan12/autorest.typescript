@@ -1,17 +1,11 @@
 import { assert } from "chai";
 import { PagingClient, Product } from "./generated/paging/src";
-import { InternalPipelineOptions } from "@azure/core-http";
 
 describe("Integration tests for Paging", () => {
   let client: PagingClient;
 
   beforeEach(() => {
-    const pipelineOptions: InternalPipelineOptions = {
-      retryOptions: {
-        retryDelayInMs: 0
-      }
-    };
-    client = new PagingClient();
+    client = new PagingClient({ allowInsecureConnection: true });
   });
 
   describe("getMultiplePagesRetrySecond", () => {
